@@ -1,0 +1,122 @@
+/* Full-page wrapper */
+.signup-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("glass.webp") no-repeat center center/cover;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Flex container for image + card */
+.container {
+  display: flex;
+  align-items: stretch;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  max-width: 800px;
+  width: 100%;
+}
+
+/* Left side image */
+.image-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 30px;
+}
+
+.lady-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: left;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Heading */
+.glass-card h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.glass-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.glass-card input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Password rule */
+.password-rule {
+  color: #f1f1f1;
+  font-size: 12px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+/* Button */
+.glass-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(95, 177, 192, 0.6);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.glass-card button:hover {
+  background: rgba(27, 101, 228, 0.6);
+}
+
+/* Sign In link */
+.glass-card p {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.glass-card a {
+  color: #00f2fe;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.glass-card a:hover {
+  text-decoration: underline;
+}

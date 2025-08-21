@@ -1,0 +1,202 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80')
+    no-repeat center center/cover;
+  backdrop-filter: blur(4px);
+  background-attachment: fixed;
+  cursor: url('HamsiniLogo.png'), auto;
+  padding-top: 120px; /* prevent content hiding under header */
+}
+
+/* Glass Header */
+.glass-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0 0 20px 20px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+}
+
+.logo-section {
+  display: flex;
+  
+  gap: 20px;
+}
+
+.logo-section img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+}
+
+.logo-section img:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.glass-header h1 {
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.btns {
+  display: flex;
+  gap: 20px;
+}
+
+/* Glass Buttons */
+.glass-btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.glass-btn::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: rgba(35, 201, 231, 0.5);
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 25px 25px;
+  transition: 0.3s;
+  transform: scaleX(0);
+}
+
+.glass-btn:hover::after {
+  transform: scaleX(1);
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+  margin: 40px auto;
+  max-width: 1000px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  padding: 30px;
+}
+
+.glass-container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+    inset 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.hero-text {
+  max-width: 450px;
+  color: white;
+}
+
+.hero-text h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #f1f1f1;
+}
+
+.hero-img img {
+  border-radius: 15px;
+  max-width: 350px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal {
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+  min-width: 300px;
+  position: relative;
+}
+
+/* Close Icon in top-right */
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: crimson;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.close-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Stack buttons vertically */
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+  padding: 12px;
+}

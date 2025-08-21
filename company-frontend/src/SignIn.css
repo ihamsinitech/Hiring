@@ -1,0 +1,93 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+
+  /* ✅ Background Company Image */
+  background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80") 
+              no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(4px);
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  width: 350px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+  color: #fff;
+}
+
+/* Headings */
+.glass-card h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Labels */
+.glass-card label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* Inputs */
+.glass-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Button */
+.glass-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(8, 89, 229, 0.25);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.glass-card button:hover {
+  background:rgba(64, 200, 224, 0.4);
+}
+
+/* Link */
+.glass-card p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.glass-card a {
+  color: gold;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.glass-card a:hover {
+  text-decoration: underline;
+}
