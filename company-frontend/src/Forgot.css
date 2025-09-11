@@ -12,14 +12,27 @@ html, body, #root {
 
 /* Background */
 .forgot-container {
+  position: relative; /* required for ::before */
   min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* prevent blur edges */
+  z-index: 1;
+}
+
+/* ✅ Blurred background layer */
+.forgot-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: url('https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=1600&q=80')
               no-repeat center center/cover;
   background-attachment: fixed;
+  filter: blur(12px);  /* blur the image */
+  transform: scale(1.05); /* avoid blur cut-off edges */
+  z-index: -1; /* behind content */
 }
 
 /* Glass wrapper */

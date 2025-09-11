@@ -12,15 +12,29 @@ html, body, #root {
 
 /* Full page background */
 .company-container {
+  position: relative; /* enable layering */
   min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=80")
-                no-repeat center center/cover;
-  background-attachment: fixed;
+  overflow: hidden; /* avoid blur edges */
+  z-index: 1;
 }
+
+/* ✅ Blurred background layer */
+.company-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=80")
+              no-repeat center center/cover;
+  background-attachment: fixed;
+  filter: blur(12px);         /* blur effect */
+  transform: scale(1.05);     /* avoid blur cutoff edges */
+  z-index: -1;                /* push behind content */
+}
+
 .company-header {
   position: absolute;
   top: 0;

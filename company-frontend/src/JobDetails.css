@@ -1,13 +1,26 @@
 .job-details {
+  position: relative; /* for ::before */
   min-height: 100vh;
   padding: 120px 32px 48px;
-  background: url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1950&q=80")
-    no-repeat center/cover fixed;
 
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  z-index: 1; /* keep content above */
 }
+
+/* Blurred background image layer */
+.job-details::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1950&q=80")
+    no-repeat center/cover fixed;
+  filter: blur(12px);   /* ✅ blur image */
+  z-index: -1;          /* send behind content */
+}
+
 
 .job-details-card {
   max-width: 900px;

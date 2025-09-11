@@ -11,19 +11,31 @@ html, body, #root {
   width: 100%;
 }
 
-/* Background */
+/* Background with blur overlay */
 .signup-container {
+  position: relative;
   min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1950&q=80')
-              no-repeat center center/cover;
+    no-repeat center center/cover;
   background-attachment: fixed;
+  overflow: hidden;
 }
 
-/* Glass wrapper */
+.signup-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 0;
+}
+
+/* Header */
 .signup-header {
   position: absolute;
   top: 0;
@@ -32,6 +44,7 @@ html, body, #root {
   padding: 1rem 2rem;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -53,19 +66,19 @@ html, body, #root {
   font-size: 1.5rem;
   color: white;
   font-weight: bold;
-  margin: 0;
 }
 
-/* New section styling */
+/* Section */
 .signup-section {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 90px;   /* Push content below header */
-  min-height: 150vh;  /* Keep full height layout */
+  padding-top: 90px; /* Push content below header */
+  min-height: 150vh;
+  position: relative;
+  z-index: 1; /* keep above background blur */
 }
-
 
 /* Glass wrapper */
 .signup-wrapper {
@@ -74,16 +87,17 @@ html, body, #root {
   justify-content: space-between;
   width: 90%;
   max-width: 1000px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   overflow: hidden;
+  z-index: 2;
 }
 
-
+/* Left image */
 .signup-image {
   flex: 1;
   display: flex;
@@ -100,15 +114,16 @@ html, body, #root {
   object-fit: contain;
 }
 
-/* Right side form */
+/* Right form */
 .signup-form {
-  flex: 1.2;  /* give a bit more space to the form */
+  flex: 1.2;
   padding: 3rem 2rem;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .signup-form h2 {
   text-align: left;
   margin-bottom: 1.5rem;

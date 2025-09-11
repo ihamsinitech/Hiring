@@ -11,18 +11,31 @@ html, body, #root {
   width: 100%;
 }
 
-/* Background */
+/* Background with blur overlay */
 .auth-container {
+  position: relative;
   min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1950&q=80') 
-              no-repeat center center/cover;
+  background: url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1950&q=80')
+    no-repeat center center/cover;
   background-attachment: fixed;
+  overflow: hidden;
 }
 
+.auth-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); /* subtle dark overlay */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 0;
+}
+
+/* Header */
 .signin-header {
   position: absolute;
   top: 0;
@@ -31,6 +44,7 @@ html, body, #root {
   padding: 1rem 2rem;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -52,19 +66,19 @@ html, body, #root {
   font-size: 1.5rem;
   color: white;
   font-weight: bold;
-  margin: 0;
 }
 
-/* New section styling */
+/* Section */
 .signin-section {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 50px;   /* Push content below header */
-  min-height: 120vh;   /* Keep full height layout */
+  padding-top: 50px;
+  min-height: 120vh;
+  position: relative;
+  z-index: 1; /* keep above blur overlay */
 }
-
 
 /* Glass wrapper */
 .signin-wrapper {
@@ -73,13 +87,14 @@ html, body, #root {
   justify-content: space-between;
   width: 90%;
   max-width: 1000px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   overflow: hidden;
+  z-index: 2;
 }
 
 /* Left: Form */

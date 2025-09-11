@@ -1,13 +1,23 @@
 /* Main container with equal columns */
 .job-list-container {
+  position: relative; /* make it relative for ::before layering */
   display: grid;
-  grid-template-columns: 280px 1fr; /* left fixed, right flexible */
+  grid-template-columns: 280px 1fr;
   gap: 32px;
   padding: 80px 32px;
   min-height: 100vh;
+  z-index: 1; /* keep content above */
+}
+
+/* Background blur layer */
+.job-list-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: url("https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=1600&q=80")
     no-repeat center/cover fixed;
-  backdrop-filter: blur(6px);  
+  filter: blur(12px);   /* ✅ apply blur to image itself */
+  z-index: -1;          /* keep it behind content */
 }
 
 /* Left filters panel */

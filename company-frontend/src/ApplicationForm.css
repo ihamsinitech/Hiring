@@ -1,11 +1,24 @@
 .apply-container {
+  position: relative; /* allow layering */
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80")
-    no-repeat center/cover fixed;
   padding: 30px;
+  overflow: hidden; /* prevent blur edges showing */
+  z-index: 1;
+}
+
+/* ✅ Blurred background layer */
+.apply-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80")
+              no-repeat center/cover fixed;
+  filter: blur(12px);
+  transform: scale(1.05);  /* avoid cropped blur edges */
+  z-index: -1;             /* keep behind the form */
 }
 
 .apply-box {

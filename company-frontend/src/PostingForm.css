@@ -1,3 +1,4 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +10,10 @@ html, body, #root {
   height: 100%;
   width: 100%;
 }
-/* Background */
+
+/* Background with blur overlay */
 .posting-container {
+  position: relative;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -18,7 +21,20 @@ html, body, #root {
   justify-content: center;
   background: url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1950&q=80") no-repeat center center/cover;
   background-attachment: fixed;
+  overflow: hidden;
 }
+
+.posting-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25); /* subtle dark overlay */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 0;
+}
+
+/* Header */
 .posting-header {
   position: absolute;
   top: 0;
@@ -51,14 +67,16 @@ html, body, #root {
   margin: 0;
 }
 
-/* New section styling */
+/* Page Section */
 .posting-page {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 120px;   /* Push content below header */
-  min-height: 100vh;   /* Keep full height layout */
+  min-height: 100vh;
+  position: relative;
+  z-index: 1; /* keep above blur overlay */
 }
 
 /* Main container */
@@ -72,6 +90,7 @@ html, body, #root {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  z-index: 2;
 }
 
 /* Left illustration */
@@ -85,8 +104,8 @@ html, body, #root {
 .posting-image img {
   width: 170%;         /* Take full width of its container */
   max-width: 850px;    /* Increase max width */
-  height: 50%;        /* Maintain aspect ratio */
-  
+  height: 50%;         /* Maintain aspect ratio */
+  object-fit: contain;
 }
 
 /* Right form */
@@ -117,12 +136,14 @@ html, body, #root {
   background: rgba(255, 255, 255, 0.2);
   color:white;
 }
+
 /* Ensure inputs and selects are clickable */
 .posting-form select {
   pointer-events: auto;
   position: relative;
   z-index: 2;
 }
+
 /* Fix for select dropdown arrow */
 select {
   appearance: auto;
@@ -174,4 +195,22 @@ span {
   color: #2ecc71;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .posting-box {
+    flex-direction: column;
+  }
 
+  .posting-image {
+    padding: 1rem;
+  }
+
+  .posting-form {
+    padding: 2rem;
+  }
+
+  .posting-image img {
+    width: 100%;
+    height: auto;
+  }
+}
