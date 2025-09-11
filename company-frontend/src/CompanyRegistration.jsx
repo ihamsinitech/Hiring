@@ -1,105 +1,243 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./CompanyRegistration.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './CompanyRegistration.css';
 
-export default function CompanyRegistration() {
-  const [formData, setFormData] = useState({
-    companyName: "",
-    companyEmail: "",
-    password: "",
-    mobile: "",
-    address: "",
-    payment: "",
+const CompanyRegistration = () => {
+  const [form, setForm] = useState({
+    companyName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    mobile: '',
+    address: ''
   });
-
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [trialInfo, setTrialInfo] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { id, value } = e.target;
+    setForm({
+      ...form,
+      [id]: value
+    });
+    
+    // Clear error when user starts typing
+    if (errors[id]) {
+      setErrors({
+        ...errors,
+        [id]: ''
+      });
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!form.companyName.trim()) {
+      newErrors.companyName = 'Company name is required';
+    }
+    
+    if (!form.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    
+    if (!form.password) {
+      newErrors.password = 'Password is required';
+    } else if (form.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    
+    if (!form.confirmPassword) {
+      newErrors.confirmPassword = 'Please confirm your password';
+    } else if (form.password !== form.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+    
+    if (!form.mobile.trim()) {
+      newErrors.mobile = 'Mobile number is required';
+    }
+    
+    if (!form.address.trim()) {
+      newErrors.address = 'Address is required';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const register = async (e) => {
     e.preventDefault();
-
-    const response = await fetch("http://localhost:8085/api/company/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      alert("✅ Registration Successful");
-      navigate("/signIn");
-    } else {
-      alert("❌ Registration Failed");
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    setErrors({});
+    setMessage('');
+    setLoading(true);
+    
+    try {
+      const response = await fetch('http://localhost:8085/api/auth/signup/company', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          companyName: form.companyName,
+          email: form.email,
+          password: form.password,
+          confirmPassword: form.confirmPassword,
+          mobile: form.mobile,
+          address: form.address
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage(data.message);
+        setTrialInfo({
+          trialEndDate: data.trialEndDate,
+          message: `30-day free trial until ${new Date(data.trialEndDate).toLocaleDateString()}`
+        });
+        
+        setTimeout(() => {
+          navigate('/signin');
+        }, 3000);
+      } else {
+        setErrors({ submit: data });
+      }
+    } catch (err) {
+      setErrors({ submit: 'An error occurred. Please try again.' });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="form-page">
-      <div className="glass-container">
-        <div className="glass-card">
-          <h2>Company Registration</h2>
-          <form onSubmit={handleSubmit}>
+    <div className="company-container">
+      <header className="company-header">
+        <div className="company-logo">
+          <a href="/">
+            <img src="logo-website.png" alt="Company Logo" />
+          </a>
+          <h1>Company Registration</h1>
+        </div>
+      </header>
+
+      <div className="company-section">
+      <div className="company-box">
+
+        {/* Left Image */}
+      <div className="company-image">
+        <img src="animation-12.png" alt="Illustration" />
+      </div>
+
+        {/* right Content */}
+        <div className="company-form">
+          <h2>Company Registration Form</h2>
+
+          {trialInfo && (
+            <div className="company-trial-box">
+              <h3>🎁 Free Trial Activated!</h3>
+              <p>{trialInfo.message}</p>
+              <small>After trial period, payment will be required to continue using our services</small>
+            </div>
+          )}
+
+          {errors.submit && <div className="error">{errors.submit}</div>}
+          {message && <div className="success">{message}</div>}
+
+          <form onSubmit={register}>
             <label>Company Name:</label>
             <input
               type="text"
-              name="companyName"
-              value={formData.companyName}
+              id="companyName"
+              value={form.companyName}
               onChange={handleChange}
-              required
+              placeholder="Company Name"
+              className={errors.companyName ? 'error' : ''}
             />
+            {errors.companyName && <div className="error-message">{errors.companyName}</div>}
 
-            <label>Company Email:</label>
+            <label> Company Email Id:</label>
             <input
               type="email"
-              name="companyEmail"
-              value={formData.companyEmail}
+              id="email"
+              value={form.email}
               onChange={handleChange}
-              required
+              placeholder="Email"
+              className={errors.email ? 'error' : ''}
             />
+            {errors.email && <div className="error-message">{errors.email}</div>}
 
             <label>Password:</label>
             <input
               type="password"
-              name="password"
-              value={formData.password}
+              id="password"
+              value={form.password}
               onChange={handleChange}
-              required
+              placeholder="Password"
+              className={errors.password ? 'error' : ''}
             />
+            {errors.password && <div className="error-message">{errors.password}</div>}
 
-            <label>Mobile Number:</label>
+            <label>Confirm Password:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm Password"
+              className={errors.confirmPassword ? 'error' : ''}
+            />
+            {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
+
+            <label>Mobile:</label>
             <input
               type="text"
-              name="mobile"
-              value={formData.mobile}
+              id="mobile"
+              value={form.mobile}
               onChange={handleChange}
-              required
+              placeholder="Mobile"
+              className={errors.mobile ? 'error' : ''}
             />
+            {errors.mobile && <div className="error-message">{errors.mobile}</div>}
 
             <label>Address:</label>
             <textarea
-              name="address"
-              value={formData.address}
+              id="address"
+              value={form.address}
               onChange={handleChange}
-              required
+              placeholder="Address"
+              className={errors.address ? 'error' : ''}
             />
+            {errors.address && <div className="error-message">{errors.address}</div>}
 
-            <label>Payment:</label>
-            <input
-              type="text"
-              name="payment"
-              value={formData.payment}
-              onChange={handleChange}
-              required
-            />
+            <p className="company-terms">
+              By registering, you agree to our 30-day free trial. After the trial period,
+              you'll need to subscribe to continue using our services.
+            </p>
 
-            <button type="submit" className="glass-btn">
-              Submit
+            <button type="submit" disabled={loading}>
+              {loading ? 'Registering...' : 'Register'}
             </button>
           </form>
         </div>
+
+        
       </div>
     </div>
+  </div>
+    
   );
-}
+};
+
+export default CompanyRegistration; 

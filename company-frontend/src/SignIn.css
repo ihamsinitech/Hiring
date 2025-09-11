@@ -3,91 +3,188 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  height: 100vh;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Background */
+.auth-container {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-
-  /* ✅ Background Company Image */
-  background: url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80") 
-              no-repeat center center fixed;
-  background-size: cover;
-  backdrop-filter: blur(4px);
+  background: url('https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=1950&q=80') 
+              no-repeat center center/cover;
+  background-attachment: fixed;
 }
 
-/* Glassmorphism Card */
-.glass-card {
-  width: 350px;
-  padding: 30px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
+.signin-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
+}
+
+.signin-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.signin-logo img {
+  height: 50px;
+}
+
+.signin-logo h1 {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* New section styling */
+.signin-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;   /* Push content below header */
+  min-height: 120vh;   /* Keep full height layout */
+}
+
+
+/* Glass wrapper */
+.signin-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+/* Left: Form */
+.signin-form {
+  flex: 1;
+  padding: 3rem 2rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signin-form h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.signin-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.signin-form label {
+  font-weight: 500;
+}
+
+.signin-form input {
+  padding: 0.9rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.15);
   color: #fff;
 }
 
-/* Headings */
-.glass-card h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: bold;
+.signin-form input::placeholder {
+  color: rgba(255,255,255,0.7);
 }
 
-/* Labels */
-.glass-card label {
-  display: block;
-  margin: 10px 0 5px;
-  font-size: 14px;
-  text-align: left;
-}
-
-/* Inputs */
-.glass-card input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  border: none;
+.signin-form input:focus {
   outline: none;
-  font-size: 14px;
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.2);
 }
 
-/* Button */
-.glass-card button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
+.signin-form button {
+  margin-top: 1rem;
+  padding: 1rem;
   border: none;
-  background: rgba(8, 89, 229, 0.25);
-  color: white;
-  font-size: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0,200,255,0.4), rgba(0,150,200,0.4));
+  color: #fff;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
-.glass-card button:hover {
-  background:rgba(64, 200, 224, 0.4);
+.signin-form button:hover {
+  background: linear-gradient(135deg, rgba(0,200,255,0.6), rgba(0,150,200,0.6));
 }
 
-/* Link */
-.glass-card p {
-  margin-top: 15px;
-  font-size: 14px;
+.auth-links {
+  margin-top: -0.5rem;
 }
 
-.glass-card a {
-  color: gold;
+.auth-links a {
+  color: #00eaff;
+  font-size: 0.9rem;
   text-decoration: none;
-  font-weight: bold;
 }
 
-.glass-card a:hover {
-  text-decoration: underline;
+.auth-redirect {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.auth-redirect a {
+  color: #00eaff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Right: Image */
+.signin-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.signin-image img {
+  max-width: 100%;
+  max-height: 450px;
+  object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .signin-wrapper {
+    flex-direction: column;
+  }
+
+  .signin-image {
+    padding: 1rem;
+  }
 }

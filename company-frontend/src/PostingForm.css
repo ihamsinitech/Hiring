@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+/* Background */
+.posting-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1950&q=80") no-repeat center center/cover;
+  background-attachment: fixed;
+}
+.posting-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
+}
+
+.posting-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.posting-logo img {
+  height: 50px;
+}
+
+.posting-logo h1 {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* New section styling */
+.posting-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 120px;   /* Push content below header */
+  min-height: 100vh;   /* Keep full height layout */
+}
+
+/* Main container */
+.posting-box {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 1000px;
+  max-width: 95%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Left illustration */
+.posting-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.posting-image img {
+  width: 170%;         /* Take full width of its container */
+  max-width: 850px;    /* Increase max width */
+  height: 50%;        /* Maintain aspect ratio */
+  
+}
+
+/* Right form */
+.posting-form {
+  flex: 1.5;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.posting-form h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* Inputs + selects + textarea */
+.posting-form input,
+.posting-form select,
+.posting-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 16px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color:white;
+}
+/* Ensure inputs and selects are clickable */
+.posting-form select {
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+}
+/* Fix for select dropdown arrow */
+select {
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.posting-form select option {
+  color: black;   
+  background: white;  
+}
+
+.posting-form input::placeholder,
+.posting-form textarea::placeholder {
+  color: #ddd;
+}
+
+.posting-form label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Button */
+.posting-form button {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.posting-form button:hover {
+  background: linear-gradient(135deg, #16a085, #1abc9c);
+}
+
+/* Errors + status */
+span {
+  color: #ff6b6b;
+  font-size: 12px;
+}
+.status {
+  margin-bottom: 15px;
+  color: #2ecc71;
+}
+
+

@@ -1,89 +1,169 @@
-import React, { useState } from "react";
-import "./SignUp.css";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import './SignUp.css';
 
-export default function SignUp() {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const SignUp = () => {
+  const [form, setForm] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
 
-  const signup = async () => {
-    const data = {
-      fullName: fullName.toUpperCase(),
-      email,
-      password,
-    };
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setForm({
+      ...form,
+      [id]: id === 'fullName' ? value.toUpperCase() : value
+    });
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setMessage('');
+    setLoading(true);
+
+    // Password validation
+    const hasLowerCase = /[a-z]/.test(form.password);
+    const hasUpperCase = /[A-Z]/.test(form.password);
+    const hasNumber = /[0-9]/.test(form.password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(form.password);
+    
+    if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
+      setError('Password must contain lowercase, uppercase, number, and special character');
+      setLoading(false);
+      return;
+    }
+    
+    if (form.password !== form.confirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+    
     try {
-      const res = await fetch("http://localhost:8085/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+      const response = await fetch('http://localhost:8085/api/auth/signup/student', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: form.fullName,
+          email: form.email,
+          password: form.password,
+          confirmPassword: form.confirmPassword
+        }),
       });
-
-      const msg = await res.text();
-      alert(msg);
-
-      if (msg.includes("successful")) {
-        navigate("/signin");
+      
+      const data = await response.text();
+      
+      if (response.ok) {
+        setMessage('Registration successful! Redirecting to sign in...');
+        setTimeout(() => {
+          navigate('/signin');
+        }, 2000);
+      } else {
+        setError(data || 'Registration failed');
       }
-    } catch (error) {
-      console.error("Signup failed:", error);
-      alert("Something went wrong. Please try again.");
+    } catch (err) {
+      setError('Network error: ' + err.message);
+      console.error('Error details:', err);
+
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="signup-page">
-      <div className="container">
-        {/* Left Side Image */}
-        <div className="image-section">
-          <img src="animation.png" alt="Lady Illustration" className="lady-img" />
+    <div className="signup-container">
+      <header className="signup-header">
+        <div className="signup-logo">
+          <a href="/">
+            <img src="logo-website.png" alt="Company Logo" />
+          </a>
+          <h1>Student Sign Up</h1>
         </div>
+      </header>
 
-        {/* Glassmorphism Sign Up Form */}
-        <div className="glass-card">
-          <h2>Sign Up</h2>
-
-          <label>Full Name:</label>
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="Full Name"
-            style={{ textTransform: "uppercase" }}
-            required
-          />
-
-          <label>Email Id:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-          />
-
-          <small className="password-rule">
-            Password must contain lowercase, uppercase, number, and special character
-          </small>
-
-          <button type="button" onClick={signup}>Sign Up</button>
-          <p>
-            Already have an account? <a href="/signin">Sign In</a>
-          </p>
+      <section className="signup-section">
+        <div className="signup-wrapper">
+          {/* Left side image */}
+          <div className="signup-image">
+            <img src="annimation-15.png" alt="Sign Up" />
+          </div>
+         
+        <div className="signup-form">
+          <h2>Create Account</h2>
+          {error && <div className="error-message">{error}</div>}
+          {message && <div className="success-message">{message}</div>}
+          
+          <form onSubmit={handleSubmit}>
+            <label>Full Name:</label>
+            <input 
+              type="text" 
+              id="fullName" 
+              value={form.fullName} 
+              onChange={handleChange} 
+              placeholder="Full Name" 
+              style={{ textTransform: "uppercase" }}
+              required 
+              disabled={loading} // Disable during loading
+            />
+            
+            <label>Email Id:</label>
+            <input 
+              type="email" 
+              id="email" 
+              value={form.email} 
+              onChange={handleChange} 
+              placeholder="Email" 
+              required 
+              disabled={loading} // Disable during loading
+            />
+            
+            <label>Password:</label>
+            <input 
+              type="password" 
+              id="password" 
+              value={form.password} 
+              onChange={handleChange} 
+              placeholder="Password" 
+              required 
+              disabled={loading} // Disable during loading
+            />
+            <div className="password-requirements">
+                Password must contain a lowercase, uppercase, number, and special character.
+            </div>
+            
+            <label>Confirm Password:</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              value={form.confirmPassword} 
+              onChange={handleChange} 
+              placeholder="Confirm Password" 
+              required 
+              disabled={loading} // Disable during loading
+            />
+            
+            <button type="submit" disabled={loading}>
+              {loading ? 'Processing...' : 'Sign Up'}
+            </button>
+          </form>
+          
+          <div className="auth-redirect">
+            <p>Already have an account? <Link to="/signin">Sign In</Link></p>
+          </div>
         </div>
-      </div>
+       </div> 
+      </section>
     </div>
   );
-}
+};
+
+export default SignUp;

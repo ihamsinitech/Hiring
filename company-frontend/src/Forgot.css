@@ -1,88 +1,170 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Background */
+.forgot-container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* ✅ Office/Work Background */
-  background: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80")
-    no-repeat center center / cover;
-
-  backdrop-filter: blur(5px);
+  background: url('https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=1600&q=80')
+              no-repeat center center/cover;
+  background-attachment: fixed;
 }
 
-/* Glassmorphism Card */
-.glass-card {
-  width: 350px;
-  padding: 30px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.3);
+/* Glass wrapper */
+.forgot-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  text-align: center;
-  color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
 }
 
-/* Title */
-.glass-card h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
+.forgot-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.forgot-logo img {
+  height: 50px;
+}
+
+.forgot-logo h1 {
+  font-size: 1.5rem;
+  color: white;
   font-weight: bold;
+  margin: 0;
 }
 
-/* Inputs */
-.glass-card input {
+/* New section styling */
+.forgot-section {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 12px;
-  outline: none;
-  font-size: 15px;
-  color: #333;
-  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 90px;   /* Push content below header */
+  min-height: 100vh;  /* Keep full height layout */
 }
 
-/* Button */
-.glass-card button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+/* Glassmorphic Box */
+.forgot-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 850px;
+  max-width: 95%;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Left: Form */
+.forgot-form {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.forgot-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
   color: #fff;
+}
+
+.forgot-form label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.forgot-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+.forgot-form button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #0099cc, #00cc99);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
   font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.glass-card button:hover {
-  background: linear-gradient(135deg, #2575fc, #6a11cb);
+.forgot-form button:hover {
+  opacity: 0.9;
 }
 
-/* Link */
-.glass-card p {
+/* Error & Success */
+.error {
+  color: #ff4d4d;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: #00cc66;
+  margin-bottom: 10px;
+}
+
+/* Sign In link */
+.signin-link {
   margin-top: 15px;
+  color: #fff;
 }
 
-.glass-card a {
-  color: #ffeb3b;
+.signin-link a {
+  color: #00e6e6;
   text-decoration: none;
-  font-weight: 500;
 }
 
-.glass-card a:hover {
-  text-decoration: underline;
+/* Right: Image */
+.forgot-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.forgot-image img {
+  max-width: 400px;
+  width: 80%;
+  height: 100%;
+}
+.forgot-redirect {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.forgot-redirect a {
+  color: #00eaff;
+  font-weight: 600;
+  text-decoration: none;
 }

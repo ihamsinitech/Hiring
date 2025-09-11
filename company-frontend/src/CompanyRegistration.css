@@ -1,96 +1,190 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Page background */
-.form-page {
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Full page background */
+.company-container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1950&q=80")
-    no-repeat center center fixed;
-  background-size: cover;
+  background: url("https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=80")
+                no-repeat center center/cover;
+  background-attachment: fixed;
+}
+.company-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
 }
 
-/* Glass container */
-.glass-container {
+.company-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.company-logo img {
+  height: 50px;
+}
+
+.company-logo h1 {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* New section styling */
+.company-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 90px;   /* Push content below header */
+  min-height: 150vh;   /* Keep full height layout */
+}
+
+/* Glassmorphism card */
+.company-box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1100px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.company-image {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
 }
+.company-image img {
+  width: 100%;
+  max-width: 500px;
+  height: 120%;
+}
 
-/* Glass card */
-.glass-card {
-  width: 400px;
-  padding: 30px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+.company-form {
+  flex: 1;
+  padding: 40px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.glass-card h2 {
-  text-align: center;
+.company-form h1 {
   margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: 600;
 }
 
-/* Labels & Inputs */
-label {
-  display: block;
-  margin: 12px 0 6px;
+.company-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
   font-size: 14px;
   font-weight: 500;
 }
 
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
+.company-form input,
+.company-form textarea {
+  padding: 10px;
+  border-radius: 8px;
   border: none;
   outline: none;
-  background: rgba(255, 255, 255, 0.25);
-  color: #fff;
   font-size: 14px;
-  margin-bottom: 10px;
-  resize: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
-input::placeholder,
-textarea::placeholder {
-  color: #eee;
+.company-form input::placeholder {
+  color: #ddd;
+}
+.company-form textarea {
+  min-height: 60px;
 }
 
-select option {
-  color: #000;
-}
-
-/* Button */
-.glass-btn {
-  width: 100%;
+.company-form button {
+  margin-top: 20px;
   padding: 12px;
-  margin-top: 15px;
+  border-radius: 8px;
   border: none;
-  border-radius: 12px;
-  background: rgba(27, 101, 228, 0.25);
+  background: #6e8efb;
   color: #fff;
   font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
-.glass-btn:hover {
-  background: rgba(192, 95, 156, 0.4);
+.company-form button:hover {
+  background: #5a7be0;
+}
+
+/* Error & success */
+.error {
+  color: #ff4d4d;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.success {
+  color: #aaffaa;
+  margin: 10px 0;
+}
+
+/* Trial info box */
+.company-trial-box {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Terms text */
+.company-terms {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Right image */
+.company-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.company-image img {
+  width: 90%;
+  height: auto;   /* make it taller */
+  object-fit: cover;  /* cover full area */
+  border-radius: 0; 
 }

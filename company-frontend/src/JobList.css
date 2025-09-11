@@ -1,0 +1,132 @@
+/* Main container with equal columns */
+.job-list-container {
+  display: grid;
+  grid-template-columns: 280px 1fr; /* left fixed, right flexible */
+  gap: 32px;
+  padding: 80px 32px;
+  min-height: 100vh;
+  background: url("https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=1600&q=80")
+    no-repeat center/cover fixed;
+  backdrop-filter: blur(6px);  
+}
+
+/* Left filters panel */
+.filters-card {
+  height: fit-content;
+  padding: 24px;
+  border-radius: 18px;
+  margin-top: 75px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Dropdown filter sections */
+.filter-section {
+  margin-bottom: 18px;
+}
+
+.filter-header {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-header:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.filter-options {
+  margin-top: 10px;
+  padding-left: 8px;
+  display: none;
+}
+
+.filter-options.show {
+  display: block;
+}
+
+.filter-options label {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.filter-options input {
+  margin-right: 8px;
+}
+
+/* Right side job list */
+.job-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.job-list h2 {
+  font-size: 2rem;
+  margin-bottom: 32px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Glassmorphism Job Card */
+.job-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 24px;
+  margin-bottom: 20px;
+
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.no-results {
+  margin-top: 20px;
+  color: #eee;
+  font-size: 1.1rem;
+}
+.apply-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.apply-btn:hover {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  transform: translateY(-2px);
+}

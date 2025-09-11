@@ -1,87 +1,108 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import styles from "./Home.module.css";
+
 
 export default function Home() {
-  const [showSignupChoice, setShowSignupChoice] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
   const navigate = useNavigate();
 
-  const handleStudentSignup = () => {
-    navigate("/signup");
+  const openModal = (modalName) => {
+    setActiveModal(modalName);
   };
 
-  const handleCompanySignup = () => {
-    navigate("/companyRegistration");
+  const closeModal = () => {
+    setActiveModal(null);
+  };
+
+  const handleFormSubmit = (e, formType) => {
+    e.preventDefault();
+    alert(`${formType} submission successful!`);
   };
 
   return (
-    <div className="home-container">
+    <div className={styles.careerPortal}>
       {/* Header */}
-      <header className="glass-header">
-        {/* Left: Logo */}
-        <div className="logo-section">
-          <a
-            href="https://hamsinitechsolutions.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src="/logo.png" alt="Company Logo" />
+      <header className={styles.glassHeader}>
+        <div className={styles.logoSection}>
+          <a href="https://www.hamsinitechsolutions.com" target="_blank" rel="noreferrer">
+            <img src="logo-website.png" alt="Company Logo" style={{height: '100px'}} />
           </a>
+          <h1>HAMSINI TECH SOLUTIONS</h1>
         </div>
 
-        {/* Right: Buttons */}
-        <div className="btns">
-          <button className="glass-btn" onClick={() => navigate("/signIn")}>
+        <div className={styles.btns}>
+          <button className={styles.glassBtn} onClick={() => navigate('/signin')}>
             Sign In
           </button>
-          <button
-            className="glass-btn"
-            onClick={() => setShowSignupChoice(true)}
-          >
+          <button className={styles.glassBtn} onClick={() => openModal('signUp')}>
             Sign Up
           </button>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="hero glass-container">
-        <div className="hero-text">
+      <section className={`${styles.hero} ${styles.glassContainer}`}>
+        <div className={styles.heroText}>
           <h2>Best opportunity to build your career ✨</h2>
           <p>
             Join us to explore exciting career opportunities with the latest
             technologies.
           </p>
         </div>
-        <div className="hero-img">
-          <img src="/download.jpeg" alt="Career" />
+        <div className={styles.heroImg}>
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Career" />
         </div>
       </section>
 
-      {/* SignUp Choice Modal */}
-      {showSignupChoice && (
-        <div className="modal-overlay">
-          <div className="modal glass-container">
-            {/* Close Icon */}
-            <span
-              className="close-icon"
-              onClick={() => setShowSignupChoice(false)}
-            >
-              ✖
+      {/* Glassmorphism SignUp Choice Modal */}
+      {activeModal === 'signUp' && (
+        <div className={`${styles.modalOverlay} ${styles.active}`} onClick={closeModal}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <span className={styles.closeIcon} onClick={closeModal}>
+              <i className="fas fa-times"></i>
             </span>
-
-            <h3>Choose Sign Up Type</h3>
-            <div className="modal-buttons">
-              <button className="glass-btn full-width" onClick={handleStudentSignup}>
-                Student
-              </button>
-              <p> Or</p>
-              <button className="glass-btn full-width" onClick={handleCompanySignup}>
-                Company
-              </button>
+            
+            <h2 className={styles.modalTitle}>Choose Account Type</h2>
+            
+            <div className={styles.optionsContainer}>
+              <div className={styles.optionCard} onClick={() => navigate('/signup')}>
+                <div className={`${styles.optionIcon} ${styles.student}`}>
+                  <i className="fas fa-user-graduate"></i>
+                </div>
+               
+                <img 
+                   src="student.png" 
+                   alt="Student" 
+                   style={{ width: "40px", height: "50px", marginRight: "10px"}} 
+  />
+                <h3 className={`${styles.optionTitle} ${styles.student}`}>Student</h3>
+                <p className={styles.optionDescription}>Looking for opportunities? Join as a student.</p>
+              </div>
+              
+              <div className={styles.optionCard} onClick={() => navigate('/companyRegistration')}>
+                <div className={`${styles.optionIcon} ${styles.company}`}>
+                  <i className="fas fa-building"></i>
+                </div>
+                 <img 
+                  src="company.png" 
+                  alt="Student" 
+                  style={{ width: "40px", height: "40px", marginRight: "10px" }} 
+                 />
+                <h3 className={`${styles.optionTitle} ${styles.company}`}>Company</h3>
+                <p className={styles.optionDescription}>Hiring talent? Register as a company.</p>
+              </div>
             </div>
           </div>
         </div>
       )}
+      
+      {/* Footer */}
+      <footer className={styles.footer}>
+        <div className={styles.container}>
+          <p>&copy; 2025 CareerPortal. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }

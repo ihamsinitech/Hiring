@@ -1,0 +1,332 @@
+
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --primary: #6a11cb;
+  --secondary: #2575fc;
+  --accent-student: #ff6b6b;
+  --accent-company: #4ecdc4;
+  --light-bg: #f8f9fa;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  cursor: url('');
+ 
+  
+}
+
+  .careerPortal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+  background-attachment: fixed; 
+}
+
+.glassHeader {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;  
+  gap: 15px;             
+}
+
+.logoSection img {
+  height: 80px;          
+}
+.logoSection h1 {
+  font-size: 1.5rem;   
+  font-weight: 600;    
+  color: white;        
+  margin-left: 10px;   
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3); 
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.btns {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  white-space: nowrap;
+  
+}
+
+
+.glassBtn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  margin-left: 0;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 90px;
+}
+
+.glassBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  margin: 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  flex: 1;
+  width: calc(100% - 4rem); 
+  box-sizing: border-box;
+}
+
+.heroText h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.heroText p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.heroImg img {
+  max-width: 300px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Glassmorphism Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modalOverlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 90%;
+  max-width: 500px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+}
+
+.modalOverlay.active .modal {
+  transform: scale(1);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s;
+  z-index: 10;
+}
+
+.closeIcon:hover {
+  color: white;
+}
+
+.modalTitle {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.optionCard {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.optionCard:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.optionIcon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.optionTitle {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: white;
+}
+
+.optionDescription {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.student {
+  color: #ff6b6b;
+}
+
+.company {
+  color: #4ecdc4;
+}
+
+footer {
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+  backdrop-filter: blur(5px);
+  width: 100%;
+}
+.footer p{
+  font-size: x-large;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .logoSection h1 {
+    font-size: 1.2rem;
+  }
+
+
+  
+  .heroImg img {
+    margin-top: 2rem;
+    max-width: 250px;
+  }
+  
+  .heroText h2 {
+    font-size: 2rem;
+  }
+  
+  .modal {
+    padding: 20px;
+  }
+  
+  .optionCard {
+    padding: 20px;
+  }
+  
+  .glassHeader {
+    padding: 1rem;
+  }
+  
+  .glassBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+}
