@@ -201,17 +201,74 @@ html, body, #root {
   text-decoration: underline;
 }
 
-/* Responsive */
+/* ✅ Mobile View Fix */
 @media (max-width: 768px) {
+  .signup-section {
+    min-height: auto;       /* Remove fixed height */
+    padding: 6rem 1rem 2rem;
+  }
+
   .signup-wrapper {
     flex-direction: column;
+    width: 95%;
+    max-width: 500px;
   }
 
   .signup-image {
     padding: 1rem;
   }
 
+  .signup-image img {
+    max-width: 250px;
+    height: auto;
+  }
+
   .signup-form {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .signup-form h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .signup-form form {
+    gap: 0.8rem;
+  }
+
+  .signup-form input {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .signup-form button {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .auth-redirect {
+    font-size: 0.9rem;
   }
 }
+
+/* ✅ Very Small Screens (phones <480px) */
+@media (max-width: 480px) {
+  .signup-image img {
+    max-width: 200px;
+  }
+
+  .signup-form h2 {
+    font-size: 1.3rem;
+  }
+
+  .signup-form input {
+    font-size: 0.85rem;
+    padding: 0.7rem;
+  }
+
+  .signup-form button {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+}
+

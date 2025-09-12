@@ -202,3 +202,62 @@ html, body, #root {
   object-fit: cover;  /* cover full area */
   border-radius: 0; 
 }
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .company-box {
+    flex-direction: column;  /* stack image and form */
+    padding: 20px;
+    margin-top: 70px;
+    margin-bottom: 40px;
+  }
+
+  .company-image {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .company-image img {
+    width: 80%;
+    height: auto;
+  }
+
+  .company-form {
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+  .company-form h1 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .company-form input,
+  .company-form textarea {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .company-form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+  .company-form h1 {
+    font-size: 1.1rem;
+  }
+
+  .company-form input,
+  .company-form textarea {
+    font-size: 12px;
+  }
+
+  .company-form button {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+

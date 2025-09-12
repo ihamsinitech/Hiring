@@ -181,3 +181,48 @@ html, body, #root {
   font-weight: 600;
   text-decoration: none;
 }
+
+@media (max-width: 768px) {
+  .forgot-section {
+    padding-top: 70px; /* less gap on small screens */
+    margin-top: 70px;
+    margin-bottom: 30px;
+  
+  }
+
+  .forgot-box {
+    flex-direction: column;   /* stack form and image */
+    padding: 20px;            /* reduce padding */
+    text-align: center;       /* center content */
+  }
+
+  .forgot-form {
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .forgot-form h2 {
+    font-size: 20px; /* smaller title */
+  }
+
+  .forgot-form input {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .forgot-form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .forgot-image {
+    margin-top: 20px; /* move image below form */
+  }
+
+  .forgot-image img {
+    max-width: 250px;
+    width: 70%;
+    height: auto;
+  }
+}
+

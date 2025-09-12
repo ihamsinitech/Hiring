@@ -179,18 +179,47 @@ html, body, #root {
   margin-bottom: 10px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
+  .student-section {
+    padding-top: 70px;
+    min-height: auto;  /* prevent extra scroll */
+    margin-top: 70px;
+    margin-bottom: 40px;
+  }
+
   .student-box {
-    flex-direction: column;
+    flex-direction: column;   /* stack image + form */
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .student-image {
+    padding: 15px;
   }
 
   .student-image img {
-    width: 100%;
-    max-width: 250px;
+    width: 80%;       /* smaller image */
+    max-width: 200px; /* limit size */
+    height: auto;
   }
 
   .student-form {
-    padding: 30px 20px;
+    padding: 10px;    /* reduce padding */
+    text-align: center;
+  }
+
+  .student-form h2 {
+    font-size: 18px;  /* smaller title */
+  }
+
+  .student-form input,
+  .student-form select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .student-form button {
+    font-size: 14px;
+    padding: 10px;
   }
 }

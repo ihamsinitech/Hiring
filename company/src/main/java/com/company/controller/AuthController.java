@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -45,11 +46,25 @@ import jakarta.mail.internet.MimeMessage;
 @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"},allowedHeaders = "*")
 public class AuthController {
     
+    
     @Autowired
     private StudentRepository studentRepository;
     
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    @Autowired
+    private ApplicationRepository applicationRepository;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    // ✅ Add this line to inject your email address from application.properties
+    @Value("${spring.mail.username}")
+    private String mailFrom;
     
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody Map<String, String> credentials) {
@@ -301,8 +316,7 @@ public class AuthController {
         }
     }
 
-    @Autowired
-    private JobRepository jobRepository;
+    
     
     @PostMapping("/post")
     public ResponseEntity<?> postJob(@RequestBody PostingForm job) {
@@ -327,13 +341,7 @@ public class AuthController {
     }
 
 
-    @Autowired
-    private ApplicationRepository applicationRepository;
-
-    @Autowired
-    private JavaMailSender mailSender;
-
-   @PostMapping("/apply")
+@PostMapping("/apply")
    public ResponseEntity<?> applyForJob(@ModelAttribute JobApplicationDTO dto) {
     try {
         // Save resume
@@ -374,7 +382,7 @@ public class AuthController {
     MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
     // ✅ Set "from" as your Gmail (must match spring.mail.username)
-    helper.setFrom("lavanyagorle2003@gmail.com");  
+    helper.setFrom(mailFrom);  
     helper.setTo(dto.getCompanyEmail()); // send to company email
     helper.setSubject("New Job Application: " + dto.getFullName());
     helper.setText(

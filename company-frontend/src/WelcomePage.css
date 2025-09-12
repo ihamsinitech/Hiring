@@ -84,17 +84,53 @@ html, body, #root {
   background: rgba(255, 255, 255, 0.4);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .welcome-card {
-    padding: 30px 20px;
+    padding: 20px 15px;   /* reduce padding */
+    max-width: 90%;       /* shrink width */
+  }
+
+  .welcome-logo {
+    width: 80px;          /* smaller logo */
+    margin-bottom: 15px;
   }
 
   .welcome-card h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;    /* smaller title */
+    margin-bottom: 8px;
   }
 
   .welcome-card p {
-    font-size: 1rem;
+    font-size: 0.95rem;   /* smaller text */
+    margin-bottom: 15px;
+    line-height: 1.4;     /* better readability */
+  }
+
+  .welcome-card button {
+    padding: 10px 18px;
+    font-size: 0.9rem;    /* smaller button */
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-card {
+    padding: 15px 12px;   /* tighter on very small screens */
+  }
+
+  .welcome-logo {
+    width: 65px;          /* extra small logo */
+  }
+
+  .welcome-card h1 {
+    font-size: 1.3rem;
+  }
+
+  .welcome-card p {
+    font-size: 0.85rem;
+  }
+
+  .welcome-card button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
   }
 }

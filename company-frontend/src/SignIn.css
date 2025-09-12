@@ -193,13 +193,32 @@ html, body, #root {
   object-fit: contain;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .signin-wrapper {
-    flex-direction: column;
+    flex-direction: column;   /* stack form + image */
+    width: 90%;
+    max-width: 500px;
+    margin-top: 70px;
+    margin-bottom: 30px;
+  }
+
+  .signin-form {
+    padding: 1.5rem;          /* reduce padding */
+    text-align: center;       /* center text */
+  }
+
+  .signin-form h2 {
+    font-size: 1.6rem;        /* smaller title */
   }
 
   .signin-image {
+    order: -1;                /* show image ABOVE form */
     padding: 1rem;
   }
+
+  .signin-image img {
+    max-width: 200px;         /* smaller image */
+    height: auto;
+  }
 }
+

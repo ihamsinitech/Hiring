@@ -92,14 +92,87 @@
 
 
 
-/* Subtle fade-in */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* Tablet screens */
+@media (max-width: 1024px) {
+  .job-details {
+    padding: 100px 24px 40px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .job-details-card {
+    padding: 30px;
+    max-width: 100%;
+  }
+
+  .job-details-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .job-details-card h3 {
+    font-size: 1.2rem;
   }
 }
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .job-details {
+    padding: 80px 16px 32px;
+    align-items: center; /* center card */
+  }
+
+  .job-details-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .job-details-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .job-details-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .job-details-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .floating-apply-btn {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small mobile (very narrow screens) */
+@media (max-width: 480px) {
+  .job-details {
+    padding: 60px 12px 24px;
+  }
+
+  .job-details-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .job-details-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .job-details-card h3 {
+    font-size: 1rem;
+  }
+
+  .job-details-card p {
+    font-size: 0.85rem;
+  }
+
+  .floating-apply-btn {
+    bottom: 12px;
+    right: 12px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}
+

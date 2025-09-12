@@ -81,3 +81,57 @@
 .apply-box button:hover {
   background: linear-gradient(135deg, #2575fc, #6a11cb);
 }
+
+/* Tablet & mobile responsiveness */
+@media (max-width: 768px) {
+  .apply-box {
+    padding: 20px;
+    max-width: 90%;      /* fit within screen */
+  }
+
+  .apply-box h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .apply-box label {
+    font-size: 14px;
+  }
+
+  .apply-box input,
+  .apply-box select,
+  .apply-box textarea {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .apply-box button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+  .apply-box {
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .apply-box h2 {
+    font-size: 1.2rem;
+  }
+
+  .apply-box input,
+  .apply-box select,
+  .apply-box textarea {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .apply-box button {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+

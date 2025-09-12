@@ -195,22 +195,30 @@ span {
   color: #2ecc71;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .posting-box {
     flex-direction: column;
+    width: 95%;
+    margin-top: 60px;
+    margin-bottom: 50px;
   }
 
   .posting-image {
     padding: 1rem;
-  }
-
-  .posting-form {
-    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .posting-image img {
-    width: 100%;
-    height: auto;
+    width: 70%;       /* Fit inside container */
+    max-width: 350px; /* Prevent too large */
+    height: auto;     /* Keep ratio */
+    object-fit: contain;
+  }
+
+  .posting-form {
+    padding: 1.5rem;
   }
 }
+

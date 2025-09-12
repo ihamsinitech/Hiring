@@ -140,3 +140,66 @@
   background: linear-gradient(135deg, #2575fc, #6a11cb);
   transform: translateY(-2px);
 }
+/* Responsive design */
+@media (max-width: 1024px) {
+  .job-list-container {
+    grid-template-columns: 220px 1fr; /* slightly smaller sidebar on tablets */
+    gap: 20px;
+    padding: 60px 20px;
+  }
+
+  .job-card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .job-list-container {
+    grid-template-columns: 1fr; /* stack filters & jobs */
+    padding: 20px 16px;
+  }
+
+  .filters-card {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .job-list h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+
+  .job-card {
+    padding: 18px;
+    font-size: 0.95rem;
+  }
+
+  .apply-btn {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-list-container {
+    padding: 12px;
+  }
+
+  .job-card {
+    padding: 14px;
+    font-size: 0.85rem;
+  }
+
+  .filter-header {
+    font-size: 0.95rem;
+  }
+
+  .apply-btn {
+    bottom: 12px;
+    right: 12px;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+  }
+}
