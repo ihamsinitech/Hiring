@@ -40,6 +40,10 @@ public class Student  {
     private String yearsOfExp;
     private String role;
 
+    @Column(name = "mobile")
+    private String mobile;
+
+
     
     
 }

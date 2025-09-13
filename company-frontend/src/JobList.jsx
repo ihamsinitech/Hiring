@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './JobList.css';   // ✅ import CSS
 
+
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState({
@@ -10,12 +11,21 @@ const JobList = () => {
     experience: 0
   });
   const [openFilter, setOpenFilter] = useState(null);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8085/api/auth')
+    fetch('http://15.206.41.13:8085/api/auth')
       .then(res => res.json())
       .then(data => setJobs(data));
+  }, []);
+
+  // ✅ Load user details from localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
   }, []);
 
   // Toggle dropdown filter
@@ -78,7 +88,18 @@ const JobList = () => {
 
   return (
     <div className="job-list-container">
-      {/* Left side filters */}
+
+      <header className="job-header">
+        <div className="job-logo">
+          <a href="/">
+            <img src="logo-website.png" alt="Company Logo" />
+          </a>
+          <h1>Available Job Opportunities</h1>
+        </div>
+        
+      </header>
+
+    {/* Left side filters */}
       <div className="filters-card" >
         <h3>All Filters</h3>
 
@@ -148,8 +169,7 @@ const JobList = () => {
 
       {/* Right Job List */}
       <div className="job-list">
-        <h2>Available Job Opportunities</h2>
-        {filteredJobs.map((job) => (
+      {filteredJobs.map((job) => (
           <div key={job.id} className="job-card" onClick={() => navigate(`/jobs/${job.id}`)}>
             <h3>{job.jobTitle}</h3>
             <p>{job.companyName} | {job.location}</p>

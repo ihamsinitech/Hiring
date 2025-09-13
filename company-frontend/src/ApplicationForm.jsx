@@ -23,7 +23,7 @@ const ApplicationForm = () => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:8085/api/auth/${id}`)
+    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
       .then((res) => res.json())
       .then((data) => setJob(data))
       .catch((err) => console.error("Error fetching job:", err));
@@ -57,7 +57,7 @@ const ApplicationForm = () => {
 
 
 
-      const response = await fetch("http://localhost:8085/api/auth/apply", {
+      const response = await fetch("http://15.206.41.13:8085/api/auth/apply", {
         method: "POST",
         body: formData, // ✅ send multipart/form-data
       });
@@ -95,6 +95,17 @@ const ApplicationForm = () => {
 
   return (
     <div className="apply-container">
+
+      <header className="apply-header">
+        <div className="apply-logo">
+          <h1>ApplicationForm</h1>
+          
+           <a href="/">
+            &emsp; Home
+          </a>
+        </div>
+        </header>
+
       <div className="apply-box">
         <h2>Apply for {job.jobTitle}</h2>
         <p><b>Company:</b> {job.companyName}</p>

@@ -83,7 +83,7 @@ const PostingForm = () => {
       // Get company email from localStorage or context
       const companyEmail = localStorage.getItem('companyEmail') || 'company@example.com';
       
-      const response = await fetch('http://localhost:8085/api/auth/post', {
+      const response = await fetch('http://15.206.41.13:8085/api/auth/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -205,6 +205,7 @@ const PostingForm = () => {
               id="educationRequired"
               value={form.educationRequired}
               onChange={handleChange}
+              required
             >
               <option>B.Tech</option>
               <option>Associate's Degree</option>
@@ -220,6 +221,7 @@ const PostingForm = () => {
               id="skillsRequired"
               value={form.skillsRequired}
               onChange={handleChange}
+              required
             />
 
             <label>Job Description *</label>
@@ -228,6 +230,7 @@ const PostingForm = () => {
               value={form.jobDescription}
               onChange={handleChange}
               rows="3"
+              required
             />
             {errors.jobDescription && <span>{errors.jobDescription}</span>}
 
@@ -237,6 +240,7 @@ const PostingForm = () => {
               value={form.responsibilities}
               onChange={handleChange}
               rows="3"
+              required
             />
             {errors.responsibilities && <span>{errors.responsibilities}</span>}
 
@@ -246,6 +250,7 @@ const PostingForm = () => {
               value={form.benefits}
               onChange={handleChange}
               rows="3"
+              required
             />
 
             <label>Contact Email *</label>
@@ -254,6 +259,7 @@ const PostingForm = () => {
               id="contactEmail"
               value={form.contactEmail}
               onChange={handleChange}
+              required
             />
             {errors.contactEmail && <span>{errors.contactEmail}</span>}
 
@@ -263,6 +269,7 @@ const PostingForm = () => {
               id="website"
               value={form.website}
               onChange={handleChange}
+              required
             />
 
             <label>Company Portal</label>

@@ -13,16 +13,19 @@ html, body, #root {
 
 /* Background */
 .welcome-container {
-  height: 100vh;
+  min-height: 100vh;          /* allow height to expand */
   width: 100%;
-  background: url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1950&q=80")
+  background: url("https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1950&q=80")
     no-repeat center center/cover;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;    /* keep card below header */
+  padding: 150px 20px 100px;  /* top + bottom padding */
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;           /* allow scrolling if needed */
 }
+
+
 
 .welcome-container::before {
   content: "";
@@ -32,6 +35,39 @@ html, body, #root {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 0;
+}
+/* Header */
+.welcome-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
+  
+}
+
+.welcome-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.welcome-logo img {
+  height: 50px;
+}
+
+.welcome-logo h1 {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  margin: 0;
 }
 
 /* Glass Card */
@@ -46,9 +82,10 @@ html, body, #root {
   text-align: center;
   max-width: 600px;
   width: 90%;
-  color: white;
+  color: black;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  
 }
 
 /* Logo */
@@ -74,7 +111,7 @@ html, body, #root {
   border: none;
   padding: 12px 24px;
   border-radius: 12px;
-  color: white;
+  color: black;
   font-size: 1rem;
   cursor: pointer;
   transition: 0.3s ease;
@@ -85,6 +122,9 @@ html, body, #root {
 }
 
 @media (max-width: 768px) {
+  .welcome-container {
+    padding-top: 90px;
+  }
   .welcome-card {
     padding: 20px 15px;   /* reduce padding */
     max-width: 90%;       /* shrink width */
@@ -113,6 +153,10 @@ html, body, #root {
 }
 
 @media (max-width: 480px) {
+
+  .welcome-container {
+    padding-top: 70px;
+  }
   .welcome-card {
     padding: 15px 12px;   /* tighter on very small screens */
   }

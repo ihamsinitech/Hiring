@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -43,7 +42,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"},allowedHeaders = "*")
+@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"},allowedHeaders = "*")
 public class AuthController {
     
     
@@ -62,10 +61,6 @@ public class AuthController {
     @Autowired
     private JavaMailSender mailSender;
 
-    // ✅ Add this line to inject your email address from application.properties
-    @Value("${spring.mail.username}")
-    private String mailFrom;
-    
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody Map<String, String> credentials) {
         try {
@@ -382,7 +377,7 @@ public class AuthController {
     MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
     // ✅ Set "from" as your Gmail (must match spring.mail.username)
-    helper.setFrom(mailFrom);  
+    helper.setFrom("lavanyagorle2003@gmail.com");  
     helper.setTo(dto.getCompanyEmail()); // send to company email
     helper.setSubject("New Job Application: " + dto.getFullName());
     helper.setText(
@@ -409,6 +404,5 @@ public class AuthController {
         return ResponseEntity.status(500).body("❌ Error in /apply: " + e.getMessage());
     }
 }
-
 
 }

@@ -9,6 +9,16 @@ const WelcomePage = () => {
 
   return (
     <div className="welcome-container">
+
+      <header className="welcome-header">
+        <div className="welcome-logo">
+          <a href="/">
+            <img src="logo-website.png" alt="Company Logo" />
+          </a>
+          <h1>Welcome </h1>
+        </div>
+        </header>
+
       <div className="welcome-card">
         <img 
           src="/logo-website.png"   // <-- put your logo inside public/logo.png

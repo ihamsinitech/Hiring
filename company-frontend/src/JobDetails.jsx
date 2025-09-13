@@ -7,9 +7,10 @@ const JobDetails = () => {
   const [job, setJob] = useState(null);
   const navigate = useNavigate();
 
+ 
 
   useEffect(() => {
-    fetch(`http://localhost:8085/api/auth/${id}`)
+    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
       .then(res => res.json())
       .then(data => {
         console.log("Job Data from API:", data); // ✅ Debug check
@@ -21,6 +22,16 @@ const JobDetails = () => {
 
   return (
     <div className="job-details">
+
+      <header className="jobdetails-header">
+        <div className="jobdetails-logo">
+          <h1>Apply Now</h1>
+          <a href="/">&emsp;
+            Home
+          </a>
+        </div>
+        </header>
+        
       <div className="job-details-card">
         <h2>{job.jobTitle}</h2>
         <p><b>Company:</b> {job.companyName}</p>

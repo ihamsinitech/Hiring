@@ -63,7 +63,7 @@ html, body, #root {
 
 .forgot-logo h1 {
   font-size: 1.5rem;
-  color: white;
+  color: black;
   font-weight: bold;
   margin: 0;
 }
@@ -101,14 +101,14 @@ html, body, #root {
 .forgot-form h2 {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #fff;
+  color: black;
 }
 
 .forgot-form label {
   display: block;
   margin-top: 10px;
   font-size: 14px;
-  color: #fff;
+  color: black;
 }
 
 .forgot-form input {
@@ -128,7 +128,7 @@ html, body, #root {
   background: linear-gradient(to right, #0099cc, #00cc99);
   border: none;
   border-radius: 8px;
-  color: #fff;
+  color: black;
   font-size: 16px;
   cursor: pointer;
 }
@@ -151,7 +151,7 @@ html, body, #root {
 /* Sign In link */
 .signin-link {
   margin-top: 15px;
-  color: #fff;
+  color: black;
 }
 
 .signin-link a {

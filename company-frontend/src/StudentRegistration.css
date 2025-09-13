@@ -63,7 +63,7 @@ html, body, #root {
 
 .student-logo h1 {
   font-size: 1.5rem;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
@@ -114,7 +114,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: #fff;
+  color: black;
 }
 
 .student-form h2 {
@@ -133,7 +133,7 @@ html, body, #root {
   border: none;
   outline: none;
   background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  color: black;
 }
 
 .student-form select option {
@@ -142,7 +142,7 @@ html, body, #root {
 }
 
 .student-form input::placeholder {
-  color: #ddd;
+  color: black;
 }
 
 .student-form label {
@@ -158,7 +158,7 @@ html, body, #root {
   background: linear-gradient(135deg, #1abc9c, #16a085);
   border: none;
   border-radius: 8px;
-  color: #fff;
+  color: black;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;

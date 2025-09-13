@@ -9,6 +9,7 @@
   z-index: 1;
 }
 
+
 /* ✅ Blurred background layer */
 .apply-container::before {
   content: "";
@@ -20,6 +21,40 @@
   transform: scale(1.05);  /* avoid cropped blur edges */
   z-index: -1;             /* keep behind the form */
 }
+/* Header */
+.apply-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
+}
+
+.apply-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.apply-logo a {
+  
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.apply-logo h1 {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  margin: 0;
+}
 
 .apply-box {
   width: 100%;
@@ -29,8 +64,9 @@
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(14px);
-  color: #fff;
+  color: black;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  margin-top: 70px;
 }
 
 .apply-box h2 {
@@ -54,7 +90,7 @@
   border: none;
   outline: none;
   background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+  color: black;
 }
 .apply-box select option {
   color: black;   
@@ -72,7 +108,7 @@
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   border: none;
   border-radius: 10px;
-  color: #fff;
+  color: black;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;

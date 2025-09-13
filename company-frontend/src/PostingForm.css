@@ -62,7 +62,7 @@ html, body, #root {
 
 .posting-logo h1 {
   font-size: 1.5rem;
-  color: white;
+  color: black;
   font-weight: bold;
   margin: 0;
 }
@@ -91,6 +91,7 @@ html, body, #root {
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   z-index: 2;
+  margin-bottom: 30px;
 }
 
 /* Left illustration */
@@ -114,7 +115,7 @@ html, body, #root {
   padding: 40px;
   display: flex;
   flex-direction: column;
-  color: #fff;
+  color: black;
 }
 
 .posting-form h2 {
@@ -134,7 +135,7 @@ html, body, #root {
   border: none;
   outline: none;
   background: rgba(255, 255, 255, 0.2);
-  color:white;
+  color:black;
 }
 
 /* Ensure inputs and selects are clickable */
@@ -155,12 +156,12 @@ select {
 
 .posting-form select option {
   color: black;   
-  background: white;  
+  background: black;  
 }
 
 .posting-form input::placeholder,
 .posting-form textarea::placeholder {
-  color: #ddd;
+  color: black;
 }
 
 .posting-form label {
@@ -176,7 +177,7 @@ select {
   background: linear-gradient(135deg, #1abc9c, #16a085);
   border: none;
   border-radius: 10px;
-  color: #fff;
+  color: black;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;

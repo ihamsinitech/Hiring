@@ -64,7 +64,7 @@ html, body, #root {
 
 .signin-logo h1 {
   font-size: 1.5rem;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
@@ -101,7 +101,7 @@ html, body, #root {
 .signin-form {
   flex: 1;
   padding: 3rem 2rem;
-  color: #fff;
+  color: black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -128,7 +128,7 @@ html, body, #root {
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.3);
   background: rgba(255,255,255,0.15);
-  color: #fff;
+  color: black;
 }
 
 .signin-form input::placeholder {
@@ -147,7 +147,7 @@ html, body, #root {
   border: none;
   border-radius: 12px;
   background: linear-gradient(135deg, rgba(0,200,255,0.4), rgba(0,150,200,0.4));
-  color: #fff;
+  color: black;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
