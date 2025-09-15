@@ -27,7 +27,7 @@ html, body, #root {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1950&q=80")
+  background: url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1950&q=80")
               no-repeat center center/cover;
   background-attachment: fixed;
   filter: blur(12px);         /* blur effect */

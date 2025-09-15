@@ -4,6 +4,7 @@ import './StudentRegistration.css';
 
 const StudentRegistration = () => {
   const [form, setForm] = useState({
+    mobile: '',
     education: '',
     yearOfPassing: '',
     place: '',
@@ -24,6 +25,7 @@ const StudentRegistration = () => {
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
     if (userData.email) {
       setUserEmail(userData.email);
+      setForm((prev) => ({ ...prev, email: userData.email }));
     } else {
       // If no user data, redirect to signin
       navigate('/signin');
@@ -43,14 +45,12 @@ const StudentRegistration = () => {
     setMessage('');
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/complete-student-registration', {        method: 'POST',
+      const response = await fetch('http://localhost:8085/api/auth/complete-student-registration', { 
+       method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: userEmail,
-          ...form
-        }),
+        body: JSON.stringify(form),
       });
       
       const data = await response.text();
@@ -111,6 +111,17 @@ const StudentRegistration = () => {
             />
             {errors.email && <div className="error-message">{errors.email}</div>}
 
+            <label>Mobile Number</label>
+            <input
+              type="number"
+              id="mobile"
+              value={form.mobile}
+              onChange={handleChange}
+              placeholder="Enter mobile number"
+              pattern="[0-9]{10}" // ✅ simple validation (10 digits)
+              required
+            />
+
           <label>Education</label>
           <input
             type="text"
@@ -129,6 +140,9 @@ const StudentRegistration = () => {
             required
           >
             <option value="">--Select Year--</option>
+
+            <option>2027</option>
+            <option>2026</option>
             <option>2025</option>
             <option>2024</option>
             <option>2023</option>

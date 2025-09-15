@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './JobList.css';   // ✅ import CSS
 
-
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState({
@@ -14,8 +13,16 @@ const JobList = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+
+// Call this in useEffect when user is loaded
+useEffect(() => {
+  if (user && user.userType === 'student') {
+    fetchStudentProfile(user.userId);
+  }
+}, [user]);
+
   useEffect(() => {
-    fetch('http://15.206.41.13:8085/api/auth')
+    fetch('http://localhost:8085/api/auth')
       .then(res => res.json())
       .then(data => setJobs(data));
   }, []);
@@ -86,6 +93,10 @@ const JobList = () => {
   return matchWorkMode && matchSkillsOrTitle && matchExperience;
   });
 
+  const handleProfileClick = () => {
+    navigate('/student-profile');
+  };
+
   return (
     <div className="job-list-container">
 
@@ -96,8 +107,7 @@ const JobList = () => {
           </a>
           <h1>Available Job Opportunities</h1>
         </div>
-        
-      </header>
+     </header>
 
     {/* Left side filters */}
       <div className="filters-card" >

@@ -13,6 +13,8 @@ import JobList from './JobList';
 import JobDetails from './JobDetails';
 import WelcomePage from './WelcomePage';
 import ApplicationForm from './ApplicationForm';
+import SuccessPage from './SuccessPage';
+
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/welcome" element={<WelcomePage />} />
           <Route path="/apply/:id" element={<ApplicationForm />} />
+          <Route path="/success" element={<SuccessPage />} />
+          
         </Routes>
       </div>
     </Router>

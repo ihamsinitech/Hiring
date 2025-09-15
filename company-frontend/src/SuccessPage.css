@@ -1,0 +1,118 @@
+/* Full page wrapper with background image */
+.success-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+  background: #000;  /* ensures ::before is visible */
+  z-index: 0;
+}
+
+.success-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1600&q=80")
+    no-repeat center center/cover;
+  filter: blur(12px);
+  transform: scale(1.05);
+  z-index: -1;
+}
+
+
+/* Optional dark overlay for contrast */
+.success-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* semi-transparent dark layer */
+  z-index: -1;
+}
+
+/* Glassmorphism Card */
+.success-container {
+  max-width: 600px;
+  width: 100%;
+  padding: 40px 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+}
+
+/* Heading */
+.success-container h2 {
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Paragraph */
+.success-container p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Button */
+.success-container .home-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.success-container .home-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+/* Big Success Icon */
+.success-icon {
+  width: 120px;          /* bigger circle */
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, 0.15); /* soft green background */
+  border: 4px solid #4caf50;           /* green border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  font-size: 4rem;       /* ✔ size */
+  font-weight: bold;
+  color: #4caf50;        /* green tick */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Tick animation */
+.success-icon span {
+  display: inline-block;
+  animation: pop 0.6s ease-out;
+  font-size: 6rem;     /* make ✔ really big */
+  font-weight: bold;
+  color: #4caf50;      /* green tick */
+  margin-bottom: 20px;
+  text-align: center;
+  animation: pop 0.5s ease-out;
+}
+
+
+
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); }
+}
+

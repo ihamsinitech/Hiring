@@ -4,13 +4,13 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 32px;
-  padding: 80px 32px;
+  padding: 120px 32px 80px;;
   min-height: 100vh;
   z-index: 1; /* keep content above */
 }
 /* Header */
 .job-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -18,10 +18,11 @@
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,0.2);
   z-index: 10;
+  gap: 20px;
 }
 
 .job-logo {
@@ -41,12 +42,58 @@
   margin: 0;
 }
 
+/* Student Profile in Header */
+.student-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.student-profile-header:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.profile-name {
+  font-weight: 600;
+  color: black;
+  font-size: 0.95rem;
+}
+
+.profile-role {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 /* Background blur layer */
 .job-list-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=1600&q=80")
+  background: url("https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80")
     no-repeat center/cover fixed;
   filter: blur(12px);   /* ✅ apply blur to image itself */
   z-index: -1;          /* keep it behind content */
@@ -188,36 +235,40 @@
 
 @media (max-width: 768px) {
   .job-list-container {
-    grid-template-columns: 1fr; /* stack filters & jobs */
-    padding: 20px 16px;
+    grid-template-columns: 1fr; 
+    padding: 100px 16px 60px; /* ✅ extra top padding for fixed header */
   }
 
   .filters-card {
-    margin-top: 20px;
+    margin-top: 0;     /* ✅ no overlap issues */
     width: 100%;
+  }
+
+  .job-list {
+    margin-top: 20px;  /* ✅ spacing after filters */
   }
 
   .job-list h2 {
     font-size: 1.5rem;
-    margin-top: 20px;
   }
 
   .job-card {
     padding: 18px;
     font-size: 0.95rem;
   }
-
-  .apply-btn {
-    bottom: 16px;
-    right: 16px;
-    padding: 8px 16px;
-    font-size: 0.9rem;
+  
+  .student-profile-header {
+    padding: 6px 12px;
+  }
+  
+  .profile-info {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
   .job-list-container {
-    padding: 12px;
+    padding: 90px 12px 50px; /* ✅ reduce padding but still clear header */
   }
 
   .job-card {
@@ -226,13 +277,11 @@
   }
 
   .filter-header {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    padding: 8px;
   }
-
-  .apply-btn {
-    bottom: 12px;
-    right: 12px;
-    font-size: 0.8rem;
-    padding: 6px 14px;
+  
+  .job-logo h1 {
+    font-size: 1.2rem;
   }
 }

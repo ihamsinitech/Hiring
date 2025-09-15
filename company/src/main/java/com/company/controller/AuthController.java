@@ -2,6 +2,7 @@ package com.company.controller;
 
 
 import java.io.File;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,9 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.company.model.Application;
 import com.company.model.Company;
@@ -35,6 +34,7 @@ import com.company.repository.CompanyRepository;
 import com.company.repository.JobRepository;
 import com.company.repository.StudentRepository;
 
+
 import jakarta.mail.internet.MimeMessage;
 
 
@@ -42,7 +42,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"},allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"},allowedHeaders = "*")
 public class AuthController {
     
     
@@ -224,8 +224,13 @@ public class AuthController {
             
             if (studentOptional.isPresent()) {
                 Student student = studentOptional.get();
-                
+
                 // Update student details
+
+                if (request.containsKey("mobile")) {
+                    student.setMobile((String) request.get("mobile"));
+                }
+                
                 if (request.containsKey("education")) {
                     student.setEducation((String) request.get("education"));
                 }

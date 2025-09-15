@@ -44,14 +44,15 @@ export default function Home() {
       {/* Hero Section */}
       <section className={`${styles.hero} ${styles.glassContainer}`}>
         <div className={styles.heroText}>
-          <h2>Best opportunity to build your career ✨</h2>
+          <h2>Your Future Starts Here – Hamsini Tech Solutions 🚀</h2>
           <p>
-            Join us to explore exciting career opportunities with the latest
-            technologies.
+            Step into a workplace where innovation, creativity, and passion come together.  
+            We’re hiring individuals who are eager to learn, grow, and build a successful career in technology.  
           </p>
+
         </div>
         <div className={styles.heroImg}>
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwa90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Career" />
+          <img src="hiring.jpg" alt="Career" />
         </div>
       </section>
 

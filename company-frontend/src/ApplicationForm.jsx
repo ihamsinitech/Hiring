@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./ApplicationForm.css";
 
 const ApplicationForm = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ const ApplicationForm = () => {
   });
 
   useEffect(() => {
-    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
+    fetch(`http://localhost:8085/api/auth/${id}`)
       .then((res) => res.json())
       .then((data) => setJob(data))
       .catch((err) => console.error("Error fetching job:", err));
@@ -57,13 +58,14 @@ const ApplicationForm = () => {
 
 
 
-      const response = await fetch("http://15.206.41.13:8085/api/auth/apply", {
+      const response = await fetch("http://localhost:8085/api/auth/apply", {
         method: "POST",
         body: formData, // ✅ send multipart/form-data
       });
 
 
       if (response.ok) {
+        navigate("/success");
         setMessage("Application submitted successfully!");
         setForm({
           fullName: "",

@@ -121,7 +121,7 @@ html, body, #root {
 }
 
 .heroText h2 {
-  font-size: 2.5rem;
+  font-size: 2.0rem;
   font-weight: 700;
   color: black;
   margin-bottom: 1rem;
@@ -131,8 +131,9 @@ html, body, #root {
 .heroText p {
   font-size: 1.2rem;
   color: hwb(0 15% 85% / 0.9);
-  max-width: 500px;
+  max-width: 700px;
   line-height: 1.6;
+  
 }
 
 .heroImg img {
