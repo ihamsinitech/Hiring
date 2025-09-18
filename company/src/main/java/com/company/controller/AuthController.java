@@ -42,7 +42,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"},allowedHeaders = "*")
+@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"},allowedHeaders = "*")
 public class AuthController {
     
     
@@ -374,6 +374,10 @@ public class AuthController {
         app.setCompanyEmail(dto.getCompanyEmail());
         app.setResumePath(resumePath);
 
+        if (dto.getStudentId() != null) {
+            app.setStudentId(dto.getStudentId());
+        }
+
         applicationRepository.save(app);
 
     // Send email if companyEmail is not null
@@ -409,5 +413,43 @@ public class AuthController {
         return ResponseEntity.status(500).body("❌ Error in /apply: " + e.getMessage());
     }
 }
+
+@GetMapping("/student/{id}/profile")
+public ResponseEntity<?> getStudentProfile(@PathVariable Long id) {
+    try {
+        Optional<Student> studentOpt = studentRepository.findById(id);
+        if (studentOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Student not found");
+        }
+
+        Student student = studentOpt.get();
+
+        // Count applications
+        long appliedCount = applicationRepository.countByStudentId(id);
+
+        // Count shortlisted applications
+        long shortlistedCount = applicationRepository.countByStudentIdAndStatus(id, "Shortlisted");
+
+        // Count company replies (assuming replies = applications with companyEmail not null)
+        long companyReplies = applicationRepository.countByStudentIdAndCompanyEmailNotNull(id);
+
+        Map<String, Object> profile = new HashMap<>();
+        profile.put("fullName", student.getFullName());
+        profile.put("email", student.getEmail());
+        profile.put("education", student.getEducation());
+        profile.put("yearOfPassing", student.getYearOfPassing());
+        profile.put("place", student.getPlace());
+        profile.put("status", student.getStatus());
+        profile.put("appliedCount", appliedCount);
+        profile.put("shortlisted", shortlistedCount);
+        profile.put("messages", companyReplies);
+
+        return ResponseEntity.ok(profile);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+    }
+}
+
+
 
 }

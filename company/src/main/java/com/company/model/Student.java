@@ -1,5 +1,6 @@
 package com.company.model;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +44,14 @@ public class Student  {
     @Column(name = "mobile")
     private String mobile;
 
+    @Column(name = "applied_count")
+    private Integer appliedCount = 0;
+
+    @Column(name = "shortlisted")
+    private Integer shortlisted = 0;
+
+    @Column(name = "messages")
+    private Integer messages = 0;
 
     
     

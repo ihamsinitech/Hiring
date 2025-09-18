@@ -14,6 +14,8 @@ import JobDetails from './JobDetails';
 import WelcomePage from './WelcomePage';
 import ApplicationForm from './ApplicationForm';
 import SuccessPage from './SuccessPage';
+import StudentSuccessPage from './StudentSuccessPage';
+
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
           <Route path="/welcome" element={<WelcomePage />} />
           <Route path="/apply/:id" element={<ApplicationForm />} />
           <Route path="/success" element={<SuccessPage />} />
+          <Route path="/student-success" element={<StudentSuccessPage/>} />
+          
           
         </Routes>
       </div>

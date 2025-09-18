@@ -156,12 +156,12 @@ select {
 
 .posting-form select option {
   color: black;   
-  background: black;  
+  background: white;  
 }
 
 .posting-form input::placeholder,
 .posting-form textarea::placeholder {
-  color: black;
+  color: white;
 }
 
 .posting-form label {

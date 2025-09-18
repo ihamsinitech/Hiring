@@ -83,7 +83,7 @@ const PostingForm = () => {
       // Get company email from localStorage or context
       const companyEmail = localStorage.getItem('companyEmail') || 'company@example.com';
       
-      const response = await fetch('http://localhost:8085/api/auth/post', {
+      const response = await fetch('http://15.206.41.13:8085/api/auth/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

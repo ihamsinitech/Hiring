@@ -45,7 +45,7 @@ const StudentRegistration = () => {
     setMessage('');
     
     try {
-      const response = await fetch('http://localhost:8085/api/auth/complete-student-registration', { 
+      const response = await fetch('http://15.206.41.13:8085/api/auth/complete-student-registration', { 
        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,8 +58,8 @@ const StudentRegistration = () => {
       if (response.ok) {
         setMessage('Registration completed successfully! Redirecting to home...');
         setTimeout(() => {
-          navigate('/');
-        }, 2000);
+          navigate('/student-success');
+        }, 1000);
       } else {
         setError(data);
       }
@@ -104,7 +104,7 @@ const StudentRegistration = () => {
             <input
               type="email"
               id="email"
-              value={form.email}
+              value={form.email || ""}
               onChange={handleChange}
               placeholder="Email"
               className={errors.email ? 'error' : ''}
@@ -115,7 +115,7 @@ const StudentRegistration = () => {
             <input
               type="number"
               id="mobile"
-              value={form.mobile}
+              value={form.mobile || ""}
               onChange={handleChange}
               placeholder="Enter mobile number"
               pattern="[0-9]{10}" // ✅ simple validation (10 digits)
@@ -126,20 +126,20 @@ const StudentRegistration = () => {
           <input
             type="text"
             id="education"
-            value={form.education}
+            value={form.education || ""}
             onChange={handleChange}
             placeholder="Education"
             required
           />
 
-          <label>Passing Year</label>
+          <label required>Passing Year</label>
           <select
             id="yearOfPassing"
             value={form.yearOfPassing}
             onChange={handleChange}
             required
           >
-            <option value="">--Select Year--</option>
+            <option value="" >--Select Year--</option>
 
             <option>2027</option>
             <option>2026</option>
@@ -153,7 +153,7 @@ const StudentRegistration = () => {
             <option>2018</option>
           </select>
 
-          <label>Place</label>
+          <label required>Place</label>
           <select
             id="place"
             value={form.place}
@@ -171,7 +171,7 @@ const StudentRegistration = () => {
             <option>Dubai</option>
           </select>
 
-          <label>Status</label>
+          <label required>Status</label>
           <select id="status" value={form.status} onChange={handleChange}>
             <option value="Fresher">Fresher</option>
             <option value="Experience">Experience</option>
@@ -179,7 +179,7 @@ const StudentRegistration = () => {
 
           {form.status === "Experience" && (
             <>
-              <label>Company Name</label>
+              <label required>Company Name</label>
               <input
                 type="text"
                 id="companyName"
@@ -188,7 +188,7 @@ const StudentRegistration = () => {
                 placeholder="Company Name"
               />
 
-              <label>Years Of Experience</label>
+              <label required>Years Of Experience</label>
               <input
                 type="text"
                 id="yearsOfExp"
@@ -197,7 +197,7 @@ const StudentRegistration = () => {
                 placeholder="Years of Experience"
               />
 
-              <label>Role</label>
+              <label required>Role</label>
               <input
                 type="text"
                 id="role"

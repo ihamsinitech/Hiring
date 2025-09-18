@@ -20,4 +20,7 @@ public class JobApplicationDTO {
     private String companyEmail;
 
     private MultipartFile resume;
+
+    private Long studentId;
+
 }

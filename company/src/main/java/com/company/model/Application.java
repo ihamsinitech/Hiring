@@ -1,22 +1,28 @@
 package com.company.model;
 
+
+
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
 @Table(name = "applications")
-@Data
+@Setter
+@Getter
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String jobId;
     private String fullName;
     private String email;
@@ -36,4 +42,9 @@ public class Application {
     private String companyEmail;
 
     private String resumePath;  // Store uploaded resume file path
+    private Long studentId;
+    
+    private String status;
+    
+    
 }

@@ -50,7 +50,7 @@
 
 .jobdetails-logo h1 {
   font-size: 1.5rem;
-  color: black;
+  color: white;
   font-weight: bold;
   margin: 0;
 }
@@ -109,7 +109,7 @@
   border-radius: 50px;
 
   background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: black;
+  color: white;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 
   cursor: pointer;

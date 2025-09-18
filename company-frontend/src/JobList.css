@@ -1,120 +1,147 @@
-/* Main container with equal columns */
 .job-list-container {
-  position: relative; /* make it relative for ::before layering */
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 32px;
-  padding: 120px 32px 80px;;
   min-height: 100vh;
-  z-index: 1; /* keep content above */
+  background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
 }
+
+
 /* Header */
-.job-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
+.naukri-header {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.header-top .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  z-index: 10;
+  padding: 15px;
   gap: 20px;
 }
 
-.job-logo {
+/* Logo + Search */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img.logo-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.logo h1 {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.search-container input {
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 12px;
+  color: #fff;
+}
+
+/* Profile Section (RIGHT SIDE) */
+.profile-section {
   display: flex;
   align-items: center;
   gap: 15px;
+  color: #fff;
 }
 
-.job-logo img {
-  height: 50px;
-}
-
-.job-logo h1 {
-  font-size: 1.5rem;
-  color: black;
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Student Profile in Header */
-.student-profile-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  padding: 8px 16px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.1);
-  transition: background 0.3s ease;
-}
-
-.student-profile-header:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
+/* Avatar */
 .profile-avatar {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  position: relative;
 }
 
-.profile-info {
+.notification-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff4d4d;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Profile text + stats */
+.profile-details {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  gap: 4px;
 }
 
-.profile-name {
+.user-name {
   font-weight: 600;
-  color: black;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
-.profile-role {
-  font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.7);
+.profile-stats {
+  display: flex;
+  gap: 15px;
 }
 
-/* Background blur layer */
-.job-list-container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80")
-    no-repeat center/cover fixed;
-  filter: blur(12px);   /* ✅ apply blur to image itself */
-  z-index: -1;          /* keep it behind content */
+.stat {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.85rem;
 }
 
-/* Left filters panel */
+
+/* Main two-column layout */
+.main-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Left Filters */
+.left-sidebar {
+  flex: 0 0 250px;
+}
+
+/* Right Job List */
+.right-content {
+  flex: 1;
+}
+
+/* Filters Card */
 .filters-card {
   height: fit-content;
   padding: 24px;
   border-radius: 18px;
-  margin-top: 75px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-
   color: black;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
 
-/* Dropdown filter sections */
 .filter-section {
   margin-bottom: 18px;
 }
@@ -124,7 +151,7 @@
   font-weight: 600;
   padding: 10px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -132,13 +159,13 @@
 }
 
 .filter-header:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255,255,255,0.18);
 }
 
 .filter-options {
   margin-top: 10px;
-  padding-left: 8px;
   display: none;
+  padding-left: 8px;
 }
 
 .filter-options.show {
@@ -156,132 +183,73 @@
   margin-right: 8px;
 }
 
-/* Right side job list */
+/* Job List */
 .job-list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
-.job-list h2 {
-  font-size: 2rem;
-  margin-bottom: 32px;
-  color: black;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-}
-
-/* Glassmorphism Job Card */
 .job-card {
   width: 100%;
   max-width: 700px;
   padding: 24px;
   margin-bottom: 20px;
-
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-
   color: black;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
 }
 
 .job-card:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
-  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+  background: rgba(255,255,255,0.18);
 }
 
-.no-results {
-  margin-top: 20px;
-  color: black;
-  font-size: 1.1rem;
-}
+/* Apply button inside card */
 .apply-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  padding: 10px 20px;
+  margin-top: 12px;
+  padding: 8px 16px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background: linear-gradient(135deg,#6a11cb,#2575fc);
   color: black;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
+  align-self: flex-end;
+  
 }
 
 .apply-btn:hover {
-  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  background: linear-gradient(135deg,#2575fc,#6a11cb);
   transform: translateY(-2px);
 }
-/* Responsive design */
-@media (max-width: 1024px) {
-  .job-list-container {
-    grid-template-columns: 220px 1fr; /* slightly smaller sidebar on tablets */
-    gap: 20px;
-    padding: 60px 20px;
-  }
 
-  .job-card {
-    max-width: 100%;
-  }
+.no-results {
+  color: black;
+  font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-  .job-list-container {
-    grid-template-columns: 1fr; 
-    padding: 100px 16px 60px; /* ✅ extra top padding for fixed header */
+/* Responsive */
+@media (max-width: 992px) {
+  .main-content {
+    flex-direction: column;
   }
-
-  .filters-card {
-    margin-top: 0;     /* ✅ no overlap issues */
+  .left-sidebar, .right-content {
     width: 100%;
   }
-
-  .job-list {
-    margin-top: 20px;  /* ✅ spacing after filters */
-  }
-
-  .job-list h2 {
-    font-size: 1.5rem;
-  }
-
   .job-card {
-    padding: 18px;
-    font-size: 0.95rem;
-  }
-  
-  .student-profile-header {
-    padding: 6px 12px;
-  }
-  
-  .profile-info {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .job-list-container {
-    padding: 90px 12px 50px; /* ✅ reduce padding but still clear header */
-  }
-
-  .job-card {
-    padding: 14px;
-    font-size: 0.85rem;
-  }
-
-  .filter-header {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
-  
-  .job-logo h1 {
-    font-size: 1.2rem;
+    max-width: 100%;
   }
 }
