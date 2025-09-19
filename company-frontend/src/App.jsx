@@ -15,6 +15,10 @@ import WelcomePage from './WelcomePage';
 import ApplicationForm from './ApplicationForm';
 import SuccessPage from './SuccessPage';
 import StudentSuccessPage from './StudentSuccessPage';
+import StudentProfile from './StudentProfile';
+import AppliedJobs from './AppliedJobs';
+import Messages from './Messages';
+
 
 
 
@@ -36,6 +40,9 @@ function App() {
           <Route path="/apply/:id" element={<ApplicationForm />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/student-success" element={<StudentSuccessPage/>} />
+          <Route path="/profile" element={<StudentProfile />} />
+          <Route path="/applied-jobs" element={<AppliedJobs />} />
+          <Route path="/messages" element={<Messages />} />
           
           
         </Routes>

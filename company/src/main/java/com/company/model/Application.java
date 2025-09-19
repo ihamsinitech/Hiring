@@ -23,7 +23,7 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String jobId;
+    private Long jobId;
     private String fullName;
     private String email;
     private String mobile;
@@ -45,6 +45,10 @@ public class Application {
     private Long studentId;
     
     private String status;
+
+    @Column(name = "has_reply")
+    private Boolean hasReply = false; 
+
     
     
 }

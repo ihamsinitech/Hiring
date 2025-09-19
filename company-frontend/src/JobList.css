@@ -80,7 +80,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #ff4d4d;
+  background: black;
   position: absolute;
   top: 0;
   right: 0;
@@ -109,6 +109,20 @@
   flex-direction: column;
   align-items: center;
   font-size: 0.85rem;
+  color: black;           /* ✅ Make text black */
+  font-weight: bold; 
+}
+
+.stat-number {
+  font-size: 1rem;
+  font-weight: bold;      /* ✅ Numbers bold too */
+  color: black;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: bold;      /* ✅ Labels bold */
+  color: black;
 }
 
 
@@ -253,3 +267,57 @@
     max-width: 100%;
   }
 }
+
+/* Extra Mobile Responsive (for < 768px screens) */
+@media (max-width: 768px) {
+  .header-top .container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .logo h1 {
+    font-size: 18px;
+  }
+
+  .search-container input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .profile-section {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Sidebar moves on top */
+  .main-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .left-sidebar {
+    width: 100%;
+    order: 1; /* Show filters above job list */
+  }
+
+  .right-content {
+    width: 100%;
+    order: 2;
+  }
+
+  /* Job card full width */
+  .job-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    font-size: 0.9rem;
+  }
+
+  .apply-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+

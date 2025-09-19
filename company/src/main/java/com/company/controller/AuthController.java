@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -359,7 +360,7 @@ public class AuthController {
 
         // Save application
         Application app = new Application();
-        app.setJobId(dto.getJobId().toString());
+        app.setJobId(dto.getJobId());
         app.setFullName(dto.getFullName());
         app.setEmail(dto.getEmail());
         app.setMobile(dto.getMobile());
@@ -424,29 +425,74 @@ public ResponseEntity<?> getStudentProfile(@PathVariable Long id) {
 
         Student student = studentOpt.get();
 
-        // Count applications
-        long appliedCount = applicationRepository.countByStudentId(id);
+        // Count applications by this student
+    long appliedCount = applicationRepository.countByStudentId(student.getId());
+    long shortlistedCount = applicationRepository.countByStudentIdAndStatus(student.getId(), "SHORTLISTED");
+    long messagesCount = applicationRepository.countByStudentIdAndHasReply(student.getId(), true);
 
-        // Count shortlisted applications
-        long shortlistedCount = applicationRepository.countByStudentIdAndStatus(id, "Shortlisted");
+    Map<String, Object> profile = new HashMap<>();
+    profile.put("fullName", student.getFullName());
+    profile.put("email", student.getEmail());
+    profile.put("appliedCount", appliedCount);
+    profile.put("shortlisted", shortlistedCount);
+    profile.put("messages", messagesCount);
 
-        // Count company replies (assuming replies = applications with companyEmail not null)
-        long companyReplies = applicationRepository.countByStudentIdAndCompanyEmailNotNull(id);
+    return ResponseEntity.ok(profile);
 
-        Map<String, Object> profile = new HashMap<>();
-        profile.put("fullName", student.getFullName());
-        profile.put("email", student.getEmail());
-        profile.put("education", student.getEducation());
-        profile.put("yearOfPassing", student.getYearOfPassing());
-        profile.put("place", student.getPlace());
-        profile.put("status", student.getStatus());
-        profile.put("appliedCount", appliedCount);
-        profile.put("shortlisted", shortlistedCount);
-        profile.put("messages", companyReplies);
-
-        return ResponseEntity.ok(profile);
     } catch (Exception e) {
         return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+    }
+    
+}
+
+// Update student profile
+    @PutMapping("/student/{id}/profile")
+    public ResponseEntity<?> updateStudentProfile(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> updates) {
+
+        Optional<Student> studentOpt = studentRepository.findById(id);
+        if (studentOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Student not found");
+        }
+
+        Student student = studentOpt.get();
+
+        if (updates.containsKey("fullName")) student.setFullName(updates.get("fullName"));
+        if (updates.containsKey("email")) student.setEmail(updates.get("email"));
+        if (updates.containsKey("mobile")) student.setMobile(updates.get("mobile"));
+
+        studentRepository.save(student);
+
+        return ResponseEntity.ok(Map.of("message", "Profile updated successfully"));
+    }
+
+
+ @GetMapping("/student/{id}/applied-jobs")
+public ResponseEntity<?> getAppliedJobs(@PathVariable Long id) {
+    try {
+        List<PostingForm> jobs = applicationRepository.findAppliedJobsByStudentId(id);
+
+        if (jobs.isEmpty()) {
+            return ResponseEntity.ok(List.of()); // return empty list
+        }
+
+        return ResponseEntity.ok(jobs);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error fetching applied jobs: " + e.getMessage());
+    }
+}
+
+@GetMapping("/student/{id}/messages")
+public ResponseEntity<?> getStudentMessages(@PathVariable Long id) {
+    try {
+        List<Application> messages = applicationRepository.findByStudentIdAndHasReply(id, true);
+
+        return ResponseEntity.ok(messages);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error fetching messages: " + e.getMessage());
     }
 }
 

@@ -23,6 +23,8 @@ const ApplicationForm = () => {
     description: ""
   });
 
+  const storedUser = JSON.parse(localStorage.getItem("userData"));
+
   useEffect(() => {
     fetch(`http://15.206.41.13:8085/api/auth/${id}`)
       .then((res) => res.json())
@@ -50,8 +52,14 @@ const ApplicationForm = () => {
       Object.keys(form).forEach((key) => {
         formData.append(key, form[key] ? String(form[key]) : "");
       });
+
       formData.append("jobId" ,id);
       formData.append("companyEmail", job.contactEmail || "");
+
+      if (storedUser && storedUser.userId) {
+        formData.append("studentId", storedUser.userId);
+      }
+
       if (resumeFile) {
         formData.append("resume", resumeFile); // ✅ add resume file
       }

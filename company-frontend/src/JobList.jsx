@@ -20,24 +20,26 @@ const JobList = () => {
 
   // ✅ Load user from localStorage & fetch student profile
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      setUser(userData);
+  const storedUser = JSON.parse(localStorage.getItem("userData"));
 
-      // Fetch student profile & stats
-      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`)
-        .then(res => res.json())
-        .then(data => {
-          console.log("Fetched Profile:", data); 
-          setStudentProfile(data);
-          setAppliedCount(data.appliedCount || 0);
-          setStatusCounts({ shortlisted: data.shortlisted || 0 });
-          setCompanyReplies(data.messages || 0);
-        })
-        .catch(err => console.error("Error fetching student profile:", err));
-    }
-  }, []);
+  if (storedUser) {
+    console.log("User ID:", storedUser.userId);
+    console.log("User Type:", storedUser.userType);
+
+    // Fetch student profile & stats
+    fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/profile`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("Fetched Profile:", data);
+        setStudentProfile(data);
+        setAppliedCount(data.appliedCount || 0);
+        setStatusCounts({ shortlisted: data.shortlisted || 0 });
+        setCompanyReplies(data.messages || 0);
+      })
+      .catch(err => console.error("Error fetching student profile:", err));
+  }
+}, []);
+
 
   // ✅ Fetch jobs
   useEffect(() => {
@@ -52,7 +54,7 @@ const JobList = () => {
   const goToMessages = () => navigate('/messages');
   const goToProfile = () => navigate('/profile');
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("userData");
     navigate('/login');
   };
 
@@ -123,7 +125,9 @@ const JobList = () => {
             {/* Logo */}
             <div className="header-left">
               <div className="logo">
+              <a href='/'>
                 <img src="/logo-website.png" alt="CareerConnect" className="logo-img" />
+              </a>
                 <h1>CareerConnect</h1>
               </div>
             </div>

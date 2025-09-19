@@ -78,6 +78,7 @@ html, body, #root {
   min-height: 150vh;
   position: relative;
   z-index: 1; /* keep above background blur */
+  margin-top: 30px;
 }
 
 /* Glass wrapper */
