@@ -19,6 +19,8 @@ import StudentProfile from './StudentProfile';
 import AppliedJobs from './AppliedJobs';
 import Messages from './Messages';
 import ShortlistedJobs from './ShortlistedJobs';
+import CompanyDashboard from './CompanyDashboard';
+
 
 
 
@@ -45,8 +47,7 @@ function App() {
           <Route path="/applied-jobs" element={<AppliedJobs />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/shortlisted" element={<ShortlistedJobs />} />
-          
-          
+        
         </Routes>
       </div>
     </Router>

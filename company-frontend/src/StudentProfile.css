@@ -61,6 +61,56 @@
   text-align: left;
 }
 
+/* Header buttons */
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Logout button */
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* Back button */
+.back-btn {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+  background: #4b5563;
+}
+
+/* Header content */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
 .back-btn {
   padding: 12px 25px;
   background: rgba(255, 255, 255, 0.2);
@@ -256,5 +306,14 @@
   
   .profile-header h1 {
     text-align: center;
+  }
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .header-buttons {
+    justify-content: center;
   }
 }

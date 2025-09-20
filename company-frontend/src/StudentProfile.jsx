@@ -12,7 +12,7 @@ const Profile = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
       // First get the basic profile with stats
-      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`)
+      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setStudent(data);
@@ -29,7 +29,7 @@ const Profile = () => {
 
   const handleSave = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`, {
+    fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -45,6 +45,12 @@ const Profile = () => {
       .catch(err => console.error("Error updating profile:", err));
   };
 
+  // ✅ Logout function
+  const handleLogout = () => {
+    localStorage.removeItem("userData");
+    navigate('/signin');
+  };
+
   if (!student) return <div className="loading">Loading...</div>;
 
   return (
@@ -53,7 +59,10 @@ const Profile = () => {
       <div className="profile-header">
         <div className="header-content">
         <h1>My Profile</h1>
-        <button className="back-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
+        <div className="header-buttons">
+            <button className="back-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
+            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          </div>
       </div>
       </div>
       
