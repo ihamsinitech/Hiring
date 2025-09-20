@@ -43,7 +43,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"},allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"},allowedHeaders = "*")
 public class AuthController {
     
     
@@ -426,46 +426,64 @@ public ResponseEntity<?> getStudentProfile(@PathVariable Long id) {
         Student student = studentOpt.get();
 
         // Count applications by this student
-    long appliedCount = applicationRepository.countByStudentId(student.getId());
-    long shortlistedCount = applicationRepository.countByStudentIdAndStatus(student.getId(), "SHORTLISTED");
-    long messagesCount = applicationRepository.countByStudentIdAndHasReply(student.getId(), true);
+        long appliedCount = applicationRepository.countByStudentId(student.getId());
+        long shortlistedCount = applicationRepository.countByStudentIdAndStatus(student.getId(), "SHORTLISTED");
 
-    Map<String, Object> profile = new HashMap<>();
-    profile.put("fullName", student.getFullName());
-    profile.put("email", student.getEmail());
-    profile.put("appliedCount", appliedCount);
-    profile.put("shortlisted", shortlistedCount);
-    profile.put("messages", messagesCount);
+        Map<String, Object> response = new HashMap<>();
 
-    return ResponseEntity.ok(profile);
+        // Student profile data
+        response.put("id", student.getId());
+        response.put("fullName", student.getFullName());
+        response.put("email", student.getEmail());
+        response.put("mobile", student.getMobile());
+        response.put("education", student.getEducation());
+        response.put("yearOfPassing", student.getYearOfPassing());
+        response.put("place", student.getPlace());
+        response.put("status", student.getStatus());
+        response.put("companyName", student.getCompanyName());
+        response.put("yearsOfExp", student.getYearsOfExp());
+        response.put("role", student.getRole());
+        
+        // Application counts
+        response.put("appliedCount", appliedCount);
+        response.put("shortlisted", shortlistedCount);
+        response.put("messages", 0); // Set to 0 since we don't have this count
+
+        return ResponseEntity.ok(response);
 
     } catch (Exception e) {
         return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
     }
-    
 }
 
 // Update student profile
     @PutMapping("/student/{id}/profile")
     public ResponseEntity<?> updateStudentProfile(
-            @PathVariable Long id,
-            @RequestBody Map<String, String> updates) {
+        @PathVariable Long id,
+        @RequestBody Map<String, String> updates) {
 
-        Optional<Student> studentOpt = studentRepository.findById(id);
-        if (studentOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Student not found");
-        }
-
-        Student student = studentOpt.get();
-
-        if (updates.containsKey("fullName")) student.setFullName(updates.get("fullName"));
-        if (updates.containsKey("email")) student.setEmail(updates.get("email"));
-        if (updates.containsKey("mobile")) student.setMobile(updates.get("mobile"));
-
-        studentRepository.save(student);
-
-        return ResponseEntity.ok(Map.of("message", "Profile updated successfully"));
+    Optional<Student> studentOpt = studentRepository.findById(id);
+    if (studentOpt.isEmpty()) {
+        return ResponseEntity.badRequest().body("Student not found");
     }
+
+    Student student = studentOpt.get();
+
+    if (updates.containsKey("fullName")) student.setFullName(updates.get("fullName"));
+    if (updates.containsKey("email")) student.setEmail(updates.get("email"));
+    if (updates.containsKey("mobile")) student.setMobile(updates.get("mobile"));
+    if (updates.containsKey("education")) student.setEducation(updates.get("education"));
+    if (updates.containsKey("yearOfPassing")) student.setYearOfPassing(updates.get("yearOfPassing"));
+    if (updates.containsKey("place")) student.setPlace(updates.get("place"));
+    if (updates.containsKey("status")) student.setStatus(updates.get("status"));
+    if (updates.containsKey("companyName")) student.setCompanyName(updates.get("companyName"));
+    if (updates.containsKey("yearsOfExp")) student.setYearsOfExp(updates.get("yearsOfExp"));
+    if (updates.containsKey("role")) student.setRole(updates.get("role"));
+
+    studentRepository.save(student);
+
+    return ResponseEntity.ok(Map.of("message", "Profile updated successfully"));
+}
 
 
  @GetMapping("/student/{id}/applied-jobs")
@@ -496,6 +514,15 @@ public ResponseEntity<?> getStudentMessages(@PathVariable Long id) {
     }
 }
 
-
+@GetMapping("/student/{id}/shortlisted-jobs")
+public ResponseEntity<?> getShortlistedJobs(@PathVariable Long id) {
+    try {
+        List<PostingForm> jobs = applicationRepository.findShortlistedJobsByStudentId(id);
+        return ResponseEntity.ok(jobs);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error fetching shortlisted jobs: " + e.getMessage());
+    }
+}
 
 }

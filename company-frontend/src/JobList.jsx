@@ -27,7 +27,7 @@ const JobList = () => {
     console.log("User Type:", storedUser.userType);
 
     // Fetch student profile & stats
-    fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/profile`)
+    fetch(`http://localhost:8085/api/auth/student/${storedUser.userId}/profile`)
       .then(res => res.json())
       .then(data => {
         console.log("Fetched Profile:", data);
@@ -43,7 +43,7 @@ const JobList = () => {
 
   // ✅ Fetch jobs
   useEffect(() => {
-    fetch('http://15.206.41.13:8085/api/auth')
+    fetch('http://localhost:8085/api/auth')
       .then(res => res.json())
       .then(data => setJobs(data))
       .catch(err => console.error("Error fetching jobs:", err));
@@ -51,6 +51,7 @@ const JobList = () => {
 
   // ✅ Header actions
   const goToAppliedJobs = () => navigate('/applied-jobs');
+  const goToShortlistedJobs = () => navigate('/shortlisted');
   const goToMessages = () => navigate('/messages');
   const goToProfile = () => navigate('/profile');
   const handleLogout = () => {
@@ -119,7 +120,7 @@ const JobList = () => {
   return (
     <div className="job-list-container">
       {/* ✅ Header */}
-      <header className="naukri-header">
+      <header className="job-header">
         <div className="header-top">
           <div className="container">
             {/* Logo */}
@@ -128,7 +129,7 @@ const JobList = () => {
               <a href='/'>
                 <img src="/logo-website.png" alt="CareerConnect" className="logo-img" />
               </a>
-                <h1>CareerConnect</h1>
+                <h1>Career Connect</h1>
               </div>
             </div>
 
@@ -152,7 +153,7 @@ const JobList = () => {
                         <span className="stat-number">{appliedCount}</span>
                         <span className="stat-label">Applied</span>
                       </div>
-                      <div className="stat" onClick={goToAppliedJobs}>
+                      <div className="stat" onClick={goToShortlistedJobs}>
                         <span className="stat-number">{statusCounts.shortlisted}</span>
                         <span className="stat-label">Shortlisted</span>
                       </div>

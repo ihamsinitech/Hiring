@@ -19,7 +19,7 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1950&q=80") no-repeat center center/cover;
+  background: url("https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1950&q=80") no-repeat center center/cover;
   background-attachment: fixed;
   overflow: hidden;
 }
@@ -62,7 +62,7 @@ html, body, #root {
 
 .posting-logo h1 {
   font-size: 1.5rem;
-  color: white;
+  color: black;
   font-weight: bold;
   margin: 0;
 }

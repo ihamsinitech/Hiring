@@ -53,9 +53,7 @@ public class Student  {
     @Column(name = "messages")
     private Integer messages = 0;
 
-    @Column(name = "has_reply")
-    private Boolean hasReply = false; 
-
+    
     
     
 }

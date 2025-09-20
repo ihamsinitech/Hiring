@@ -1,107 +1,192 @@
-import React, { useEffect, useState } from "react";
-import "./StudentProfile.css";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './StudentProfile.css';
 
-const StudentProfile = () => {
-  const [profile, setProfile] = useState({
-    fullName: "",
-    email: "",
-    mobile: "",
-    place: "",
-    status: ""
-  });
-  const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const storedUser = JSON.parse(localStorage.getItem("userData"));
+const Profile = () => {
+  const [student, setStudent] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (storedUser) {
-      fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/profile`)
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData && userData.userId) {
+      // First get the basic profile with stats
+      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
-          setProfile(data);
-          setLoading(false);
-        })
-        .catch(err => console.error("Error:", err));
+          setStudent(data);
+          setFormData(data);
+          })
+        .catch(err => console.error("Error fetching profile:", err));
     }
   }, []);
 
-  const handleChange = (e) => {
-    setProfile({ ...profile, [e.target.name]: e.target.value });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdate = () => {
-    fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/profile`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fullName: profile.fullName,
-        email: profile.email,
-        mobile: profile.mobile
-      })
+  const handleSave = () => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
     })
       .then(res => res.json())
       .then(data => {
-        setMessage(data.message || "Profile updated successfully");
-        setEditing(false);
+        setStudent(formData);
+        setIsEditing(false);
+        alert('Profile updated successfully');
       })
       .catch(err => console.error("Error updating profile:", err));
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("userData");
-    window.location.href = "/login";
-  };
-
-  if (loading) return <p>Loading profile...</p>;
+  if (!student) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="student-profile-container">
-      <div className="profile-card">
-        <h2>Student Profile</h2>
-
-        <label>Full Name:</label>
-        <input
-          type="text"
-          name="fullName"
-          value={profile.fullName}
-          onChange={handleChange}
-          disabled={!editing}
-        />
-
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={profile.email}
-          onChange={handleChange}
-          disabled={!editing}
-        />
-
-        <label>Mobile:</label>
-        <input
-          type="text"
-          name="mobile"
-          value={profile.mobile}
-          onChange={handleChange}
-          disabled={!editing}
-        />
-
-        <p><strong>Place:</strong> {profile.place}</p>
-        <p><strong>Status:</strong> {profile.status}</p>
-
-        {message && <p className="success-message">{message}</p>}
-
-        {!editing ? (
-          <button onClick={() => setEditing(true)}>Edit Profile</button>
-        ) : (
-          <button onClick={handleUpdate}>Save Changes</button>
-        )}
-        <button onClick={handleLogout} className="logout-btn">Logout</button>
+    <div className="profile-page">
+    
+      <div className="profile-header">
+        <div className="header-content">
+        <h1>My Profile</h1>
+        <button className="back-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
       </div>
+      </div>
+      
+      <div className="profile-container">
+      <div className="profile-content">
+        {!isEditing ? (
+          <div className="profile-details">
+            <div className="profile-card">
+              <h2>Personal Information</h2>
+              <div className="profile-field">
+                <label>Full Name:</label>
+                <span>{student.fullName || 'Not provided'}</span>
+              </div>
+              <div className="profile-field">
+                <label>Email:</label>
+                <span>{student.email || 'Not provided'}</span>
+              </div>
+              <div className="profile-field">
+                <label>Mobile:</label>
+                <span>{student.mobile || 'Not provided'}</span>
+              </div>
+            </div>
+
+            <div className="profile-card">
+              <h2>Education Details</h2>
+              <div className="profile-field">
+                <label>Education:</label>
+                <span>{student.education || 'Not provided'}</span>
+              </div>
+              <div className="profile-field">
+                <label>Year of Passing:</label>
+                <span>{student.yearOfPassing || 'Not provided'}</span>
+              </div>
+              <div className="profile-field">
+                <label>Location:</label>
+                <span>{student.place || 'Not provided'}</span>
+              </div>
+            </div>
+
+            {student.status === 'Experience' && (
+              <div className="profile-card">
+                <h2>Work Experience</h2>
+                <div className="profile-field">
+                  <label>Company Name:</label>
+                  <span>{student.companyName || 'Not provided'}</span>
+                </div>
+                <div className="profile-field">
+                  <label>Years of Experience:</label>
+                  <span>{student.yearsOfExp || 'Not provided'}</span>
+                </div>
+                <div className="profile-field">
+                  <label>Role:</label>
+                  <span>{student.role || 'Not provided'}</span>
+                </div>
+              </div>
+            )}
+
+            <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit Profile</button>
+          </div>
+        ) : (
+          <div className="profile-edit">
+            <div className="profile-card">
+              <h2>Edit Personal Information</h2>
+              <div className="form-group">
+                <label>Full Name:</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Mobile:</label>
+                <input
+                  type="text"
+                  name="mobile"
+                  value={formData.mobile || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+            <div className="profile-card">
+              <h2>Edit Education Details</h2>
+              <div className="form-group">
+                <label>Education:</label>
+                <input
+                  type="text"
+                  name="education"
+                  value={formData.education || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Year of Passing:</label>
+                <input
+                  type="text"
+                  name="yearOfPassing"
+                  value={formData.yearOfPassing || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Location:</label>
+                <input
+                  type="text"
+                  name="place"
+                  value={formData.place || ''}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+            <div className="button-group">
+              <button className="save-btn" onClick={handleSave}>Save Changes</button>
+              <button className="cancel-btn" onClick={() => setIsEditing(false)}>Cancel</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
     </div>
   );
 };
 
-export default StudentProfile;
+export default Profile;

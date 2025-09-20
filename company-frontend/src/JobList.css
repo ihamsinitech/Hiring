@@ -1,14 +1,33 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .job-list-container {
   min-height: 100vh;
-  background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
-  background-size: cover;
+  position: relative;
+  z-index: 1; /* keep content above */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;
 }
 
+/* Blurred background */
+.job-list-container::before {
+  content: "";
+  position: fixed;   /* ✅ fixed = covers full viewport */
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80')
+    no-repeat center center / cover;
+  filter: blur(12px);
+  transform: scale(1.1); /* ✅ prevents visible edges */
+  z-index: -1;           /* ✅ behind content */
+}
+
+
+
 
 /* Header */
-.naukri-header {
+.job-header {
   backdrop-filter: blur(10px);
   background: rgba(255,255,255,0.15);
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
@@ -38,7 +57,7 @@
 }
 
 .logo h1 {
-  color: #ffffff;
+  color: black;
   font-size: 24px;
   font-weight: bold;
   text-shadow: 0 1px 3px rgba(0,0,0,0.5);
@@ -58,7 +77,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  color: #fff;
+  color: white;
 }
 
 /* Avatar */
@@ -69,11 +88,12 @@
   justify-content:center;
   align-items:center;
   border-radius:50%;
-  background: rgba(255,255,255,0.25);
+  background: rgba(255, 217, 0, 0.637);
   box-shadow: 0 4px 30px rgba(0,0,0,0.1);
   font-weight: bold;
   font-size: 1rem;
   position: relative;
+  cursor: pointer;
 }
 
 .notification-dot {
@@ -122,7 +142,7 @@
 .stat-label {
   font-size: 0.85rem;
   font-weight: bold;      /* ✅ Labels bold */
-  color: black;
+  color: blue;
 }
 
 

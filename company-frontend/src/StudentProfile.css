@@ -1,107 +1,260 @@
-.student-profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Full page wrapper */
+.profile-page {
   min-height: 100vh;
-  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+  background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1950&q=80');
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   position: relative;
 }
 
-.student-profile-container::before {
-  content: "";
+/* Overlay for better readability - covers entire page */
+.profile-page::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.35);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
   z-index: 0;
-  border-radius: 0;
 }
 
-/* Glassmorphism card */
-.profile-card {
+.profile-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
   position: relative;
   z-index: 1;
+}
+
+/* Full width header */
+.profile-header {
+  width: 100%;
+  padding: 25px 0;
+  /* Glassmorphism effect */
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 30px 40px;
-  width: 350px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+/* Header content container */
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  color: #fff;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Headings */
-.profile-card h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  letter-spacing: 1px;
+.profile-header h1 {
+  color: black;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 28px;
+  text-align: left;
 }
 
-/* Labels */
-.profile-card label {
-  font-weight: bold;
-  margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-/* Input fields */
-.profile-card input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: rgba(255, 255, 255, 0.25);
-  color: #fff;
-  font-size: 0.95rem;
-  backdrop-filter: blur(5px);
-}
-
-.profile-card input:focus {
-  border: 1px solid #fff;
-  box-shadow: 0 0 5px rgba(255,255,255,0.5);
-}
-
-/* Paragraphs */
-.profile-card p {
-  margin: 5px 0;
-  font-size: 0.95rem;
-}
-
-/* Buttons */
-.profile-card button {
-  padding: 10px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
+.back-btn {
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
   cursor: pointer;
-  background-color: #2563eb;
-  color: white;
-  font-weight: bold;
+  backdrop-filter: blur(5px);
   transition: all 0.3s ease;
 }
 
-.profile-card button:hover {
-  background-color: #3b82f6;
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0);
 }
 
-.profile-card button.logout-btn {
-  background-color: #f44336;
+.profile-content,
+.profile-card {
+  position: relative;
+  z-index: 2;
 }
 
-.profile-card button.logout-btn:hover {
-  background-color: #ff6659;
+.profile-content {
+  padding: 25px;
+  /* Glassmorphism effect */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  border: 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* Success message */
-.success-message {
-  color: #00ff88;
+.profile-card {
+  margin-bottom: 30px;
+  padding: 25px;
+  /* Glassmorphism effect */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card h2 {
+  color: white;
+  margin-top: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.profile-field {
+  display: flex;
+  margin-bottom: 15px;
+  font-size: medium;
+}
+
+.profile-field label {
   font-weight: bold;
+  width: 200px;
+  color: lab(10.1% 1.46 0.52 / 0.9);
+  text-shadow: 0 1px 2px;
+}
+
+.profile-field span {
+  color: black;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-size: medium;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba极速赛车开奖直播
+}
+
+.edit-btn, .save-btn, .cancel-btn {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 15px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.edit-btn {
+  background: rgba(0, 123, 255, 0.3);
+  color: white;
+}
+
+.edit-btn:hover {
+  background: rgba(0, 123极速赛车开奖直播);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.save-btn {
+  background: rgba(40, 167, 69, 0.3);
+  color: white;
+}
+
+.save-btn:hover {
+  background: rgba(40, 167, 69, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-btn {
+  background: rgba(220, 53, 69, 0.3);
+ 
+}
+
+.cancel-btn:hover {
+  background: rgba(220, 53, 69, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.button-group {
+  margin-top: 25px;
+}
+
+.loading {
   text-align: center;
+  padding: 60px;
+  font-size: 20px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .profile-field {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .profile-field label {
+    width: 100%;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .edit-btn, .save-btn, .cancel-btn {
+    margin-right: 0;
+    width: 100%;
+  }
+  
+  .profile-container {
+    padding: 15px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .profile-header h1 {
+    text-align: center;
+  }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./WelcomePage.css";
 
@@ -7,27 +7,36 @@ const WelcomePage = () => {
   const navigate = useNavigate();
   const { companyName } = location.state || { companyName: "Guest Company" };
 
+  // ✅ Auto redirect after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/jobs");
+    }, 5000); // 5000ms = 5 seconds
+
+    return () => clearTimeout(timer); // cleanup on unmount
+  }, [navigate]);
+
   return (
     <div className="welcome-container">
-
       <header className="welcome-header">
         <div className="welcome-logo">
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>Welcome </h1>
+          <h1>Welcome</h1>
         </div>
-        </header>
+      </header>
 
       <div className="welcome-card">
-        <img 
-          src="/logo-website.png"   // <-- put your logo inside public/logo.png
+        <img
+          src="/logo-website.png" // keep this inside public/
           alt="Hamsini Tech Solutions Logo"
           className="logo"
         />
         <h1>Welcome {companyName}!</h1>
         <p>You are now a part of <b>Hamsini Tech Solutions</b>.</p>
         <button onClick={() => navigate("/jobs")}>View Jobs</button>
+        <p className="auto-msg">(Redirecting to Jobs in 5 seconds...)</p>
       </div>
     </div>
   );

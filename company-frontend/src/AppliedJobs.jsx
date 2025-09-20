@@ -1,113 +1,71 @@
-import React, { useEffect, useState } from "react";
-import "./StudentProfile.css";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './AppliedJobs.css';
 
-const StudentProfile = () => {
-  const [profile, setProfile] = useState({
-    fullName: "",
-    email: "",
-    mobile: "",
-    place: "",
-    status: ""
-  });
+const AppliedJobs = () => {
+  const [appliedJobs, setAppliedJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editing, setEditing] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const storedUser = JSON.parse(localStorage.getItem("userData"));
+  const navigate = useNavigate();
 
   useEffect(() => {
-  const storedUser = JSON.parse(localStorage.getItem("userData"));
-  if (storedUser) {
-    fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/applied-jobs`)
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          setJobs(data);
-        } else {
-          setJobs([]); // fallback
-          console.error("Applied jobs API returned non-array:", data);
-        }
-      })
-      .catch(err => console.error("Error:", err));
-  }
-}, []);
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (userData && userData.userId) {
+      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/applied-jobs`)
+        .then(res => res.json())
+        .then(data => {
+          setAppliedJobs(data);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error("Error fetching applied jobs:", err);
+          setLoading(false);
+        });
+    }
+  }, []);
 
-
-  const handleChange = (e) => {
-    setProfile({ ...profile, [e.target.name]: e.target.value });
-  };
-
-  const handleUpdate = () => {
-    fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/profile`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fullName: profile.fullName,
-        email: profile.email,
-        mobile: profile.mobile
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        setMessage(data.message || "Profile updated successfully");
-        setEditing(false);
-      })
-      .catch(err => console.error("Error updating profile:", err));
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("userData");
-    window.location.href = "/login";
-  };
-
-  if (loading) return <p>Loading profile...</p>;
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="student-profile-container">
-      <div className="profile-card">
-        <h2>Student Profile</h2>
-
-        <label>Full Name:</label>
-        <input
-          type="text"
-          name="fullName"
-          value={profile.fullName}
-          onChange={handleChange}
-          disabled={!editing}
-        />
-
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={profile.email}
-          onChange={handleChange}
-          disabled={!editing}
-        />
-
-        <label>Mobile:</label>
-        <input
-          type="text"
-          name="mobile"
-          value={profile.mobile}
-          onChange={handleChange}
-          disabled={!editing}
-        />
-
-        <p><strong>Place:</strong> {profile.place}</p>
-        <p><strong>Status:</strong> {profile.status}</p>
-
-        {message && <p className="success-message">{message}</p>}
-
-        {!editing ? (
-          <button onClick={() => setEditing(true)}>Edit Profile</button>
-        ) : (
-          <button onClick={handleUpdate}>Save Changes</button>
-        )}
-        <button onClick={handleLogout} className="logout-btn">Logout</button>
+    <div className="applied-jobs-page">
+    
+      <div className="applied-jobs-header">
+        <div className="header-content">
+        <h1>My Applied Jobs</h1>
+        <button className="back-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
       </div>
+      </div>
+
+      <div className="applied-jobs-container">
+      <div className="applied-jobs-content">
+        {appliedJobs.length === 0 ? (
+          <div className="no-applications">
+            <h2>You haven't applied to any jobs yet</h2>
+            <p>Start applying to jobs and they will appear here</p>
+            <button onClick={() => navigate('/jobs')}>Browse Jobs</button>
+          </div>
+        ) : (
+          <div className="applied-jobs-list">
+            {appliedJobs.map(job => (
+              <div key={job.id} className="applied-job-card">
+                <div className="job-info">
+                  <h3>{job.jobTitle}</h3>
+                  <p className="company">{job.companyName}</p>
+                  <p className="location">{job.location}</p>
+                  <p className="experience">{job.experienceLevel} | {job.salary}</p>
+                  <p className="skills">Skills: {job.skillsRequired}</p>
+                </div>
+                <div className="application-status">
+                  <span className="status-badge">Applied</span>
+                  <span className="applied-date">Applied on: {new Date().toLocaleDateString()}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
     </div>
   );
 };
 
-export default StudentProfile;
+export default AppliedJobs;

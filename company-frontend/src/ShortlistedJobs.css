@@ -1,6 +1,6 @@
-.messages-page {
+.shortlisted-jobs-page {
   min-height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+  background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=1950&q=80');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.messages-page::before {
+.shortlisted-jobs-page::before {
   content: '';
   position: absolute;
   top: 0;
@@ -20,7 +20,7 @@
   z-index: 0;
 }
 
-.messages-header {
+.shortlisted-jobs-header {
   width: 100%;
   padding: 25px 0;
   background: rgba(255, 255, 255, 0.15);
@@ -29,14 +29,40 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.messages-header h1 {
+.header-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shortlisted-jobs-header h1 {
   color: black;
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   font-size: 28px;
 }
 
-.messages-container {
+.back-btn {
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.shortlisted-jobs-container {
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
@@ -45,7 +71,7 @@
   z-index: 1;
 }
 
-.messages-content {
+.shortlisted-jobs-content {
   padding: 25px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
@@ -55,48 +81,52 @@
   margin-top: 30px;
 }
 
-.no-messages {
+.no-shortlisted {
   text-align: center;
   padding: 60px 30px;
   color: black;
 }
 
-.no-messages h2 {
+.no-shortlisted h2 {
   color: black;
   margin-bottom: 15px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   font-size: 24px;
 }
 
-.no-messages p {
-  color: rgba(59, 56, 56, 0.963);
+.no-shortlisted p {
+  color: rgba(55, 50, 50, 0.9);
   margin-bottom: 25px;
   font-size: 16px;
 }
 
-.no-messages button {
+.no-shortlisted button {
   padding: 14px 30px;
   background: rgba(255, 255, 255, 0.2);
   color: black;
   border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
   cursor: pointer;
   backdrop-filter: blur(5px);
   font-size: 16px;
   transition: all 0.3s ease;
 }
 
-.no-messages button:hover {
-  background: rgba(255, 255, 255, 0.3);
+.no-shortlisted button:hover {
+  background: rgba;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.messages-list {
+.shortlisted-jobs-list {
   display: grid;
   gap: 20px;
 }
 
-.message-card {
+.shortlisted-job-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 25px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
@@ -105,96 +135,54 @@
   transition: all 0.3s ease;
 }
 
-.message-card:hover {
-  transform: translateY(-2px);
+.shortlisted-job-card:hover {
+  transform: translateY(-4px);
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-.message-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 15px;
-}
-
-.company-info h3 {
-  margin: 0 0 8px 0;
+.job-info h3 {
+  margin: 0 0 12px 0;
   color: black;
-  font-size: 18px;
+  font-size: 20px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.job-title {
+.company {
+  font-weight: bold;
   color: #4fc3f7;
-  margin: 0;
-  font-size: 14px;
+  margin: 6px 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.message-date {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
-}
-
-.message-body {
-  margin-bottom: 20px;
-}
-
-.message-text {
+.location, .experience, .skills {
+  margin: 6px 0;
   color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 15px 0;
-  line-height: 1.5;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.message-status {
+.application-status {
   text-align: right;
 }
 
-.status-badge {
-  background: rgba(76, 175, 80, 0.8);
-  color: black;
-  padding: 6px 15px;
+.status-badge.shortlisted {
+  background: rgba(255, 193, 7, 0.8);
+  color: #000;
+  padding: 8px 18px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.message-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.view-job-btn, .reply-btn {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.view-job-btn {
-  background: rgba(0, 123, 255, 0.3);
-  color: white;
-}
-
-.view-job-btn:hover {
-  background: rgba(0, 123, 255, 0.4);
-}
-
-.reply-btn {
-  background: rgba(40, 167, 69, 0.3);
-  color: white;
-}
-
-.reply-btn:hover {
-  background: rgba(40, 167, 69, 0.4);
+.shortlisted-date {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .loading {
@@ -206,13 +194,14 @@
 }
 
 @media (max-width: 768px) {
-  .message-header {
+  .shortlisted-job-card {
     flex-direction: column;
-    gap: 10px;
+    text-align: center;
+    gap: 15px;
   }
   
-  .message-actions {
-    flex-direction: column;
+  .application-status {
+    text-align: center;
   }
   
   .header-content {
