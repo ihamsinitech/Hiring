@@ -10,8 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -522,6 +525,100 @@ public ResponseEntity<?> getShortlistedJobs(@PathVariable Long id) {
     } catch (Exception e) {
         return ResponseEntity.internalServerError()
                 .body("Error fetching shortlisted jobs: " + e.getMessage());
+    }
+}
+
+// Get company profile
+@GetMapping("/company/{companyId}/profile")
+public ResponseEntity<?> getCompanyProfile(@PathVariable Long companyId) {
+    try {
+        Optional<Company> companyOpt = companyRepository.findById(companyId);
+        if (companyOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Company not found");
+        }
+
+        Company company = companyOpt.get();
+        
+        // Count company's posted jobs
+        long postedJobsCount = jobRepository.countByCompanyId(companyId);
+        
+        // Count applications for company's jobs using custom query
+        long applicationsCount = applicationRepository.countApplicationsByCompanyId(companyId);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("companyName", company.getCompanyName());
+        response.put("email", company.getEmail());
+        response.put("mobile", company.getMobile());
+        response.put("address", company.getAddress());
+        response.put("postedJobsCount", postedJobsCount);
+        response.put("applicationsCount", applicationsCount);
+        response.put("messagesCount", 0);
+
+        return ResponseEntity.ok(response);
+
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
+    }
+}
+
+// Get company's jobs
+@GetMapping("/company/{companyId}/jobs")
+public ResponseEntity<?> getJobsByCompanyId(@PathVariable Long companyId) {
+    try {
+        List<PostingForm> companyJobs = jobRepository.findByCompanyId(companyId);
+        return ResponseEntity.ok(companyJobs);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error fetching company jobs: " + e.getMessage());
+    }
+}
+
+@GetMapping("/company/{companyId}/applications")
+public ResponseEntity<?> getCompanyApplications(@PathVariable Long companyId) {
+    try {
+        // Get all jobs posted by this company
+        List<PostingForm> companyJobs = jobRepository.findByCompanyId(companyId);
+        
+        // Extract job IDs
+        List<Long> jobIds = companyJobs.stream()
+                                      .map(PostingForm::getId)
+                                      .collect(Collectors.toList());
+        
+        // Get all applications for these job IDs
+        List<Application> applications = applicationRepository.findByJobIdIn(jobIds);
+        
+        return ResponseEntity.ok(applications);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error fetching company applications: " + e.getMessage());
+    }
+}
+
+@GetMapping("/resume/{applicationId}")
+public ResponseEntity<?> downloadResume(@PathVariable Long applicationId) {
+    try {
+        Optional<Application> applicationOpt = applicationRepository.findById(applicationId);
+        if (applicationOpt.isEmpty() || applicationOpt.get().getResumePath() == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Application application = applicationOpt.get();
+        Path path = Paths.get(application.getResumePath());
+        
+        if (!Files.exists(path)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        byte[] resumeData = Files.readAllBytes(path);
+        String fileName = path.getFileName().toString();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(resumeData);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error downloading resume: " + e.getMessage());
     }
 }
 

@@ -23,6 +23,8 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long companyId;
+
     private Long jobId;
     private String fullName;
     private String email;

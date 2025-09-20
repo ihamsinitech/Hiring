@@ -26,4 +26,10 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     @Query("SELECT j FROM PostingForm j JOIN Application a ON j.id = a.jobId WHERE a.studentId = :studentId AND a.status = 'SHORTLISTED'")
     List<PostingForm> findShortlistedJobsByStudentId(@Param("studentId") Long studentId);
 
+    @Query("SELECT COUNT(a) FROM Application a WHERE a.jobId IN (SELECT j.id FROM PostingForm j WHERE j.companyId = :companyId)")
+    long countApplicationsByCompanyId(@Param("companyId") Long companyId);
+
+
+    List<Application> findByJobIdIn(List<Long> jobIds);
+
 }

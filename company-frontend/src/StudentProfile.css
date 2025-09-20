@@ -133,6 +133,9 @@
   position: relative;
   z-index: 2;
 }
+.profile-card h2{
+  color: black;
+}
 
 .profile-content {
   padding: 25px;
@@ -184,13 +187,14 @@
 
 .form-group {
   margin-bottom: 15px;
+  color: black;
 }
 
 .form-group label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(62, 55, 55, 0.9);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -201,7 +205,7 @@
   border-radius: 6px;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: black;
   backdrop-filter: blur(5px);
 }
 
@@ -212,7 +216,7 @@
 .form-group input:focus {
   outline: none;
   border-color: rgba(255, 255, 255, 0.5);
-  background: rgba极速赛车开奖直播
+  background: rgba;
 }
 
 .edit-btn, .save-btn, .cancel-btn {
@@ -233,7 +237,7 @@
 }
 
 .edit-btn:hover {
-  background: rgba(0, 123极速赛车开奖直播);
+  background: rgba(0, 123);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }

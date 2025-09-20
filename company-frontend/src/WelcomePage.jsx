@@ -10,7 +10,7 @@ const WelcomePage = () => {
   // ✅ Auto redirect after 5 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/jobs");
+      navigate("/companyDashboard");
     }, 5000); // 5000ms = 5 seconds
 
     return () => clearTimeout(timer); // cleanup on unmount
@@ -35,7 +35,7 @@ const WelcomePage = () => {
         />
         <h1>Welcome {companyName}!</h1>
         <p>You are now a part of <b>Hamsini Tech Solutions</b>.</p>
-        <button onClick={() => navigate("/jobs")}>View Jobs</button>
+        <button onClick={() => navigate("/companyDashboard")}>View Jobs</button>
         <p className="auto-msg">(Redirecting to Jobs in 5 seconds...)</p>
       </div>
     </div>

@@ -19,6 +19,8 @@ public class PostingForm {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Long companyId;
     
     private String jobTitle;
     private String companyName;

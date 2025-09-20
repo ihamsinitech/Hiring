@@ -80,36 +80,42 @@ const PostingForm = () => {
     setMessage('');
     
     try {
-      // Get company email from localStorage or context
-      const companyEmail = localStorage.getItem('companyEmail') || 'company@example.com';
-      
-      const response = await fetch('http://15.206.41.13:8085/api/auth/post', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...form,
-          companyEmail: companyEmail
-        }),
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        setMessage('Job posted successfully!');
-        setTimeout(() => {
-          navigate("/welcome", { state: { companyName: form.companyName }});
-        }, 1000);
-      } else {
-        setMessage(data.message || 'Error posting job');
-      }
-    } catch (err) {
-      setMessage('An error occurred. Please try again.');
-    } finally {
-      setLoading(false);
+    // Get company ID from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("userData"));
+    const companyId = storedUser?.userId;
+    
+    console.log("Sending companyId:", companyId); // Debug log
+    
+    const response = await fetch('http://15.206.41.13:8085/api/auth/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...form,
+        companyId: companyId, // ✅ CRITICAL: Add companyId to the request
+        companyEmail: form.contactEmail
+      }),
+    });
+    
+    const data = await response.json();
+    console.log("Server response:", data); // Debug log
+    
+    if (response.ok) {
+      setMessage('Job posted successfully!');
+      setTimeout(() => {
+        navigate("/welcome", { state: { companyName: form.companyName }});
+      }, 1000);
+    } else {
+      setMessage(data.message || 'Error posting job');
     }
-  };
+  } catch (err) {
+    console.error("Error:", err); // Debug log
+    setMessage('An error occurred. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="posting-container">

@@ -1,0 +1,392 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.job-list-container {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1; /* keep content above */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+/* Blurred background */
+.job-list-container::before {
+  content: "";
+  position: fixed;   /* ✅ fixed = covers full viewport */
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80')
+    no-repeat center center / cover;
+  filter: blur(12px);
+  transform: scale(1.1); /* ✅ prevents visible edges */
+  z-index: -1;           /* ✅ behind content */
+}
+
+
+
+
+/* Header */
+.job-header {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.header-top .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  gap: 20px;
+}
+
+/* Logo + Search */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img.logo-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.logo h1 {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+
+
+/* Profile Section (RIGHT SIDE) */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+/* Avatar */
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:50%;
+  background: maroon;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+  font-weight: bold;
+  font-size: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* Profile text + stats */
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.85rem;
+  color: black;           /* ✅ Make text black */
+  font-weight: bold; 
+}
+
+.stat-number {
+  font-size: 1rem;
+  font-weight: bold;      /* ✅ Numbers bold too */
+  color: black;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: bold;      /* ✅ Labels bold */
+  color: blue;
+}
+
+
+/* Main two-column layout */
+.main-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Left Filters */
+.left-sidebar {
+  flex: 0 0 250px;
+}
+
+/* Right Job List */
+.right-content {
+  flex: 1;
+}
+
+/* Filters Card */
+.filters-card {
+  height: fit-content;
+  padding: 24px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: black;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+.filter-section {
+  margin-bottom: 18px;
+}
+
+.filter-header {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-header:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.filter-options {
+  margin-top: 10px;
+  display: none;
+  padding-left: 8px;
+}
+
+.filter-options.show {
+  display: block;
+}
+
+.filter-options label {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.filter-options input {
+  margin-right: 8px;
+}
+
+/* Job List */
+.job-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.job-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: black;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.job-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+  background: rgba(255,255,255,0.18);
+}
+
+/* Apply button inside card */
+.apply-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg,#6a11cb,#2575fc);
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-end;
+  
+}
+
+.apply-btn:hover {
+  background: linear-gradient(135deg,#2575fc,#6a11cb);
+  transform: translateY(-2px);
+}
+
+.no-results {
+  color: black;
+  font-size: 1.1rem;
+}
+
+/* Additional styles for company dashboard */
+.job-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.job-list-header h2 {
+  color: black;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  
+}
+
+.create-job-btn {
+  background-color: #4e744f;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.create-job-btn:hover {
+  background-color: #5da461;
+}
+
+.job-stats {
+  margin: 10px 0;
+}
+
+.applicants-count {
+  font-size: 14px;
+  color: #666;
+}
+
+.view-btn {
+  background-color: #2e8edcbd;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+  
+}
+
+.view-btn:hover {
+  background-color: #0b7dda;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .main-content {
+    flex-direction: column;
+  }
+  .left-sidebar, .right-content {
+    width: 100%;
+  }
+  .job-card {
+    max-width: 100%;
+  }
+}
+
+/* Extra Mobile Responsive (for < 768px screens) */
+@media (max-width: 768px) {
+  .header-top .container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .logo h1 {
+    font-size: 18px;
+  }
+
+  .search-container input {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .profile-section {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Sidebar moves on top */
+  .main-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .left-sidebar {
+    width: 100%;
+    order: 1; /* Show filters above job list */
+  }
+
+  .right-content {
+    width: 100%;
+    order: 2;
+  }
+
+  /* Job card full width */
+  .job-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    font-size: 0.9rem;
+  }
+
+  .apply-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
