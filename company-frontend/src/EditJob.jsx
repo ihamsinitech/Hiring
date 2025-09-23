@@ -23,7 +23,7 @@ const EditJob = () => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:8085/api/auth/${id}`)
+    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
       .then(res => res.json())
       .then(data => setJob(data));
   }, [id]);
@@ -39,7 +39,7 @@ const EditJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    fetch(`http://localhost:8085/api/auth/update/${id}`, {
+    fetch(`http://15.206.41.13:8085/api/auth/update/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

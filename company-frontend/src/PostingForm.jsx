@@ -86,7 +86,7 @@ const PostingForm = () => {
     
     console.log("Sending companyId:", companyId); // Debug log
     
-    const response = await fetch('http://localhost:8085/api/auth/post', {
+    const response = await fetch('http://15.206.41.13:8085/api/auth/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

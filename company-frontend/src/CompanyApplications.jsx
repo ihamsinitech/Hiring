@@ -11,7 +11,7 @@ const CompanyApplications = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     if (storedUser) {
-      fetch(`http://localhost:8085/api/auth/company/${storedUser.userId}/applications`)
+      fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/applications`)
         .then(res => {
           if (!res.ok) {
             throw new Error('Applications not found');
@@ -106,7 +106,7 @@ const CompanyApplications = () => {
                     
                     {application.resumePath && (
                       <a 
-                        href={`http://localhost:8085/api/auth/resume/${application.id}`} 
+                        href={`http://15.206.41.13:8085/api/auth/resume/${application.id}`} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="resume-link"
