@@ -17,7 +17,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -3;
+  z-index: -1;
 }
 
 .background-image {
@@ -26,11 +26,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); 
+  background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); 
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  filter: blur(12px) brightness(0.7);
+  filter: blur(5px) brightness(0.7);
   transform: scale(1.05);
 }
 
@@ -51,6 +51,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 /* Professional header with glassmorphism */
@@ -66,7 +67,7 @@
     0 10px 35px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px; /* Reduced max-width */
 }
 
 .header-content {
@@ -127,19 +128,24 @@
   transform: translateY(-1px);
 }
 
-/* Main applications area */
+/* FIXED: Main applications area - PROPERLY CENTERED */
 .applications-main {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px; /* Reduced max-width */
+  display: flex;
+  justify-content: center; /* Center the grid container */
 }
 
+/* FIXED: Applications list grid - PROPERLY CENTERED */
 .applications-list {
   display: grid;
   gap: 28px;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Changed to auto-fit */
+  width: 100%;
+  justify-items: center; /* Center each grid item */
 }
 
-/* Professional application cards */
+/* FIXED: Professional application cards - CENTERED WITH FIXED WIDTH */
 .application-card {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px) saturate(160%);
@@ -153,6 +159,8 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  width: 100%; /* Ensure full width within grid cell */
+  max-width: 400px; /* Fixed maximum width */
 }
 
 .application-card::before {
@@ -236,7 +244,7 @@
   background: linear-gradient(135deg, rgba(40, 167, 69, 1) 0%, rgba(33, 136, 56, 1) 100%);
 }
 
-/* No applications state */
+/* FIXED: No applications state - PROPERLY CENTERED */
 .no-applications {
   text-align: center;
   padding: 80px 40px;
@@ -248,7 +256,9 @@
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto; /* Center with auto margins */
 }
 
 .no-applications h2 {
@@ -270,8 +280,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  max-width: 1400px;
+  max-width: 1200px;
   width: 100%;
+  justify-content: center;
 }
 
 .error-icon {
@@ -286,6 +297,7 @@
   justify-content: center;
   min-height: 60vh;
   color: rgba(255, 255, 255, 0.8);
+  width: 100%;
 }
 
 .loading-spinner {
@@ -330,7 +342,11 @@
 /* Responsive design */
 @media (max-width: 1024px) {
   .applications-list {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+  
+  .application-card {
+    max-width: 350px;
   }
 }
 
@@ -342,6 +358,7 @@
   .applications-header {
     padding: 24px;
     border-radius: 16px;
+    max-width: 100%;
   }
   
   .header-content {
@@ -362,6 +379,7 @@
   .application-card {
     padding: 24px;
     border-radius: 16px;
+    max-width: 100%;
   }
   
   .application-card h3 {
@@ -376,6 +394,7 @@
   
   .no-applications {
     padding: 60px 20px;
+    max-width: 90%;
   }
   
   .no-applications h2 {
@@ -406,5 +425,14 @@
   
   .application-details p {
     font-size: 1rem;
+  }
+  
+  .no-applications {
+    padding: 40px 20px;
+    font-size: 1.1rem;
+  }
+  
+  .no-applications h2 {
+    font-size: 1.6rem;
   }
 }

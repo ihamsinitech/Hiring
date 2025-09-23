@@ -10,7 +10,7 @@ const AppliedJobs = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/applied-jobs`)
+      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/applied-jobs`)
         .then(res => res.json())
         .then(data => {
           setAppliedJobs(data);

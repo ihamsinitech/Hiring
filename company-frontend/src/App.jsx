@@ -19,9 +19,9 @@ import StudentProfile from './StudentProfile';
 import AppliedJobs from './AppliedJobs';
 import Messages from './Messages';
 import ShortlistedJobs from './ShortlistedJobs';
-import CompanyDashboard from './CompanyDashboard';
 import CompanyProfile from './CompanyProfile';
 import CompanyApplications from './CompanyApplications';
+import CompanyDashboard from './CompanyDashBoard';
 
 
 

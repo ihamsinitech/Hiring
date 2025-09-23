@@ -70,6 +70,8 @@ const CompanyDashboard = () => {
           return res.json();
         })
         .then(data => {
+          console.log("Fetched Jobs Data:", data); // ✅ Debug log
+          console.log("First job applications:", data[0]?.applicationsCount); 
           setJobs(Array.isArray(data) ? data : []);
           setError('');
         })
@@ -81,6 +83,32 @@ const CompanyDashboard = () => {
         .finally(() => setLoading(false));
     }
   }, []);
+
+
+  // Add this useEffect to fetch applications for each job
+useEffect(() => {
+  if (jobs.length > 0) {
+    const fetchApplicationsForJobs = async () => {
+      try {
+        const jobsWithApplications = await Promise.all(
+          jobs.map(async (job) => {
+            const response = await fetch(`http://localhost:8085/api/jobs/${job.id}/applications`);
+            const applications = await response.json();
+            return {
+              ...job,
+              applicationsCount: applications.length || 0
+            };
+          })
+        );
+        setJobs(jobsWithApplications);
+      } catch (error) {
+        console.error("Error fetching applications:", error);
+      }
+    };
+
+    fetchApplicationsForJobs();
+  }
+  }, [jobs.length]); 
 
   // ✅ Header actions
   const goToApplications = () => navigate('/companyApplications');
@@ -274,7 +302,7 @@ const CompanyDashboard = () => {
         {/* Right Job List */}
         <div className="right-content">
           <div className="job-list-header">
-            <h2>Your Posted Jobs</h2>
+            <h2> &emsp; &emsp; &emsp; &emsp;Your Posted Jobs</h2>
             <button className="create-job-btn" onClick={createNewJob}>
               + Create New Job
             </button>
@@ -282,19 +310,19 @@ const CompanyDashboard = () => {
           
           <div className="job-list">
             {filteredJobs.map((job) => (
-              <div key={job.id} className="job-card" onClick={() => navigate(`/company/jobs/${job.id}`)}>
+              <div key={job.id} className="job-card" onClick={() => navigate(`/jobs/${job.id}`)}>
                 <h3>{job.jobTitle}</h3>
                 <p>{job.companyName} | {job.location}</p>
                 <p>{job.experienceLevel} | {job.salary}</p>
                 <small>Skills: {job.skillsRequired}</small>
                 <div className="job-stats">
-                  <span className="applicants-count">{job.applicantsCount || 0} Applicants</span>
+                  <span className="applicants-count">{job.applicationsCount || 0} Applicants</span>
                 </div>
                 <button
                   className="view-btn"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/company/jobs/${job.id}`);
+                    navigate(`/jobs/${job.id}`);
                   }}
                 >
                   View Details

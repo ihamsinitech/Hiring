@@ -12,7 +12,7 @@ const Profile = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
       // First get the basic profile with stats
-      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`)
+      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setStudent(data);
@@ -29,7 +29,7 @@ const Profile = () => {
 
   const handleSave = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`, {
+    fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
