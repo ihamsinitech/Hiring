@@ -22,6 +22,8 @@ import ShortlistedJobs from './ShortlistedJobs';
 import CompanyProfile from './CompanyProfile';
 import CompanyApplications from './CompanyApplications';
 import CompanyDashboard from './CompanyDashBoard';
+import JobDescription from './JobDescription';
+import EditJob from './EditJob';
 
 
 
@@ -52,6 +54,9 @@ function App() {
           <Route path="/companyDashboard" element={<CompanyDashboard />} />
           <Route path='/companyProfile' element={<CompanyProfile/>}/>
           <Route path="/companyApplications" element={<CompanyApplications />} />
+          <Route path="/edit/:id" element={<EditJob />} />
+          <Route path="/company/job/:id" element={<JobDescription />} />
+        
         </Routes>
       </div>
     </Router>

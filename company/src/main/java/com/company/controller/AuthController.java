@@ -622,4 +622,72 @@ public ResponseEntity<?> downloadResume(@PathVariable Long applicationId) {
     }
 }
 
+// Add this method to get jobs with application counts for a company
+@GetMapping("/company/{companyId}/jobs-with-applications")
+public ResponseEntity<?> getJobsWithApplications(@PathVariable Long companyId) {
+    try {
+        List<PostingForm> companyJobs = jobRepository.findByCompanyId(companyId);
+        
+        // Add application count to each job
+        List<Map<String, Object>> jobsWithApplications = companyJobs.stream()
+            .map(job -> {
+                Map<String, Object> jobData = new HashMap<>();
+                jobData.put("id", job.getId());
+                jobData.put("jobTitle", job.getJobTitle());
+                jobData.put("companyName", job.getCompanyName());
+                jobData.put("location", job.getLocation());
+                jobData.put("experienceLevel", job.getExperienceLevel());
+                jobData.put("salary", job.getSalary());
+                jobData.put("skillsRequired", job.getSkillsRequired());
+                jobData.put("workMode", job.getWorkMode());
+                jobData.put("applicationsCount", applicationRepository.countByJobId(job.getId()));
+                return jobData;
+            })
+            .collect(Collectors.toList());
+        
+        return ResponseEntity.ok(jobsWithApplications);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error fetching jobs with applications: " + e.getMessage());
+    }
+}
+
+
+// In your Spring Boot controller
+@PutMapping("/update/{id}")
+public ResponseEntity<?> updateJob(@PathVariable Long id, @RequestBody PostingForm jobDetails) {
+    try {
+        Optional<PostingForm> jobOptional = jobRepository.findById(id);
+        if (jobOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        PostingForm job = jobOptional.get();
+        
+        // Update all fields
+        job.setJobTitle(jobDetails.getJobTitle());
+        job.setCompanyName(jobDetails.getCompanyName());
+        job.setEducationRequired(jobDetails.getEducationRequired());
+        job.setExperienceLevel(jobDetails.getExperienceLevel());
+        job.setWorkMode(jobDetails.getWorkMode());
+        job.setSalary(jobDetails.getSalary());
+        job.setLocation(jobDetails.getLocation());
+        job.setContactEmail(jobDetails.getContactEmail());
+        job.setWebsite(jobDetails.getWebsite());
+        job.setJobDescription(jobDetails.getJobDescription());
+        job.setResponsibilities(jobDetails.getResponsibilities());
+        job.setBenefits(jobDetails.getBenefits());
+        job.setPortalLink(jobDetails.getPortalLink());
+        
+        PostingForm updatedJob = jobRepository.save(job);
+        return ResponseEntity.ok(updatedJob);
+        
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error updating job: " + e.getMessage());
+    }
+}
+
+
+
 }

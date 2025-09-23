@@ -84,31 +84,31 @@ const CompanyDashboard = () => {
     }
   }, []);
 
-
-  // Add this useEffect to fetch applications for each job
+  // ✅ Fetch company's posted jobs with application counts
 useEffect(() => {
-  if (jobs.length > 0) {
-    const fetchApplicationsForJobs = async () => {
-      try {
-        const jobsWithApplications = await Promise.all(
-          jobs.map(async (job) => {
-            const response = await fetch(`http://localhost:8085/api/jobs/${job.id}/applications`);
-            const applications = await response.json();
-            return {
-              ...job,
-              applicationsCount: applications.length || 0
-            };
-          })
-        );
-        setJobs(jobsWithApplications);
-      } catch (error) {
-        console.error("Error fetching applications:", error);
-      }
-    };
-
-    fetchApplicationsForJobs();
+  const storedUser = JSON.parse(localStorage.getItem("userData"));
+  if (storedUser) {
+    fetch(`http://localhost:8085/api/auth/company/${storedUser.userId}/jobs-with-applications`)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Jobs not found');
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log("Fetched Jobs with Applications:", data);
+        setJobs(Array.isArray(data) ? data : []);
+        setError('');
+      })
+      .catch(err => {
+        console.error("Error fetching company jobs:", err);
+        setError('Failed to load jobs');
+        setJobs([]);
+      })
+      .finally(() => setLoading(false));
   }
-  }, [jobs.length]); 
+}, []);
+
 
   // ✅ Header actions
   const goToApplications = () => navigate('/companyApplications');
@@ -302,15 +302,15 @@ useEffect(() => {
         {/* Right Job List */}
         <div className="right-content">
           <div className="job-list-header">
-            <h2> &emsp; &emsp; &emsp; &emsp;Your Posted Jobs</h2>
+            <h2>Your Posted Jobs</h2>
             <button className="create-job-btn" onClick={createNewJob}>
-              + Create New Job
+              + Create New Post
             </button>
           </div>
           
           <div className="job-list">
             {filteredJobs.map((job) => (
-              <div key={job.id} className="job-card" onClick={() => navigate(`/jobs/${job.id}`)}>
+              <div key={job.id} className="job-card" onClick={() => navigate(`/company/job/${job.id}`)}>
                 <h3>{job.jobTitle}</h3>
                 <p>{job.companyName} | {job.location}</p>
                 <p>{job.experienceLevel} | {job.salary}</p>
@@ -322,7 +322,7 @@ useEffect(() => {
                   className="view-btn"
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/jobs/${job.id}`);
+                    navigate(`/company/job/${job.id}`);
                   }}
                 >
                   View Details

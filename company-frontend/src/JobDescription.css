@@ -1,0 +1,512 @@
+.job-description {
+  position: relative;
+  min-height: 100vh;
+  padding: 120px 32px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1;
+}
+
+/* Blurred background image layer */
+.job-description::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;  
+  filter: blur(12px);
+  z-index: -1;
+}
+
+/* Header */
+.jobdescription-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10;
+}
+
+.jobdescription-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  justify-content: space-between; 
+}
+
+.jobdescription-logo a {
+  font-size: 1.1rem;
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  background: rgba(62, 109, 218, 0.541);
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-left: auto;
+}
+
+.jobdescription-logo a:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffe082;
+}
+
+.jobdescription-logo h1 {
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.back-to-dashboard {
+  font-size: 1.1rem;
+  color: black; /* Changed from white to black */
+  text-decoration: none;
+  font-weight: 600;
+  background: rgba(66, 75, 238, 0.8); /* Solid blue background */
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.back-to-dashboard:hover {
+  background: rgba(66, 75, 238, 1); /* Darker blue on hover */
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(66, 75, 238, 0.4);
+}
+
+.job-description-card {
+  max-width: 900px;
+  width: 100%;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: black;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+/* Action Buttons */
+.action-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.edit-btn {
+  padding: 12px 24px;
+  background:rgba(44, 106, 137, 0.959);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(245, 124, 0, 0.9));
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+}
+
+/* Headings */
+.job-description-card h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #ffe082;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 10px;
+}
+
+.job-description-card h3 {
+  margin-top: 28px;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  color: #ffe082;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+/* Paragraphs */
+.job-description-card p {
+  margin: 12px 0;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color:black;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.job-description-card b {
+  font-weight: 700;
+  color:rgb(245, 198, 28);
+}
+
+/* View Applications Button */
+.view-applications-btn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 30px;
+  background: linear-gradient(135deg, rgba(39, 174, 96, 0.8), rgba(46, 204, 113, 0.8));
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.view-applications-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.9), rgba(39, 174, 96, 0.9));
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+}
+
+/* Loading Animation */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #ffe082;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.job-description-card {
+  animation: fadeIn 0.6s ease;
+}
+
+/* Make sure the Link doesn't affect button styling */
+.job-description-card a {
+  text-decoration: none;
+}
+
+/* ========== LAPTOP/DESKTOP VIEW (1024px and above) ========== */
+@media (min-width: 1024px) {
+  .job-description {
+    padding: 140px 48px 60px;
+  }
+
+  .job-description-card {
+    padding: 50px;
+    max-width: 1000px;
+  }
+
+  .job-description-card h2 {
+    font-size: 2.5rem;
+  }
+
+  .job-description-card h3 {
+    font-size: 1.6rem;
+  }
+
+  .job-description-card p {
+    font-size: 1.15rem;
+  }
+}
+
+/* ========== TABLET VIEW (768px - 1023px) ========== */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .job-description {
+    padding: 110px 24px 40px;
+  }
+
+  .job-description-card {
+    padding: 35px;
+    max-width: 95%;
+  }
+
+  .job-description-card h2 {
+    font-size: 2rem;
+  }
+
+  .job-description-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .job-description-card p {
+    font-size: 1.05rem;
+  }
+
+  .action-buttons {
+    position: relative;
+    top: 0;
+    right: 0;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+  }
+
+  .edit-btn {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+  }
+}
+
+/* ========== MOBILE VIEW (767px and below) ========== */
+@media (max-width: 767px) {
+  .job-description {
+    padding: 100px 16px 32px;
+    align-items: center;
+  }
+
+  .job-description-card {
+    padding: 25px 20px;
+    border-radius: 16px;
+    margin: 10px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .jobdescription-header {
+    padding: 0.8rem 1rem;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .jobdescription-logo {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .jobdescription-logo h1 {
+    font-size: 1.3rem;
+  }
+
+  .jobdescription-logo a {
+    font-size: 0.95rem;
+    padding: 6px 12px;
+  }
+
+  .job-description-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .job-description-card h3 {
+    font-size: 1.3rem;
+    margin-top: 22px;
+    margin-bottom: 12px;
+  }
+
+  .job-description-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+
+  .action-buttons {
+    position: relative;
+    top: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .edit-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .view-applications-btn {
+    padding: 14px;
+    font-size: 1.05rem;
+    margin-top: 25px;
+  }
+}
+
+/* ========== SMALL MOBILE (480px and below) ========== */
+@media (max-width: 480px) {
+  .job-description {
+    padding: 90px 12px 24px;
+  }
+
+  .job-description-card {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .jobdescription-header {
+    padding: 0.7rem 0.8rem;
+  }
+
+  .jobdescription-logo h1 {
+    font-size: 1.2rem;
+  }
+
+  .jobdescription-logo a {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+
+  .job-description-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .job-description-card h3 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .job-description-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 8px 0;
+  }
+
+  .edit-btn {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+
+  .view-applications-btn {
+    padding: 12px;
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+
+  .action-buttons {
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+}
+
+/* ========== EXTRA SMALL MOBILE (360px and below) ========== */
+@media (max-width: 360px) {
+  .job-description {
+    padding: 80px 8px 20px;
+  }
+
+  .job-description-card {
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
+
+  .jobdescription-logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .job-description-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .job-description-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .job-description-card p {
+    font-size: 0.9rem;
+  }
+
+  .edit-btn {
+    padding: 9px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ========== LANDSCAPE MODE FOR MOBILE ========== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .job-description {
+    padding: 80px 16px 20px;
+    min-height: auto;
+  }
+
+  .job-description-card {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .jobdescription-header {
+    position: relative;
+  }
+}
+
+/* ========== HIGH-RESOLUTION DISPLAYS ========== */
+@media (min-resolution: 192dpi) {
+  .job-description::before {
+    filter: blur(10px);
+  }
+  
+  .job-description-card {
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+  }
+}
+
+/* ========== DARK MODE SUPPORT ========== */
+@media (prefers-color-scheme: dark) {
+  .job-description-card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+  .job-description::before {
+    display: none;
+  }
+  
+  .job-description-card {
+    background: white;
+    color: black;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+  
+  .action-buttons {
+    display: none;
+  }
+}

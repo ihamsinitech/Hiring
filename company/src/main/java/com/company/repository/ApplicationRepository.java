@@ -32,4 +32,6 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 
     List<Application> findByJobIdIn(List<Long> jobIds);
 
+    long countByJobId(Long jobId);
+
 }
