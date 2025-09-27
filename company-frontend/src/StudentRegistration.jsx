@@ -83,7 +83,7 @@ const StudentRegistration = () => {
       <div className="student-box">
         {/* Left Side Image */}
         <div className="student-image">
-          <img src="annimation-8.png" alt="Illustration" />
+          <img src="animation-16.png" alt="Illustration" />
         </div>
 
         {/* Right Side Form */}

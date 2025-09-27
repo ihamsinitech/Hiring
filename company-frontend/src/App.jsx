@@ -21,9 +21,9 @@ import Messages from './Messages';
 import ShortlistedJobs from './ShortlistedJobs';
 import CompanyProfile from './CompanyProfile';
 import CompanyApplications from './CompanyApplications';
-import CompanyDashboard from './CompanyDashBoard';
 import JobDescription from './JobDescription';
 import EditJob from './EditJob';
+import CompanyDashBoard from './CompanyDashBoard';
 
 
 
@@ -51,7 +51,7 @@ function App() {
           <Route path="/applied-jobs" element={<AppliedJobs />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/shortlisted" element={<ShortlistedJobs />} />
-          <Route path="/companyDashboard" element={<CompanyDashboard />} />
+          <Route path="/companyDashboard" element={<CompanyDashBoard />} />
           <Route path='/companyProfile' element={<CompanyProfile/>}/>
           <Route path="/companyApplications" element={<CompanyApplications />} />
           <Route path="/edit/:id" element={<EditJob />} />

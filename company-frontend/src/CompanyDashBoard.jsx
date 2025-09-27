@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CompanyDashboard.css';
+import './CompanyDashBoard.css';
 
-const CompanyDashboard = () => {
+const CompanyDashBoard = () => {
   const [companyProfile, setCompanyProfile] = useState(null);
   const [postedJobsCount, setPostedJobsCount] = useState(0);
   const [applicationsCount, setApplicationsCount] = useState(0);
@@ -337,4 +337,4 @@ useEffect(() => {
   );
 };
 
-export default CompanyDashboard;
+export default CompanyDashBoard;
