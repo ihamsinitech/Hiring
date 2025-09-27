@@ -100,7 +100,7 @@ const StudentRegistration = () => {
             placeholder="Enter your full name"
             required
           />
-           <label>Student Email Id:</label>
+           <label>Student Email Id</label>
             <input
               type="email"
               id="email"

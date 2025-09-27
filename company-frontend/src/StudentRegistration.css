@@ -105,9 +105,9 @@ html, body, #root {
 }
 
 .student-image img {
-  width: 120%;
-  max-width: 350px;
-  height: auto;
+  width: 130%;
+  max-width: 400px;
+  height: 600px;
 }
 
 /* Right Form */
@@ -158,7 +158,7 @@ html, body, #root {
 .student-form button {
   margin-top: 20px;
   padding: 12px;
-  background: linear-gradient(135deg, #1abc9c, #16a085);
+  background: linear-gradient(135deg, #1652a0);
   border: none;
   border-radius: 8px;
   color: black;
