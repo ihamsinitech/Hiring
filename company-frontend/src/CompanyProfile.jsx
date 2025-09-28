@@ -12,7 +12,7 @@ const CompanyProfile = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
       // Fetch company profile
-      fetch(`http://15.206.41.13:8085/api/auth/company/${userData.userId}/profile`)
+      fetch(`http://localhost:8085/api/auth/company/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setCompany(data);
@@ -29,7 +29,7 @@ const CompanyProfile = () => {
 
   const handleSave = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    fetch(`http://15.206.41.13:8085/api/auth/company/${userData.userId}/profile`, {
+    fetch(`http://localhost:8085/api/auth/company/${userData.userId}/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -56,10 +56,10 @@ const CompanyProfile = () => {
     <div className="profile-page">
       <div className="profile-header">
         <div className="header-content">
-          <h1>Company Profile</h1>
+          <h1>My Profile</h1>
           <div className="header-buttons">
-            <button className="back-btn" onClick={() => navigate('/companyDashboard')}>Back to Dashboard</button>
-            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+            <button className="student-btn" onClick={() => navigate('/companyDashboard')}>Back to Dashboard</button>
+            <button className="logout-btn" onClick={handleLogout}><i class="fa-solid fa-power-off"></i></button>
           </div>
         </div>
       </div>

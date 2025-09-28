@@ -27,7 +27,7 @@ const JobList = () => {
     console.log("User Type:", storedUser.userType);
 
     // Fetch student profile & stats
-    fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/profile`)
+    fetch(`http://localhost:8085/api/auth/student/${storedUser.userId}/profile`)
       .then(res => res.json())
       .then(data => {
         console.log("Fetched Profile:", data);
@@ -43,7 +43,7 @@ const JobList = () => {
 
   // ✅ Fetch jobs
   useEffect(() => {
-    fetch('http://15.206.41.13:8085/api/auth')
+    fetch('http://localhost:8085/api/auth')
       .then(res => res.json())
       .then(data => setJobs(data))
       .catch(err => console.error("Error fetching jobs:", err));
@@ -129,7 +129,7 @@ const JobList = () => {
               <a href='/'>
                 <img src="/logo-website.png" alt="CareerConnect" className="logo-img" />
               </a>
-                <h1>Career Connect</h1>
+                <h1>Career Hire</h1>
               </div>
             </div>
 

@@ -86,7 +86,7 @@ const PostingForm = () => {
     
     console.log("Sending companyId:", companyId); // Debug log
     
-    const response = await fetch('http://15.206.41.13:8085/api/auth/post', {
+    const response = await fetch('http://localhost:8085/api/auth/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -206,7 +206,7 @@ const PostingForm = () => {
               <option>Executive</option>
             </select>
 
-            <label>Education Required</label>
+            <label>Education Required *</label>
             <select
               id="educationRequired"
               value={form.educationRequired}
@@ -221,7 +221,7 @@ const PostingForm = () => {
               <option>Others</option>
             </select>
 
-            <label>Skills Required</label>
+            <label>Skills Required *</label>
             <input
               type="text"
               id="skillsRequired"
@@ -250,7 +250,7 @@ const PostingForm = () => {
             />
             {errors.responsibilities && <span>{errors.responsibilities}</span>}
 
-            <label>Benefits</label>
+            <label>Benefits *</label>
             <textarea
               id="benefits"
               value={form.benefits}
@@ -269,7 +269,7 @@ const PostingForm = () => {
             />
             {errors.contactEmail && <span>{errors.contactEmail}</span>}
 
-            <label>Company Website</label>
+            <label>Company Website *</label>
             <input
               type="url"
               id="website"

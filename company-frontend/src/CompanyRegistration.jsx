@@ -84,7 +84,7 @@ const CompanyRegistration = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signup/company', {
+      const response = await fetch('http://localhost:8085/api/auth/signup/company', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ const CompanyRegistration = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>Company Registration</h1>
+          <h1>HM Hire</h1>
         </div>
       </header>
 
@@ -156,7 +156,7 @@ const CompanyRegistration = () => {
           {message && <div className="success">{message}</div>}
 
           <form onSubmit={register}>
-            <label>Company Name:</label>
+            <label>Company Name *</label>
             <input
               type="text"
               id="companyName"
@@ -167,7 +167,7 @@ const CompanyRegistration = () => {
             />
             {errors.companyName && <div className="error-message">{errors.companyName}</div>}
 
-            <label> Company Email Id:</label>
+            <label> Company Email Id *</label>
             <input
               type="email"
               id="email"
@@ -178,7 +178,7 @@ const CompanyRegistration = () => {
             />
             {errors.email && <div className="error-message">{errors.email}</div>}
 
-            <label>Password:</label>
+            <label>Password *</label>
             <input
               type="password"
               id="password"
@@ -189,7 +189,7 @@ const CompanyRegistration = () => {
             />
             {errors.password && <div className="error-message">{errors.password}</div>}
 
-            <label>Confirm Password:</label>
+            <label>Confirm Password *</label>
             <input
               type="password"
               id="confirmPassword"
@@ -200,7 +200,7 @@ const CompanyRegistration = () => {
             />
             {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
 
-            <label>Mobile:</label>
+            <label>Mobile *</label>
             <input
               type="text"
               id="mobile"
@@ -211,7 +211,7 @@ const CompanyRegistration = () => {
             />
             {errors.mobile && <div className="error-message">{errors.mobile}</div>}
 
-            <label>Address:</label>
+            <label>Address *</label>
             <textarea
               id="address"
               value={form.address}

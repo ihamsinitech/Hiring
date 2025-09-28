@@ -1,4 +1,4 @@
-/* Reset */
+/* WelcomePage.css */
 * {
   margin: 0;
   padding: 0;
@@ -14,44 +14,47 @@ html, body, #root {
 
 /* Background */
 .welcome-container {
-  min-height: 100vh;          /* allow height to expand */
+  min-height: 100vh;
   width: 100%;
   background: url("https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1950&q=80")
     no-repeat center center/cover;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;    /* keep card below header */
-  padding: 150px 20px 100px;  /* top + bottom padding */
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 120px 20px 50px;
   position: relative;
-  overflow-y: auto;           /* allow scrolling if needed */
+  overflow-y: auto;
 }
-
-
 
 .welcome-container::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.25); /* subtle dark overlay for blur effect */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 0;
 }
+
 /* Header */
 .welcome-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 10;
-  
 }
 
 .welcome-logo {
@@ -62,120 +65,189 @@ html, body, #root {
 
 .welcome-logo img {
   height: 50px;
+  width: auto;
 }
 
 .welcome-logo h1 {
-  font-size: 1.5rem;
-  color: black;
-  font-weight: bold;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 700;
   margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Glass Card */
 .welcome-card {
   position: relative;
-  z-index: 1; /* above background overlay */
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 20px;
-  padding: 40px;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 50px 40px;
   text-align: center;
-  max-width: 600px;
+  max-width: 500px;
   width: 90%;
-  color: black;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  
+  color: white;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-top: 20px;
 }
 
-/* Logo */
-.welcome-logo {
-  width: 120px;
-  margin-bottom: 20px;
+/* Logo inside card */
+.welcome-card .logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Text */
 .welcome-card h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .welcome-card p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+  line-height: 1.6;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-card p b {
+  color: #fff;
+  font-weight: 700;
 }
 
 /* Button */
 .welcome-card button {
-  background: rgba(255, 255, 255, 0.25);
-  border: none;
-  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 14px 32px;
   border-radius: 12px;
-  color: black;
-  font-size: 1rem;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
 
 .welcome-card button:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.3));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Auto redirect message */
+.auto-msg {
+  font-size: 0.9rem !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin-top: 15px !important;
+  font-style: italic;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .welcome-container {
-    padding-top: 90px;
+    padding: 100px 15px 30px;
   }
+  
+  .welcome-header {
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .welcome-logo img {
+    height: 40px;
+  }
+  
+  .welcome-logo h1 {
+    font-size: 1.5rem;
+  }
+  
   .welcome-card {
-    padding: 20px 15px;   /* reduce padding */
-    max-width: 90%;       /* shrink width */
+    padding: 40px 30px;
+    max-width: 90%;
   }
-
-  .welcome-logo {
-    width: 80px;          /* smaller logo */
-    margin-bottom: 15px;
+  
+  .welcome-card .logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
   }
-
+  
   .welcome-card h1 {
-    font-size: 1.5rem;    /* smaller title */
-    margin-bottom: 8px;
+    font-size: 2rem;
   }
-
+  
   .welcome-card p {
-    font-size: 0.95rem;   /* smaller text */
-    margin-bottom: 15px;
-    line-height: 1.4;     /* better readability */
+    font-size: 1.1rem;
   }
-
+  
   .welcome-card button {
-    padding: 10px 18px;
-    font-size: 0.9rem;    /* smaller button */
+    padding: 12px 28px;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-
   .welcome-container {
-    padding-top: 70px;
+    padding: 90px 10px 20px;
   }
-  .welcome-card {
-    padding: 15px 12px;   /* tighter on very small screens */
+  
+  .welcome-header {
+    padding: 0.7rem 1rem;
   }
-
+  
   .welcome-logo {
-    width: 65px;          /* extra small logo */
+    gap: 10px;
   }
-
-  .welcome-card h1 {
+  
+  .welcome-logo img {
+    height: 35px;
+  }
+  
+  .welcome-logo h1 {
     font-size: 1.3rem;
   }
-
-  .welcome-card p {
-    font-size: 0.85rem;
+  
+  .welcome-card {
+    padding: 30px 20px;
+    border-radius: 20px;
   }
-
+  
+  .welcome-card .logo {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+  }
+  
+  .welcome-card h1 {
+    font-size: 1.7rem;
+  }
+  
+  .welcome-card p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
   .welcome-card button {
-    padding: 8px 14px;
-    font-size: 0.85rem;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+  }
+  
+  .auto-msg {
+    font-size: 0.8rem !important;
   }
 }

@@ -44,7 +44,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className={`${styles.hero} ${styles.glassContainer}`}>
         <div className={styles.heroText}>
-          <h2>Your Future Starts Here – Hamsini Tech Solutions 🚀</h2>
+          <h2>Your Future Starts Here – Hamsini Tech Solutions </h2>
           <p>
             Step into a workplace where innovation, creativity, and passion come together.  
             We’re hiring individuals who are eager to learn, grow, and build a successful career in technology.  
@@ -101,7 +101,7 @@ export default function Home() {
       {/* Footer */}
       <footer className={styles.footer}>
         <div className={styles.container}>
-          <p>&copy; 2025 CareerPortal. All rights reserved.</p>
+          <p><b>&copy; 2025 CareerPortal. All rights reserved.</b></p>
         </div>
       </footer>
     </div>

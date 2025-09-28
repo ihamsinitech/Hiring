@@ -11,7 +11,7 @@
 :root {
   --primary: #6a11cb;
   --secondary: #2575fc;
-  --accent-student: #ff6b6b;
+  --accent-student: #ff6b6b81;
   --accent-company: #4ecdc4;
   --light-bg: #f8f9fa;
   --glass-bg: rgba(255, 255, 255, 0.1);
@@ -87,7 +87,7 @@ html, body, #root {
 
 
 .glassBtn {
-  background: rgba(0, 0, 0, 0.402);
+  background: rgba(18, 72, 222, 0.792);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: white;
@@ -101,7 +101,7 @@ html, body, #root {
 }
 
 .glassBtn:hover {
-  background: rgba(11, 148, 211, 0.797);
+  background: rgba(23, 19, 243, 0.797);
   transform: translateY(-2px);
 }
 
@@ -202,7 +202,7 @@ html, body, #root {
   font-size: 1.8rem;
   margin-bottom: 30px;
   font-weight: 700;
-  color: white;
+  color: black;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -247,16 +247,16 @@ html, body, #root {
 }
 
 .student {
-  color: #ff6b6b;
+  color: black;
 }
 
 .company {
-  color: #4ecdc4;
+  color: black;
 }
 
 footer {
   background: rgba(0, 0, 0, 0.2);
-  color: white;
+  color: black;
   text-align: center;
   padding: 1.5rem;
   margin-top: auto;

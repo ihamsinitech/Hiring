@@ -76,8 +76,8 @@
 
 .no-messages button {
   padding: 14px 30px;
-  background: rgba(255, 255, 255, 0.2);
-  color: black;
+  background: #222020b6;
+  color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   backdrop-filter: blur(5px);
@@ -127,7 +127,7 @@
 }
 
 .job-title {
-  color: #4fc3f7;
+  color: #0c17ebbb;
   margin: 0;
   font-size: 14px;
 }

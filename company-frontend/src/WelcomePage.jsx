@@ -23,7 +23,7 @@ const WelcomePage = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>Welcome</h1>
+          <h1>HM Hire</h1>
         </div>
       </header>
 
@@ -36,7 +36,7 @@ const WelcomePage = () => {
         <h1>Welcome {companyName}!</h1>
         <p>You are now a part of <b>Hamsini Tech Solutions</b>.</p>
         <button onClick={() => navigate("/companyDashboard")}>View Jobs</button>
-        <p className="auto-msg">(Redirecting to Jobs in 5 seconds...)</p>
+        
       </div>
     </div>
   );

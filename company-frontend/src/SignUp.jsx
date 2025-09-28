@@ -47,7 +47,7 @@ const SignUp = () => {
     }
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signup/student', {
+      const response = await fetch('http://localhost:8085/api/auth/signup/student', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,12 +86,14 @@ const SignUp = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>Student Sign Up</h1>
+          <h1>HM Hire</h1>
         </div>
       </header>
 
       <section className="signup-section">
+        
         <div className="signup-wrapper">
+        
           {/* Left side image */}
           <div className="signup-image">
             <img src="annimation-15.png" alt="Sign Up" />
@@ -103,7 +105,7 @@ const SignUp = () => {
           {message && <div className="success-message">{message}</div>}
           
           <form onSubmit={handleSubmit}>
-            <label>Full Name:</label>
+            <label>Full Name *</label>
             <input 
               type="text" 
               id="fullName" 
@@ -115,7 +117,7 @@ const SignUp = () => {
               disabled={loading} // Disable during loading
             />
             
-            <label>Email Id:</label>
+            <label>Email Id *</label>
             <input 
               type="email" 
               id="email" 
@@ -126,7 +128,7 @@ const SignUp = () => {
               disabled={loading} // Disable during loading
             />
             
-            <label>Password:</label>
+            <label>Password *</label>
             <input 
               type="password" 
               id="password" 
@@ -140,7 +142,7 @@ const SignUp = () => {
                 Password must contain a lowercase, uppercase, number, and special character.
             </div>
             
-            <label>Confirm Password:</label>
+            <label>Confirm Password *</label>
             <input 
               type="password" 
               id="confirmPassword" 

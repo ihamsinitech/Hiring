@@ -175,7 +175,7 @@ select {
   margin-top: 20px;
   padding: 12px;
   width: 100%;
-  background: linear-gradient(135deg, #1abc9c, #16a085);
+  background: linear-gradient(135deg, #2fdddda1, #0d38c3ad);
   border: none;
   border-radius: 10px;
   color: black;
@@ -184,12 +184,12 @@ select {
   transition: 0.3s;
 }
 .posting-form button:hover {
-  background: linear-gradient(135deg, #16a085, #1abc9c);
+  background: linear-gradient(135deg, #46bde1a2, #1a38bc);
 }
 
 /* Errors + status */
 span {
-  color: #ff6b6b;
+  color: #f70a2237;
   font-size: 12px;
 }
 .status {

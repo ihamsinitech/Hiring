@@ -47,18 +47,15 @@
 .applied-jobs-header h1 {
   color: #000000 !important;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
   font-size: 2.2rem;
   font-weight: 700;
   letter-spacing: -0.5px;
   line-height: 1.2;
-  font-variant: small-caps;
-  text-transform: uppercase;
 }
 
 .back-btn {
   padding: 12px 25px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(29, 89, 228, 0.466);
   color: #000000 !important;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
@@ -72,7 +69,7 @@
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(23, 65, 216, 0.3);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -112,7 +109,6 @@
 .no-applications h2 {
   color: #000000 !important;
   margin-bottom: 15px;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
   font-size: 1.8rem;
   font-weight: 700;
   letter-spacing: -0.3px;
@@ -166,6 +162,7 @@
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
+  cursor: pointer; /* ADD THIS LINE - Makes cards clickable */
 }
 
 .applied-job-card:hover {
@@ -179,7 +176,6 @@
   margin: 0 0 12px 0;
   color: #000000 !important;
   font-size: 1.4rem;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
   font-weight: 700;
   letter-spacing: -0.2px;
   text-transform: capitalize;
@@ -189,7 +185,6 @@
   font-weight: 650;
   color: #000000 !important;
   margin: 6px 0;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
   font-size: 1.1rem;
   letter-spacing: 0.3px;
 }
@@ -197,7 +192,6 @@
 .location, .experience, .skills {
   margin: 6px 0;
   color: #000000 !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
   font-weight: 500;
   opacity: 0.9;
   letter-spacing: 0.2px;
@@ -236,9 +230,279 @@
   padding: 60px;
   font-size: 1.3rem;
   color: #000000 !important;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
   font-weight: 600;
   letter-spacing: 0.3px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+/* Modal Content with Light Glassmorphism */
+.modal-content {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 30px 20px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: black;
+  font-size: 1.8rem;
+  font-weight: 700;
+  flex: 1;
+  padding-right: 20px;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: rgb(248, 8, 8);
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: rotate(90deg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 30px;
+}
+
+.job-detail-section {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.job-detail-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.job-detail-section h3 {
+  color: black;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  position: relative;
+  padding-left: 15px;
+}
+
+.job-detail-section h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 2px;
+}
+
+.job-detail-section p {
+  color: black;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.job-detail-section strong {
+  color: #2b07f7;
+  font-weight: 600;
+}
+
+/* Status Info */
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.status-badge.large {
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.9), rgba(33, 136, 56, 0.9));
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 20px 30px 30px 30px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.close-modal-btn {
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(0, 86, 179, 0.9));
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.close-modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+  background: linear-gradient(135deg, rgba(0, 123, 255, 1), rgba(0, 86, 179, 1));
+}
+
+/* Responsive Design for Modal */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 15px;
+  }
+  
+  .modal-content {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+  
+  .modal-header {
+    padding: 25px 25px 15px 25px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .modal-body {
+    padding: 25px;
+  }
+  
+  .job-detail-section h3 {
+    font-size: 1.2rem;
+  }
+  
+  .close-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header {
+    padding: 20px 20px 15px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .modal-header h2 {
+    padding-right: 0;
+    text-align: center;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .status-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .modal-footer {
+    padding: 15px 20px 20px 20px;
+  }
+  
+  .close-modal-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Custom Scrollbar for Modal */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 123, 255, 0.3);
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 123, 255, 0.5);
 }
 
 /* Responsive design */
@@ -269,5 +533,29 @@
   
   .job-info h3 {
     font-size: 1.2rem;
+  }
+  
+  /* Modal responsive */
+  .modal-content {
+    width: 95%;
+    margin: 10px;
+  }
+  
+  .modal-header {
+    padding: 20px 20px 15px;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .job-detail-section {
+    padding: 15px;
+  }
+  
+  .status-info {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
   }
 }

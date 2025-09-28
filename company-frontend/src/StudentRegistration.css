@@ -107,7 +107,7 @@ html, body, #root {
 .student-image img {
   width: 130%;
   max-width: 400px;
-  height: 600px;
+  height: 500px;
 }
 
 /* Right Form */
@@ -168,12 +168,12 @@ html, body, #root {
 }
 
 .student-form button:hover {
-  background: linear-gradient(135deg, #16a085, #1abc9c);
+  background: linear-gradient(135deg, #1680a09e, #1a76bc);
 }
 
 /* Messages */
 .error {
-  color: #ff6b6b;
+  color: #ce4a6b;
   margin-bottom: 10px;
 }
 

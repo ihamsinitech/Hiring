@@ -24,7 +24,7 @@ const SignIn = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signin', {
+      const response = await fetch('http://localhost:8085/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const SignIn = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>Sign In</h1>
+          <h1>HM Hire</h1>
         </div>
       </header>
 
@@ -86,7 +86,7 @@ const SignIn = () => {
           {error && <div className="error-message">{error}</div>}
           
           <form onSubmit={handleSubmit}>
-            <label>Email Id:</label>
+            <label>Email Id *</label>
             <input 
               type="email" 
               id="email" 
@@ -96,7 +96,7 @@ const SignIn = () => {
               required 
             />
             
-            <label>Password:</label>
+            <label>Password *</label>
             <input 
               type="password" 
               id="password" 

@@ -87,6 +87,12 @@ html, body {
   font-size: 1rem;
   position: relative;
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.profile-avatar:hover {
+  transform: translateY(-2px); /* Moves up slightly */
+  box-shadow: 0 6px 40px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
 }
 
 .notification-dot {
@@ -249,7 +255,7 @@ html, body {
   padding: 8px 16px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(135deg,#6a11cb,#2575fc);
+  background: linear-gradient(135deg,#1184cb,#095be8);
   color: black;
   font-weight: 600;
   cursor: pointer;
@@ -310,7 +316,7 @@ html, body {
 }
 
 .view-btn {
-  background-color: #2e8edcbd;
+  background-color: #2e54dcbd;
   color: black;
   border: none;
   padding: 8px 12px;

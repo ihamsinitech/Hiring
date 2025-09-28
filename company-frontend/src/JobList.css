@@ -88,12 +88,18 @@ html, body {
   justify-content:center;
   align-items:center;
   border-radius:50%;
-  background: rgba(255, 217, 0, 0.637);
+  background: maroon;
   box-shadow: 0 4px 30px rgba(0,0,0,0.1);
   font-weight: bold;
   font-size: 1rem;
   position: relative;
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  
+}
+.profile-avatar:hover {
+  transform: translateY(-2px); /* Moves up slightly */
+  box-shadow: 0 6px 40px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
 }
 
 .notification-dot {
@@ -129,19 +135,19 @@ html, body {
   flex-direction: column;
   align-items: center;
   font-size: 0.85rem;
-  color: black;           /* ✅ Make text black */
+  color: black;           
   font-weight: bold; 
 }
 
 .stat-number {
   font-size: 1rem;
-  font-weight: bold;      /* ✅ Numbers bold too */
+  font-weight: bold;      
   color: black;
 }
 
 .stat-label {
   font-size: 0.85rem;
-  font-weight: bold;      /* ✅ Labels bold */
+  font-weight: bold;      
   color: blue;
 }
 

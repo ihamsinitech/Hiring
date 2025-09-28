@@ -26,7 +26,7 @@ const ApplicationForm = () => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
-    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
+    fetch(`http://localhost:8085/api/auth/${id}`)
       .then((res) => res.json())
       .then((data) => setJob(data))
       .catch((err) => console.error("Error fetching job:", err));
@@ -66,7 +66,7 @@ const ApplicationForm = () => {
 
 
 
-      const response = await fetch("http://15.206.41.13:8085/api/auth/apply", {
+      const response = await fetch("http://localhost:8085/api/auth/apply", {
         method: "POST",
         body: formData, // ✅ send multipart/form-data
       });
@@ -108,9 +108,9 @@ const ApplicationForm = () => {
 
       <header className="apply-header">
         <div className="apply-logo">
-          <h1>ApplicationForm</h1>
+          <h1>HM Hire</h1>
           
-           <a href="/">
+           <a href="/jobs">
             &emsp; Home
           </a>
         </div>
@@ -118,7 +118,7 @@ const ApplicationForm = () => {
 
       <div className="apply-box">
         <h2>Apply for {job.jobTitle}</h2>
-        <p><b>Company:</b> {job.companyName}</p>
+        <p><b>Company</b> {job.companyName}</p>
 
         <form onSubmit={handleSubmit}>
           <label>Full Name *</label>
@@ -141,19 +141,19 @@ const ApplicationForm = () => {
 
           {form.fresherOrExp === "Experienced" && (
             <>
-              <label required>Company Name</label>
+              <label required>Company Name *</label>
               <input type="text" id="companyName" value={form.companyName} onChange={handleChange} />
 
-              <label required>Role</label>
+              <label required>Role *</label>
               <input type="text" id="role" value={form.role} onChange={handleChange} />
 
-              <label required> Years of Experience</label>
+              <label required> Years of Experience *</label>
               <input type="number" id="yearsOfExperience" value={form.yearsOfExperience} onChange={handleChange} />
 
-              <label required>Previous Package</label>
+              <label required>Previous Package *</label>
               <input type="text" id="previousPackage" value={form.previousPackage} onChange={handleChange} />
 
-              <label required>Expected Package</label>
+              <label required>Expected Package *</label>
               <input type="text" id="expectedPackage" value={form.expectedPackage} onChange={handleChange} />
             </>
           )}
@@ -162,7 +162,7 @@ const ApplicationForm = () => {
           <textarea id="description" value={form.description} onChange={handleChange}></textarea>
 
           {/* ✅ Resume Upload */}
-          <label>Upload Resume (PDF/DOC)</label>
+          <label>Upload Resume (PDF/DOC) *</label>
           <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} required />
 
           <button type="submit" disabled={loading}>

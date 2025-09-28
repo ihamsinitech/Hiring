@@ -30,7 +30,7 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/forgot-password', {
+      const response = await fetch('http://localhost:8085/api/auth/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>Reset Password</h1>
+          <h1>HM Hire</h1>
         </div>
       </header>
 

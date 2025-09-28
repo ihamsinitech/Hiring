@@ -10,7 +10,7 @@ const JobDetails = () => {
  
 
   useEffect(() => {
-    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
+    fetch(`http://localhost:8085/api/auth/${id}`)
       .then(res => res.json())
       .then(data => {
         console.log("Job Data from API:", data); // ✅ Debug check
@@ -25,8 +25,8 @@ const JobDetails = () => {
 
       <header className="jobdetails-header">
         <div className="jobdetails-logo">
-          <h1>Apply Now</h1>
-          <a href="/">&emsp;
+          <h1>HM Hire</h1>
+          <a href="/jobs">&emsp;
             Home
           </a>
         </div>

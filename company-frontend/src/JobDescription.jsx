@@ -8,7 +8,7 @@ const JobDescription = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
+    fetch(`http://localhost:8085/api/auth/${id}`)
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch job');
@@ -31,7 +31,7 @@ const JobDescription = () => {
     <div className="job-description">
       <header className="jobdescription-header">
         <div className="jobdescription-logo">
-          <h1>Job Details</h1>
+          <h1>HM Hire</h1>
           <Link to="/companyDashboard"  className="back-to-dashboard">Back to Dashboard</Link>
         </div>
       </header>

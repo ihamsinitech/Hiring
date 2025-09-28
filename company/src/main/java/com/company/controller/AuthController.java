@@ -46,7 +46,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"},allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"},allowedHeaders = "*")
 public class AuthController {
     
     
@@ -110,7 +110,7 @@ public class AuthController {
                     response.put("userType", "company");
                     response.put("userId", company.getId());
                     response.put("email", company.getEmail());
-                    response.put("redirect", "/postingForm");
+                    response.put("redirect", "/companyDashboard");
                     response.put("completed", true);
                     return ResponseEntity.ok(response);
                 } else {
@@ -653,7 +653,6 @@ public ResponseEntity<?> getJobsWithApplications(@PathVariable Long companyId) {
 }
 
 
-// In your Spring Boot controller
 @PutMapping("/update/{id}")
 public ResponseEntity<?> updateJob(@PathVariable Long id, @RequestBody PostingForm jobDetails) {
     try {
@@ -662,27 +661,54 @@ public ResponseEntity<?> updateJob(@PathVariable Long id, @RequestBody PostingFo
             return ResponseEntity.notFound().build();
         }
         
-        PostingForm job = jobOptional.get();
+        PostingForm existingJob = jobOptional.get();
         
-        // Update all fields
-        job.setJobTitle(jobDetails.getJobTitle());
-        job.setCompanyName(jobDetails.getCompanyName());
-        job.setEducationRequired(jobDetails.getEducationRequired());
-        job.setExperienceLevel(jobDetails.getExperienceLevel());
-        job.setWorkMode(jobDetails.getWorkMode());
-        job.setSalary(jobDetails.getSalary());
-        job.setLocation(jobDetails.getLocation());
-        job.setContactEmail(jobDetails.getContactEmail());
-        job.setWebsite(jobDetails.getWebsite());
-        job.setJobDescription(jobDetails.getJobDescription());
-        job.setResponsibilities(jobDetails.getResponsibilities());
-        job.setBenefits(jobDetails.getBenefits());
-        job.setPortalLink(jobDetails.getPortalLink());
+        // Update all fields - make sure to check for null values
+        if (jobDetails.getJobTitle() != null) {
+            existingJob.setJobTitle(jobDetails.getJobTitle());
+        }
+        if (jobDetails.getCompanyName() != null) {
+            existingJob.setCompanyName(jobDetails.getCompanyName());
+        }
+        if (jobDetails.getEducationRequired() != null) {
+            existingJob.setEducationRequired(jobDetails.getEducationRequired());
+        }
+        if (jobDetails.getExperienceLevel() != null) {
+            existingJob.setExperienceLevel(jobDetails.getExperienceLevel());
+        }
+        if (jobDetails.getWorkMode() != null) {
+            existingJob.setWorkMode(jobDetails.getWorkMode());
+        }
+        if (jobDetails.getSalary() != null) {
+            existingJob.setSalary(jobDetails.getSalary());
+        }
+        if (jobDetails.getLocation() != null) {
+            existingJob.setLocation(jobDetails.getLocation());
+        }
+        if (jobDetails.getContactEmail() != null) {
+            existingJob.setContactEmail(jobDetails.getContactEmail());
+        }
+        if (jobDetails.getWebsite() != null) {
+            existingJob.setWebsite(jobDetails.getWebsite());
+        }
+        if (jobDetails.getJobDescription() != null) {
+            existingJob.setJobDescription(jobDetails.getJobDescription());
+        }
+        if (jobDetails.getResponsibilities() != null) {
+            existingJob.setResponsibilities(jobDetails.getResponsibilities());
+        }
+        if (jobDetails.getBenefits() != null) {
+            existingJob.setBenefits(jobDetails.getBenefits());
+        }
+        if (jobDetails.getPortalLink() != null) {
+            existingJob.setPortalLink(jobDetails.getPortalLink());
+        }
         
-        PostingForm updatedJob = jobRepository.save(job);
+        PostingForm updatedJob = jobRepository.save(existingJob);
         return ResponseEntity.ok(updatedJob);
         
     } catch (Exception e) {
+        e.printStackTrace(); // Add this for debugging
         return ResponseEntity.internalServerError()
                 .body("Error updating job: " + e.getMessage());
     }

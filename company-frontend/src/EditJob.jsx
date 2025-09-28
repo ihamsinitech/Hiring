@@ -1,4 +1,3 @@
-// EditJob.js
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './EditJob.css';
@@ -21,11 +20,27 @@ const EditJob = () => {
     benefits: '',
     portalLink: ''
   });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
-      .then(res => res.json())
-      .then(data => setJob(data));
+    fetch(`http://localhost:8085/api/auth/${id}`)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch job');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setJob(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching job:', error);
+        setError('Failed to load job details');
+        setLoading(false);
+      });
   }, [id]);
 
   const handleChange = (e) => {
@@ -36,27 +51,37 @@ const EditJob = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    fetch(`http://15.206.41.13:8085/api/auth/update/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(job)
-    })
-    .then(response => response.json())
-    .then(data => {
+    setSaving(true);
+    setError('');
+
+    try {
+      const response = await fetch(`http://localhost:8085/api/auth/update/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(job)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(errorData || 'Failed to update job');
+      }
+
+      const data = await response.json();
       console.log('Success:', data);
-      navigate(`/job/${id}`); // Redirect back to job details
-    })
-    .catch(error => {
+      navigate(`/company/job/${id}`); // Redirect back to job details
+    } catch (error) {
       console.error('Error:', error);
-    });
+      setError('Failed to update job: ' + error.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
-  if (!job.jobTitle) return <p>Loading...</p>;
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="edit-job-container">
@@ -67,13 +92,15 @@ const EditJob = () => {
         </div>
       </header>
 
+      {error && <div className="error-message">{error}</div>}
+
       <form onSubmit={handleSubmit} className="edit-job-form">
         <div className="form-group">
           <label>Job Title:</label>
           <input
             type="text"
             name="jobTitle"
-            value={job.jobTitle}
+            value={job.jobTitle || ''}
             onChange={handleChange}
             required
           />
@@ -84,7 +111,7 @@ const EditJob = () => {
           <input
             type="text"
             name="companyName"
-            value={job.companyName}
+            value={job.companyName || ''}
             onChange={handleChange}
             required
           />
@@ -95,7 +122,7 @@ const EditJob = () => {
           <input
             type="text"
             name="educationRequired"
-            value={job.educationRequired}
+            value={job.educationRequired || ''}
             onChange={handleChange}
           />
         </div>
@@ -105,7 +132,7 @@ const EditJob = () => {
           <input
             type="text"
             name="experienceLevel"
-            value={job.experienceLevel}
+            value={job.experienceLevel || ''}
             onChange={handleChange}
           />
         </div>
@@ -115,7 +142,7 @@ const EditJob = () => {
           <input
             type="text"
             name="workMode"
-            value={job.workMode}
+            value={job.workMode || ''}
             onChange={handleChange}
           />
         </div>
@@ -125,7 +152,7 @@ const EditJob = () => {
           <input
             type="text"
             name="salary"
-            value={job.salary}
+            value={job.salary || ''}
             onChange={handleChange}
           />
         </div>
@@ -135,7 +162,7 @@ const EditJob = () => {
           <input
             type="text"
             name="location"
-            value={job.location}
+            value={job.location || ''}
             onChange={handleChange}
           />
         </div>
@@ -145,7 +172,7 @@ const EditJob = () => {
           <input
             type="email"
             name="contactEmail"
-            value={job.contactEmail}
+            value={job.contactEmail || ''}
             onChange={handleChange}
           />
         </div>
@@ -155,7 +182,7 @@ const EditJob = () => {
           <input
             type="text"
             name="website"
-            value={job.website}
+            value={job.website || ''}
             onChange={handleChange}
           />
         </div>
@@ -164,7 +191,7 @@ const EditJob = () => {
           <label>Job Description:</label>
           <textarea
             name="jobDescription"
-            value={job.jobDescription}
+            value={job.jobDescription || ''}
             onChange={handleChange}
             rows="4"
           />
@@ -174,7 +201,7 @@ const EditJob = () => {
           <label>Responsibilities:</label>
           <textarea
             name="responsibilities"
-            value={job.responsibilities}
+            value={job.responsibilities || ''}
             onChange={handleChange}
             rows="4"
           />
@@ -184,7 +211,7 @@ const EditJob = () => {
           <label>Benefits:</label>
           <textarea
             name="benefits"
-            value={job.benefits}
+            value={job.benefits || ''}
             onChange={handleChange}
             rows="4"
           />
@@ -201,8 +228,19 @@ const EditJob = () => {
         </div>
 
         <div className="form-buttons">
-          <button type="submit" className="save-btn">Save Changes</button>
-          <button type="button" onClick={() => navigate(-1)} className="cancel-btn">
+          <button 
+            type="submit" 
+            className="save-btn"
+            disabled={saving}
+          >
+            {saving ? 'Saving...' : 'Save Changes'}
+          </button>
+          <button 
+            type="button" 
+            onClick={() => navigate(-1)} 
+            className="cancel-btn"
+            disabled={saving}
+          >
             Cancel
           </button>
         </div>

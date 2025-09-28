@@ -147,7 +147,7 @@ html, body, #root {
   padding: 1rem;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(0,200,255,0.4), rgba(0,150,200,0.4));
+  background: linear-gradient(135deg, rgba(0,200,255,0.6), rgba(0, 0, 200, 0.6));
   color: black;
   font-weight: 600;
   cursor: pointer;
@@ -155,7 +155,7 @@ html, body, #root {
 }
 
 .signin-form button:hover {
-  background: linear-gradient(135deg, rgba(0,200,255,0.6), rgba(0,150,200,0.6));
+  background: linear-gradient(135deg, rgba(0,200,255,0.6), rgba(0, 0, 200, 0.6));
 }
 
 .auth-links {
@@ -163,7 +163,7 @@ html, body, #root {
 }
 
 .auth-links a {
-  color: #00eaff;
+  color:rgb(2, 162, 241);
   font-size: 0.9rem;
   text-decoration: none;
 }
@@ -174,7 +174,7 @@ html, body, #root {
 }
 
 .auth-redirect a {
-  color: #00eaff;
+  color: #1500fff0;
   font-weight: 600;
   text-decoration: none;
 }
