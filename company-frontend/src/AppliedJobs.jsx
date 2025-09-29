@@ -107,7 +107,7 @@ const AppliedJobs = () => {
                 <h3>Application Status</h3>
                 <div className="status-info">
                   <span className="status-badge large">Applied</span>
-                  <p><strong>Applied Date:</strong> {new Date().toLocaleDateString()}</p>
+                  <p><b> &emsp; &emsp;Applied Date:</b> {new Date().toLocaleDateString()}</p>
                 </div>
               </div>
             </div>

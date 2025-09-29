@@ -69,28 +69,28 @@ export default function Home() {
             <div className={styles.optionsContainer}>
               <div className={styles.optionCard} onClick={() => navigate('/signup')}>
                 <div className={`${styles.optionIcon} ${styles.student}`}>
-                  <i className="fas fa-user-graduate"></i>
-                </div>
-               
-                <img 
+              <img 
                    src="student.png" 
                    alt="Student" 
                    style={{ width: "40px", height: "50px", marginRight: "10px"}} 
-  />
-                <h3 className={`${styles.optionTitle} ${styles.student}`}>Student</h3>
+                />
+               </div>
+                 
+                <button className={`${styles.optionTitle} ${styles.student}`}>Student</button>
                 <p className={styles.optionDescription}>Looking for opportunities? Join as a student.</p>
               </div>
               
               <div className={styles.optionCard} onClick={() => navigate('/companyRegistration')}>
                 <div className={`${styles.optionIcon} ${styles.company}`}>
-                  <i className="fas fa-building"></i>
-                </div>
+                
                  <img 
                   src="company.png" 
                   alt="Student" 
                   style={{ width: "40px", height: "40px", marginRight: "10px" }} 
                  />
-                <h3 className={`${styles.optionTitle} ${styles.company}`}>Company</h3>
+                </div>
+
+                <button className={`${styles.optionTitle} ${styles.company}`}>Company</button>
                 <p className={styles.optionDescription}>Hiring talent? Register as a company.</p>
               </div>
             </div>
