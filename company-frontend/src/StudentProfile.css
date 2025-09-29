@@ -69,7 +69,7 @@
 
 /* Logout button */
 .logout-btn {
-  background: #ef4444;
+  background: red;
   color: black;
   border: none;
   padding: 10px 15px;
@@ -77,10 +77,13 @@
   cursor: pointer;
   font-weight: 500;
   transition: background-color 0.2s;
+  
 }
 
 .logout-btn:hover {
   background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0);
 }
 
 /* Header content */
@@ -97,7 +100,7 @@
 
 .student-btn {
   padding: 12px 25px;
-  background: rgba(19, 30, 180, 0.525);
+  background: linear-gradient(135deg,#6a11cb,#2575fc);  
   color: black;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
@@ -107,7 +110,7 @@
 }
 
 .student-btn:hover {
-  background: rgba(18, 28, 210, 0.582);
+  background: linear-gradient(135deg,#0937f1,#168ce0e0);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0);
 }
@@ -216,7 +219,7 @@
 }
 
 .edit-btn {
-  background: rgba(0, 123, 255, 0.3);
+  background: rgba(27, 27, 195, 0.461);
   color: white;
 }
 
@@ -232,7 +235,7 @@
 }
 
 .save-btn:hover {
-  background: rgba(40, 63, 167, 0.705);
+  background: linear-gradient(135deg,#2575fc,#6a11cb);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }

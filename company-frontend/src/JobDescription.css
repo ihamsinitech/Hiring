@@ -70,12 +70,12 @@
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
-.back-to-dashboard {
+.back-to-dashboards {
   font-size: 1.1rem;
   color: black; /* Changed from white to black */
   text-decoration: none;
   font-weight: 600;
-  background: rgba(66, 75, 238, 0.8); /* Solid blue background */
+  background: linear-gradient(135deg,#2575fc,#3b09f1); /* Solid blue background */
   padding: 10px 20px;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -83,8 +83,8 @@
   backdrop-filter: blur(10px);
 }
 
-.back-to-dashboard:hover {
-  background: rgb(55, 63, 212); /* Darker blue on hover */
+.back-to-dashboards:hover {
+  background: rgba(16, 27, 231, 0.676); /* Darker blue on hover */
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(66, 75, 238, 0.4);
@@ -116,7 +116,7 @@
 
 .edit-btn {
   padding: 12px 24px;
-  background:rgba(44, 106, 137, 0.959);
+  background:linear-gradient(135deg,#2575fc,#1111cb);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
@@ -131,7 +131,7 @@
 
 .edit-btn:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, rgba(26, 167, 203, 0.557), rgba(0, 90, 245, 0.694));
+  background: linear-gradient(135deg,#2575fc,#6a11cb);
   box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
 }
 
@@ -166,7 +166,7 @@
 
 .job-description-card b {
   font-weight: 700;
-  color:blue;
+  color:rgb(218, 218, 223);
 }
 
 /* View Applications Button */

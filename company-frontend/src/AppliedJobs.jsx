@@ -12,7 +12,7 @@ const AppliedJobs = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/applied-jobs`)
+      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/applied-jobs`)
         .then(res => res.json())
         .then(data => {
           setAppliedJobs(data);
@@ -43,7 +43,7 @@ const AppliedJobs = () => {
       <div className="applied-jobs-header">
         <div className="header-content">
         <h1>My Applied Jobs</h1>
-        <button className="back-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
+        <button className="applied-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
       </div>
       </div>
 
@@ -82,7 +82,7 @@ const AppliedJobs = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{selectedJob.jobTitle}</h2>
-              <button className="close-btn" onClick={closeModal}>×</button>
+          
             </div>
             <div className="modal-body">
               <div className="job-detail-section">

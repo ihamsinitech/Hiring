@@ -1,6 +1,6 @@
 .messages-page {
   min-height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+  background-image: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -55,6 +55,23 @@
   margin-top: 30px;
 }
 
+.messages-btn {
+  padding: 12px 25px;
+  background: rgba(8, 59, 228, 0.847);
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.messages-btn:hover {
+  background: rgba(15, 67, 236, 0.76);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
 .no-messages {
   text-align: center;
   padding: 60px 30px;
@@ -76,7 +93,7 @@
 
 .no-messages button {
   padding: 14px 30px;
-  background: #222020b6;
+  background: #222020c9;
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
@@ -86,7 +103,7 @@
 }
 
 .no-messages button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.352);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -152,7 +169,7 @@
 }
 
 .status-badge {
-  background: rgba(76, 175, 80, 0.8);
+  background: rgba(5, 236, 13, 0.8);
   color: black;
   padding: 6px 15px;
   border-radius: 20px;
@@ -180,7 +197,7 @@
 }
 
 .view-job-btn {
-  background: rgba(0, 123, 255, 0.3);
+  background: rgba(0, 17, 255, 0.521);
   color: white;
 }
 

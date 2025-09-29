@@ -92,13 +92,16 @@
 .job-details-card p {
   margin: 6px 0;
   line-height: 1.6;
-  font-size: 1rem;
+  font-size: 1.2rem;
   opacity: 0.95;
+  color: black;
+
 }
 
 .job-details-card b {
   font-weight: 600;
-  color: blue;
+  color: aliceblue;
+  padding-right:1%;
 }
 .floating-apply-btn {
   position: fixed;

@@ -30,7 +30,7 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8085/api/auth/forgot-password', {
+      const response = await fetch('http://15.206.41.13:8085/api/auth/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ const ForgotPassword = () => {
 
           <div className="forgot-redirect">
             <p>
-              Remember your password? <a href="/signin">Sign In</a>
+              Remember your password?<a href="/signin">Sign In</a>
             </p>
           </div>
         </div>

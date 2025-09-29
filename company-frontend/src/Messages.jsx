@@ -10,7 +10,7 @@ const Messages = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/messages`)
+      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/messages`)
         .then(res => res.json())
         .then(data => {
           setMessages(data);
@@ -31,7 +31,7 @@ const Messages = () => {
       <div className="messages-header">
         <div className="header-content">
           <h1>Messages ({messages.length})</h1>
-          <button className="back-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
+          <button className="messages-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
         </div>
       </div>
 

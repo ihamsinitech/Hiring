@@ -53,9 +53,9 @@
   line-height: 1.2;
 }
 
-.back-btn {
+.applied-btn {
   padding: 12px 25px;
-  background: rgba(29, 89, 228, 0.466);
+  background: linear-gradient(135deg,#2575fc,#6a11cb);
   color: #000000 !important;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
@@ -68,8 +68,8 @@
   text-transform: uppercase;
 }
 
-.back-btn:hover {
-  background: rgba(23, 65, 216, 0.3);
+.applied-btn:hover {
+  background: linear-gradient(135deg,#2575fc,#0b34ed);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -203,7 +203,7 @@
 }
 
 .status-badge {
-  background: rgba(76, 175, 80, 0.8);
+  background: rgb(5, 247, 5);
   color: #000000 !important;
   padding: 8px 18px;
   border-radius: 20px;
@@ -296,31 +296,6 @@
   flex: 1;
   padding-right: 20px;
 }
-
-.close-btn {
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: rgb(248, 8, 8);
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  flex-shrink: 0;
-}
-
-.close-btn:hover {
-  background: rgba(255, 255, 255, 0.5);
-  transform: rotate(90deg);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
 /* Modal Body */
 .modal-body {
   padding: 30px;
@@ -366,7 +341,7 @@
 }
 
 .job-detail-section strong {
-  color: #2b07f7;
+  color: rgba(255, 255, 255, 0.546);
   font-weight: 600;
 }
 
@@ -394,7 +369,7 @@
 /* Modal Footer */
 .modal-footer {
   padding: 20px 30px 30px 30px;
-  text-align: center;
+  text-align: right;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 

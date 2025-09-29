@@ -53,7 +53,7 @@
 
 .edit-logo button {
   padding: 10px 20px;
-  background: rgba(66, 75, 238, 0.594);
+  background: linear-gradient(135deg,#2575fc,#6a11cb);
   color: black;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
@@ -66,7 +66,7 @@
 }
 
 .edit-logo button:hover {
-  background: rgba(27, 81, 218, 0.498);
+  background: linear-gradient(135deg,#2575fc,#3911cb);
   transform: translateY(-2px);
 }
 
@@ -133,7 +133,7 @@
 
 .save-btn {
   padding: 12px 30px;
-  background: linear-gradient(135deg, #276aae, #0d66cc);
+  background: linear-gradient(135deg, #276aae, #1a0dcc);
   color: white;
   border: none;
   border-radius: 8px;

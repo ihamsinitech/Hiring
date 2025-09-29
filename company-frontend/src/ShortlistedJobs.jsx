@@ -10,7 +10,7 @@ const ShortlistedJobs = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/shortlisted-jobs`)
+      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/shortlisted-jobs`)
         .then(res => res.json())
         .then(data => {
           setShortlistedJobs(data);
@@ -31,7 +31,7 @@ const ShortlistedJobs = () => {
       <div className="shortlisted-jobs-header">
         <div className="header-content">
           <h1>Shortlisted Jobs</h1>
-          <button className="back-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
+          <button className="shortlisted-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
         </div>
       </div>
 
