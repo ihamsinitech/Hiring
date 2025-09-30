@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 
@@ -6,6 +6,19 @@ import styles from "./Home.module.css";
 export default function Home() {
   const [activeModal, setActiveModal] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() =>{
+    const userData=JSON.parse(localStorage.getItem('userData') ||'{}');
+     
+    if (userData.userId && userData.userType) {
+      if (userData.userType === 'student') {
+        navigate('/jobs'); // Auto-redirect students to jobs page
+      } else if (userData.userType === 'company') {
+        navigate('/companyDashboard'); // Auto-redirect companies to dashboard
+      }
+    }
+  }, [navigate]);
+
 
   const openModal = (modalName) => {
     setActiveModal(modalName);
@@ -19,6 +32,11 @@ export default function Home() {
     e.preventDefault();
     alert(`${formType} submission successful!`);
   };
+
+  const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+  if (userData.userId && userData.userType) {
+    return <div>Redirecting...</div>; 
+  }
 
   return (
     <div className={styles.careerPortal}>

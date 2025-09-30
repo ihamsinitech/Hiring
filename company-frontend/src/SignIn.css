@@ -24,6 +24,27 @@ html, body, #root {
     no-repeat center center/cover;
   background-attachment: fixed;
   overflow: hidden;
+  animation: topToBottom 1.5s ease-out;
+}
+
+/* Add this animation */
+@keyframes topToBottom {
+   0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-30%);
+    opacity: 0.5;
+  }
+  80% {
+    transform: translateY(5%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .auth-container::before {
@@ -51,6 +72,18 @@ html, body, #root {
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,0.2);
   z-index: 10;
+  animation: headerSlideDown 1s ease-out 0.3s both;
+}
+/* Header animation */
+@keyframes headerSlideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .signin-logo {
@@ -79,7 +112,21 @@ html, body, #root {
   min-height: 120vh;
   position: relative;
   z-index: 1; /* keep above blur overlay */
+  animation: contentSlideUp 1.2s ease-out 0.5s both;
 }
+
+/* Content animation */
+@keyframes contentSlideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 
 /* Glass wrapper */
 .signin-wrapper {
