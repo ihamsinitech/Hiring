@@ -21,7 +21,7 @@ const StudentSuccessPage = () => {
       <div className="success-container">
         {/* ✅ Success Icon */}
         <div className="success-icon">
-          <span>✔</span>
+          <span>👍</span>
         </div>
 
         <h2>Registration Submitted Successfully!</h2>

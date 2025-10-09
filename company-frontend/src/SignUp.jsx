@@ -12,7 +12,7 @@ const SignUp = () => {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showScrollingMessage, setShowScrollingMessage] = useState(false);
+  const [showVideoMessage, setShowVideoMessage] = useState(false);
   const [successUsername, setSuccessUsername] = useState('');
   const navigate = useNavigate();
 
@@ -66,12 +66,12 @@ const SignUp = () => {
       
       if (response.ok) {
         setSuccessUsername(form.fullName);
-        setShowScrollingMessage(true);
+        setShowVideoMessage(true);
 
-        // Navigate to signin after scrolling message
+        // Navigate to signin after video message
         setTimeout(() => {
           navigate('/signin');
-        }, 4000);
+        }, 5000);
        
       } else {
         setError(data || 'Registration failed');
@@ -85,23 +85,48 @@ const SignUp = () => {
     }
   };
 
+  const skipVideo = () => {
+    navigate('/signin');
+  };
+
   return (
     <div className="signup-container">
 
-      {/* Scrolling Message Animation after Success */}
-      {showScrollingMessage && (
-        <div className="scrolling-message-container">
-          <div className="scrolling-message">
-            <div className="message-girl">
-              <img 
-                src="animation-22.png" 
-                alt="Greeting Girl" 
-                className="girl-image"
-              />
-            </div>
+      {/* Full Screen Video Message after Success */}
+      {showVideoMessage && (
+        <div className="fullscreen-success-container">
+          {/* Glass Background Overlay */}
+          <div className="glass-background-overlay"></div>
+          
+          {/* Video Container */}
+          <div className="video-content-container">
+            <img
+              src="/animation-success.gif"
+              alt="Welcome Animation"
+              className="success-animation-gif"
+              onLoad={() => console.log('GIF loaded successfully')}
+              onError={(e) => {
+                console.log('GIF loading error', e);
+                setTimeout(() => navigate('/signin'), 2000);
+              }}
+            />
+          </div>
+
+          {/* Glass Message Panel */}
+          <div className="glass-message-panel">
             <div className="message-content">
-              <h3>Hello, {successUsername}!</h3>
-              <p>Your account is ready! Taking you to Sign In...</p>
+              <div className="success-icon">🎉</div>
+              <h2>Hello, {successUsername}!</h2>
+              <p className="welcome-message">Welcome to HM Hire</p>
+              
+              <div className="success-card">
+                <p className="success-main">Successfully created account!</p>
+                <p className="signin-instruction">Please Sign In</p>
+              </div>
+
+              <button className="continue-btn" onClick={skipVideo}>
+                Continue to Sign In
+              </button>
             </div>
           </div>
         </div>
@@ -118,7 +143,6 @@ const SignUp = () => {
 
       <section className="signup-section">
         <div className="signup-wrapper">
-          {/* Left side image */}
           <div className="signup-image">
             <img src="annimation-15.png" alt="Sign Up" />
           </div>

@@ -191,7 +191,7 @@ useEffect(() => {
             {/* Logo */}
             <div className="header-left">
               <div className="logo">
-                <a href='/company'>
+                <a href='/'>
                   <img src="/logo-website.png" alt="CareerConnect" className="logo-img" />
                 </a>
                 <h1>Career Hire</h1>

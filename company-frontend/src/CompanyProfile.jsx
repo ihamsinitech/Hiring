@@ -6,6 +6,7 @@ const CompanyProfile = () => {
   const [company, setCompany] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
+  const [showLogoutAnimation, setShowLogoutAnimation] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,15 +46,44 @@ const CompanyProfile = () => {
       .catch(err => console.error("Error updating profile:", err));
   };
 
+  // ✅ Logout function with animation
   const handleLogout = () => {
-    localStorage.removeItem("userData");
-    navigate('/signin');
+    setShowLogoutAnimation(true);
+    
+    // Wait for animation to play then logout
+    setTimeout(() => {
+      localStorage.removeItem("userData");
+      navigate('/signin');
+    }, 3000); // 3 seconds for animation
   };
+
 
   if (!company) return <div className="loading">Loading...</div>;
 
   return (
     <div className="profile-page">
+
+      {/* Full Screen Logout Animation */}
+      {showLogoutAnimation && (
+        <div className="logout-animation-container">
+          <div className="logout-video-overlay">
+            <img
+              src="/279462295-unscreen (2).gif"
+              alt="Logout Animation"
+              className="logout-gif"
+              onLoad={() => console.log('Logout GIF loaded successfully')}
+              onError={() => {
+                console.log('GIF loading error');
+                // Fallback to direct navigation if GIF fails
+                localStorage.removeItem("userData");
+                navigate('/signin');
+              }}
+            />
+            
+          </div>
+        </div>
+      )}
+
       <div className="profile-header">
         <div className="header-content">
           <h1>My Profile</h1>
