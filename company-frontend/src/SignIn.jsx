@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './SignIn.css';
@@ -106,17 +107,21 @@ const SignIn = () => {
             
             {/* Video Section (Left Side) */}
             <div className="video-section">
-              <img
-                src="/74049489-unscreen.gif"
-                alt="Welcome Animation"
+              <video
+                autoPlay
+                muted
+                loop
                 className="welcome-gif"
-                onLoad={() => console.log('GIF loaded successfully')}
+                onLoadedData={() => console.log('video loaded successfully')}
                 onError={() => {
-                  console.log('GIF loading error');
+                  console.log('video loading error');
                   document.querySelector('.fallback-animation').style.display = 'flex';
                   document.querySelector('.welcome-gif').style.display = 'none';
                 }}
-              />
+              >
+                 <source src="/143765-784138221_small.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Message Section (Right Side) */}

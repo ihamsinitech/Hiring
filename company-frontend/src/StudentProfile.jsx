@@ -2,23 +2,53 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './StudentProfile.css';
 
+// Animation Component
+const LogoutAnimation = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Create floating hearts when component mounts
+    createHearts();
+    
+    // Redirect to signin page after 3 seconds
+    const timer = setTimeout(() => {
+      navigate('/signin');
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
+  return (
+    <div className="logout-animation-page">
+      <div className="animation-overlay"></div>
+      <div className="floating-hearts" id="heartsContainer"></div>
+      <div className="animation-container">
+        <div className="animation-glass-card">
+          <div className="bye-text bye-above">👋</div>
+          <div className="thank-you-text">Thank You for Visiting!</div>
+          <div className="visitor-counter">See you soon!</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Profile = () => {
   const [student, setStudent] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
-  const [showLogoutAnimation, setShowLogoutAnimation] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      // First get the basic profile with stats
       fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setStudent(data);
           setFormData(data);
-          })
+        })
         .catch(err => console.error("Error fetching profile:", err));
     }
   }, []);
@@ -46,51 +76,29 @@ const Profile = () => {
       .catch(err => console.error("Error updating profile:", err));
   };
 
-  // ✅ Logout function with animation
+  // ✅ Updated Logout function with animation
   const handleLogout = () => {
-    setShowLogoutAnimation(true);
-    
-    // Wait for animation to play then logout
+    setShowAnimation(true);
     setTimeout(() => {
       localStorage.removeItem("userData");
-      navigate('/signin');
-    }, 3000); // 3 seconds for animation
+    }, 1000);
   };
+
+  // If animation is shown, render the animation component
+  if (showAnimation) {
+    return <LogoutAnimation />;
+  }
 
   if (!student) return <div className="loading">Loading...</div>;
 
   return (
     <div className="profile-page">
-    
-      {/* Full Screen Logout Animation */}
-      {showLogoutAnimation && (
-        <div className="logout-animation-container">
-          <div className="logout-video-overlay">
-            <img
-              src="/279462295-unscreen (2).gif"
-              alt="Logout Animation"
-              className="logout-gif"
-              onLoad={() => console.log('Logout GIF loaded successfully')}
-              onError={() => {
-                console.log('GIF loading error');
-                // Fallback to direct navigation if GIF fails
-                localStorage.removeItem("userData");
-                navigate('/signin');
-              }}
-            />
-            
-          </div>
-        </div>
-      )}
-
       <div className="profile-header">
         <div className="header-content">
           <h1>My Profile</h1>
           <div className="header-buttons">
             <button className="student-btn" onClick={() => navigate('/jobs')}>Back to Jobs</button>
-            <button className="logout-btn" onClick={handleLogout}>
-              <b><i className="fa-solid fa-power-off"></i></b>
-            </button>
+            <button className="logout-btn" onClick={handleLogout}><b><i className="fa-solid fa-power-off"></i></b></button>
           </div>
         </div>
       </div>
@@ -225,6 +233,46 @@ const Profile = () => {
       </div>
     </div>
   );
+};
+
+// Floating hearts function
+const createHearts = () => {
+  if (typeof document !== 'undefined') {
+    const heartsContainer = document.getElementById('heartsContainer');
+    if (heartsContainer) {
+      const hearts = ['💖', '💝', '✨', '🌟', '🥰'];
+      
+      // Clear existing hearts
+      heartsContainer.innerHTML = '';
+      
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDelay = Math.random() * 6 + 's';
+        heart.style.fontSize = (Math.random() * 1 + 1) + 'em';
+        heartsContainer.appendChild(heart);
+      }
+
+      // Add click effect
+      document.body.addEventListener('click', function(e) {
+        const clickEffect = document.createElement('div');
+        clickEffect.className = 'heart';
+        clickEffect.textContent = '✨';
+        clickEffect.style.left = e.clientX + 'px';
+        clickEffect.style.top = e.clientY + 'px';
+        clickEffect.style.animation = 'float 3s ease-in forwards';
+        heartsContainer.appendChild(clickEffect);
+        
+        setTimeout(() => {
+          if (clickEffect.parentNode) {
+            clickEffect.remove();
+          }
+        }, 3000);
+      });
+    }
+  }
 };
 
 export default Profile;

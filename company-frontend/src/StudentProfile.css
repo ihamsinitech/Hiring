@@ -1,106 +1,182 @@
-/* Logout Animation Styles */
-.logout-animation-container {
+/* Logout Animation Styles with Glassmorphism */
+.logout-animation-page {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(20px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  right: 0;
+  bottom: 0;
   z-index: 9999;
-  animation: fadeIn 0.5s ease-in-out;
 }
 
-.logout-video-overlay {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}
-
-.logout-gif {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.logout-message {
+.animation-overlay {
   position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  padding: 20px 40px;
-  border-radius: 15px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+
+.animation-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animation-glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 50px 70px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-align: center;
+  min-width: 500px;
+  animation: glassAppear 1s ease-out;
 }
 
-.logout-message h2 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  background: linear-gradient(135deg, #fff, #e0f7fa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.logout-message p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* Animation */
-@keyframes fadeIn {
+@keyframes glassAppear {
   from {
     opacity: 0;
+    transform: scale(0.8) translateY(30px);
   }
   to {
     opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
-/* Responsive Design for Logout Animation */
+.logout-animation-page .thank-you-text {
+  font-size: 3em;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  margin: 25px 0;
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+  font-weight: bold;
+}
+
+.logout-animation-page .bye-text {
+  font-size: 2.8em;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  margin: 20px 0;
+  opacity: 0;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+.logout-animation-page .bye-above {
+  animation-delay: 0.5s;
+}
+
+.logout-animation-page .visitor-counter {
+  color: white;
+  font-size: 1.4em;
+  margin-top: 25px;
+  opacity: 0;
+  animation: fadeIn 3s ease-in-out forwards;
+  animation-delay: 1.5s;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(25px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.logout-animation-page .floating-hearts {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.logout-animation-page .heart {
+  position: absolute;
+  font-size: 1.8em;
+  opacity: 0;
+  animation: float 6s ease-in infinite;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  z-index: 1;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Enhanced glassmorphism effects */
+.animation-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* Responsive design for animation */
 @media (max-width: 768px) {
-  .logout-message {
-    bottom: 80px;
-    padding: 15px 30px;
+  .animation-glass-card {
+    min-width: 300px;
+    padding: 40px 30px;
+    margin: 20px;
   }
   
-  .logout-message h2 {
-    font-size: 2rem;
+  .logout-animation-page .thank-you-text {
+    font-size: 2.2em;
   }
   
-  .logout-message p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .logout-message {
-    bottom: 60px;
-    padding: 12px 25px;
+  .logout-animation-page .bye-text {
+    font-size: 2em;
   }
   
-  .logout-message h2 {
-    font-size: 1.7rem;
-  }
-  
-  .logout-message p {
-    font-size: 0.9rem;
+  .logout-animation-page .visitor-counter {
+    font-size: 1.1em;
   }
 }
 
@@ -401,11 +477,6 @@
   }
   
   .profile-header h1 {
-    text-align: center;
-  }
-  .header-content {
-    flex-direction: column;
-    gap: 15px;
     text-align: center;
   }
   
