@@ -19,7 +19,7 @@ import com.company.repository.StudentRepository;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"}, allowedHeaders = "*")
+@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"}, allowedHeaders = "*")
 public class AdminController {
 
     @Autowired
