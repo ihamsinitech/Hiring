@@ -15,7 +15,6 @@ import WelcomePage from './WelcomePage';
 import ApplicationForm from './ApplicationForm';
 import SuccessPage from './SuccessPage';
 import StudentSuccessPage from './StudentSuccessPage';
-import StudentProfile from './StudentProfile';
 import AppliedJobs from './AppliedJobs';
 import Messages from './Messages';
 import ShortlistedJobs from './ShortlistedJobs';
@@ -24,6 +23,9 @@ import CompanyApplications from './CompanyApplications';
 import JobDescription from './JobDescription';
 import EditJob from './EditJob';
 import CompanyDashBoard from './CompanyDashBoard';
+import StudentProfile from './StudentProfile';
+import AdminLogin from './AdminLogin';
+import AdminDashboard from './AdminDashboard';
 
 
 
@@ -56,6 +58,9 @@ function App() {
           <Route path="/companyApplications" element={<CompanyApplications />} />
           <Route path="/edit/:id" element={<EditJob />} />
           <Route path="/company/job/:id" element={<JobDescription />} />
+
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         
         </Routes>
       </div>

@@ -26,9 +26,10 @@ public class Company {
     private Long id;
 
     @NotBlank
-    @Column(name = "company_name")
+    @Column(name = "company_name", nullable = false)
     private String companyName;
-
+    
+    @Column(nullable = false, unique = true)
     private String email;
     private String password;
     @NotBlank

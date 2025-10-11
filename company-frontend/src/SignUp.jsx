@@ -49,7 +49,7 @@ const SignUp = () => {
     }
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signup/student', {
+      const response = await fetch('http://localhost:8085/api/auth/signup/student', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,25 +95,27 @@ const SignUp = () => {
       {/* Full Screen Video Message after Success */}
       {showVideoMessage && (
         <div className="fullscreen-success-container">
-          {/* Glass Background Overlay */}
-          <div className="glass-background-overlay"></div>
-          
-          {/* Video Container */}
-          <div className="video-content-container">
-            <img
-              src="/animation-success.gif"
-              alt="Welcome Animation"
-              className="success-animation-gif"
-              onLoad={() => console.log('GIF loaded successfully')}
+          {/* Full Screen Video Background */}
+          <div className="fullscreen-video-background">
+            <video
+              autoPlay
+              muted
+              loop
+              className="fullscreen-video"
+              onLoadedData={() => console.log('Video loaded successfully')}
               onError={(e) => {
-                console.log('GIF loading error', e);
+                console.log('Video loading error', e);
                 setTimeout(() => navigate('/signin'), 2000);
               }}
-            />
+            >
+              <source src='/istockphoto-1371124982-640_adpp_is.mp4' type='video/mp4'/>
+              Your browser does not support the video tag.
+            </video>
+            <div className="video-overlay"></div>
           </div>
 
-          {/* Glass Message Panel */}
-          <div className="glass-message-panel">
+          {/* Glass Message Panel on Right Side */}
+          <div className="right-glass-message-panel">
             <div className="message-content">
               <div className="success-icon">🎉</div>
               <h2>Hello, {successUsername}!</h2>

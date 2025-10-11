@@ -4,6 +4,7 @@ package com.company.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 import com.company.model.Company;
@@ -11,5 +12,6 @@ import com.company.model.Company;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     Optional<Company> findByEmail(String email);
     boolean existsByEmail(String email);
+    
     
 }

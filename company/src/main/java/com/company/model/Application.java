@@ -10,7 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -18,6 +20,8 @@ import lombok.Setter;
 @Table(name = "applications")
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +30,13 @@ public class Application {
     private Long companyId;
 
     private Long jobId;
+
+    @Column(nullable = false)
     private String fullName;
+
+    @Column(nullable = false)
     private String email;
+
     private String mobile;
     private String skills;
     private String fresherOrExp;

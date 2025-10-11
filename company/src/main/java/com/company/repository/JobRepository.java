@@ -18,4 +18,5 @@ public interface JobRepository extends JpaRepository <PostingForm , Long>{
     long countApplicationsByJobId(@Param("jobId") Long jobId);
 
     
+    
 }

@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './StudentProfile.css';
 
-// Animation Component
+// Enhanced Logout Animation Component with Side-by-Side Layout
 const LogoutAnimation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Create floating hearts when component mounts
-    createHearts();
-    
     // Redirect to signin page after 3 seconds
     const timer = setTimeout(() => {
       navigate('/signin');
@@ -20,20 +17,50 @@ const LogoutAnimation = () => {
 
   return (
     <div className="logout-animation-page">
+      {/* Header with Logo and HM Hire */}
+      <div className="animation-header">
+        <div className="animation-header-content">
+          <div className="animation-logo">
+            <div className="logo-icon">
+              <a href="/signin">
+                <img src="logo-website.png" alt="Company Logo" />
+              </a>
+            </div>
+            <span className="company-name">HM Hire</span>
+          </div>
+        </div>
+      </div>
+
       <div className="animation-overlay"></div>
-      <div className="floating-hearts" id="heartsContainer"></div>
-      <div className="animation-container">
-        <div className="animation-glass-card">
-          <div className="bye-text bye-above">👋</div>
-          <div className="thank-you-text">Thank You for Visiting!</div>
-          <div className="visitor-counter">See you soon!</div>
+      
+      {/* Main Content Container */}
+      <div className="animation-main-container">
+        {/* Left Side - Image */}
+        <div className="animation-image-section">
+          <img 
+            src='animation-24.png' 
+            alt="Goodbye Animation"
+            className="animation-side-image"
+          />
+        </div>
+
+        {/* Right Side - Glass Card Message */}
+        <div className="animation-message-section">
+          <div className="animation-glass-card">
+            <div className="animation-content">
+              <div className="bye-text bye-above">👋</div>
+              <div className="thank-you-text">Thank You for Visiting!</div>
+              <div className="visitor-counter">See you soon!</div>
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const Profile = () => {
+const StudentProfile = () => {
   const [student, setStudent] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
@@ -43,7 +70,7 @@ const Profile = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`)
+      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setStudent(data);
@@ -60,7 +87,7 @@ const Profile = () => {
 
   const handleSave = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`, {
+    fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -235,44 +262,4 @@ const Profile = () => {
   );
 };
 
-// Floating hearts function
-const createHearts = () => {
-  if (typeof document !== 'undefined') {
-    const heartsContainer = document.getElementById('heartsContainer');
-    if (heartsContainer) {
-      const hearts = ['💖', '💝', '✨', '🌟', '🥰'];
-      
-      // Clear existing hearts
-      heartsContainer.innerHTML = '';
-      
-      for (let i = 0; i < 15; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDelay = Math.random() * 6 + 's';
-        heart.style.fontSize = (Math.random() * 1 + 1) + 'em';
-        heartsContainer.appendChild(heart);
-      }
-
-      // Add click effect
-      document.body.addEventListener('click', function(e) {
-        const clickEffect = document.createElement('div');
-        clickEffect.className = 'heart';
-        clickEffect.textContent = '✨';
-        clickEffect.style.left = e.clientX + 'px';
-        clickEffect.style.top = e.clientY + 'px';
-        clickEffect.style.animation = 'float 3s ease-in forwards';
-        heartsContainer.appendChild(clickEffect);
-        
-        setTimeout(() => {
-          if (clickEffect.parentNode) {
-            clickEffect.remove();
-          }
-        }, 3000);
-      });
-    }
-  }
-};
-
-export default Profile;
+export default StudentProfile;

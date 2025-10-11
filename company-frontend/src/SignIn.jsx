@@ -50,7 +50,7 @@ const SignIn = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signin', {
+      const response = await fetch('http://localhost:8085/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,17 +112,18 @@ const SignIn = () => {
                 muted
                 loop
                 className="welcome-gif"
-                onLoadedData={() => console.log('video loaded successfully')}
+                onLoad={() => console.log('Video loaded successfully')}
                 onError={() => {
-                  console.log('video loading error');
+                  console.log('GIF loading error');
                   document.querySelector('.fallback-animation').style.display = 'flex';
                   document.querySelector('.welcome-gif').style.display = 'none';
                 }}
               >
-                 <source src="/143765-784138221_small.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+                <source src='143765-784138221_small.mp4' type='video/mp4'/>
+                  Your browser does not support the video tag.
+                  </video>
             </div>
+
 
             {/* Message Section (Right Side) */}
             <div className="message-section">

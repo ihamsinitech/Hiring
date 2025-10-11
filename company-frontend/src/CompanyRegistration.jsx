@@ -84,7 +84,7 @@ const CompanyRegistration = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signup/company', {
+      const response = await fetch('http://localhost:8085/api/auth/signup/company', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

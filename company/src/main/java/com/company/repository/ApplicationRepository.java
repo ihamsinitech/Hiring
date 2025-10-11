@@ -34,4 +34,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
 
     long countByJobId(Long jobId);
 
+
+    
+
 }

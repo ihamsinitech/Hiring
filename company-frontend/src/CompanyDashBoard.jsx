@@ -29,7 +29,7 @@ const CompanyDashBoard = () => {
       console.log("Company ID:", storedUser.userId);
 
       // Fetch company profile & stats
-      fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/profile`)
+      fetch(`http://localhost:8085/api/auth/company/${storedUser.userId}/profile`)
         .then(res => {
           if (!res.ok) {
             throw new Error('Profile not found');
@@ -62,7 +62,7 @@ const CompanyDashBoard = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     if (storedUser) {
-      fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/jobs`)
+      fetch(`http://localhost:8085/api/auth/company/${storedUser.userId}/jobs`)
         .then(res => {
           if (!res.ok) {
             throw new Error('Jobs not found');
@@ -88,7 +88,7 @@ const CompanyDashBoard = () => {
 useEffect(() => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
   if (storedUser) {
-    fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/jobs-with-applications`)
+    fetch(`http://localhost:8085/api/auth/company/${storedUser.userId}/jobs-with-applications`)
       .then(res => {
         if (!res.ok) {
           throw new Error('Jobs not found');

@@ -26,7 +26,7 @@ const ApplicationForm = () => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
-    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
+    fetch(`http://localhost:8085/api/auth/${id}`)
       .then((res) => res.json())
       .then((data) => setJob(data))
       .catch((err) => console.error("Error fetching job:", err));
@@ -66,7 +66,7 @@ const ApplicationForm = () => {
 
 
 
-      const response = await fetch("http://15.206.41.13:8085/api/auth/apply", {
+      const response = await fetch("http://localhost:8085/api/auth/apply", {
         method: "POST",
         body: formData, // ✅ send multipart/form-data
       });

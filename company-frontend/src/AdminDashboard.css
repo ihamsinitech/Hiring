@@ -1,0 +1,478 @@
+/* AdminDashboard.css - Scoped Full Glassmorphism */
+.admin-dashboard-page {
+    min-height: 100vh;
+    padding-bottom: 80px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* Background with blur */
+.admin-dashboard-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover fixed;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    z-index: -1;
+}
+
+/* Glass Card Base Style */
+.admin-dashboard-page .glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Glass Header */
+.admin-dashboard-page .admin-header {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-dashboard-page .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-dashboard-page .admin-header h1 {
+    margin: 0;
+    color: black;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.admin-dashboard-page .admin-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.admin-dashboard-page .welcome-text {
+    color: black;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.admin-dashboard-page .logout-btn {
+    padding: 0.6rem 1.2rem;
+    background: rgba(254, 2, 2, 0.874);
+    backdrop-filter: blur(10px);
+    color: black;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.admin-dashboard-page .logout-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Dashboard Content */
+.admin-dashboard-page .dashboard-content {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Stats Grid */
+.admin-dashboard-page .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.admin-dashboard-page .stat-card {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-dashboard-page .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.admin-dashboard-page .stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.admin-dashboard-page .stat-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.admin-dashboard-page .stat-card p {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: black;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.admin-dashboard-page .stat-card small {
+    color: rgba(39, 37, 37, 0.8);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Data Sections */
+.admin-dashboard-page .data-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.admin-dashboard-page .data-section {
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.admin-dashboard-page .data-section:hover {
+    transform: translateY(-3px);
+}
+
+.admin-dashboard-page .data-section h3 {
+    margin-top: 0;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Activity List */
+.admin-dashboard-page .activity-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.admin-dashboard-page .activity-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.admin-dashboard-page .activity-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.admin-dashboard-page .activity-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.admin-dashboard-page .activity-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.admin-dashboard-page .activity-item {
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.admin-dashboard-page .activity-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.admin-dashboard-page .activity-item p {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+    color: black;
+    line-height: 1.4;
+}
+
+.admin-dashboard-page .activity-item strong {
+    color: black;
+    font-weight: 600;
+}
+
+/* Glass Navigation */
+.admin-dashboard-page .admin-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    padding: 1rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.admin-dashboard-page .admin-nav button {
+    flex: 1;
+    margin: 0 0.5rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(41, 36, 36, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.admin-dashboard-page .admin-nav button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    color: black;
+}
+
+.admin-dashboard-page .admin-nav button.active {
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Glass Tab Content */
+.admin-dashboard-page .tab-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-dashboard-page .tab-header {
+    margin-bottom: 1.5rem;
+}
+
+.admin-dashboard-page .tab-header h2 {
+    margin: 0;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Glass Data Table */
+.admin-dashboard-page .data-table {
+    padding: 1.5rem;
+    overflow: auto;
+    max-width: 100%;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-dashboard-page .data-table table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+.admin-dashboard-page .data-table th,
+.admin-dashboard-page .data-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
+    color: black;
+}
+
+.admin-dashboard-page .data-table th {
+    background: rgba(255, 255, 255, 0.2);
+    color: black;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.admin-dashboard-page .data-table td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-dashboard-page .data-table tr:hover td {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.admin-dashboard-page .data-table tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-dashboard-page .data-table tr:nth-child(even):hover td {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Glass Loading States */
+.admin-dashboard-page .loading {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.3rem;
+    color: black;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    margin: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-dashboard-page .loading-subtitle {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.8);
+    margin-top: 1rem;
+}
+
+/* Glass Error States */
+.admin-dashboard-page .error-container {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    margin: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-dashboard-page .error-container h2 {
+    color: #ff6b6b;
+    margin-top: 0;
+    font-size: 1.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.admin-dashboard-page .error-container p {
+    color: black;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.admin-dashboard-page .error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.admin-dashboard-page .error-actions button {
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: black;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.admin-dashboard-page .error-actions button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.admin-dashboard-page .secondary-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: black !important;
+}
+
+.admin-dashboard-page .secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Glass No Data State */
+.admin-dashboard-page .no-data {
+    text-align: center;
+    padding: 3rem;
+    color: rgba(0, 0, 0, 0.7);
+    font-style: italic;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admin-dashboard-page .dashboard-content {
+        padding: 1rem;
+    }
+    
+    .admin-dashboard-page .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-dashboard-page .data-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .admin-dashboard-page .admin-nav {
+        flex-wrap: wrap;
+    }
+    
+    .admin-dashboard-page .admin-nav button {
+        flex: 1 0 45%;
+        margin: 0.25rem;
+    }
+    
+    .admin-dashboard-page .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .admin-dashboard-page .data-table {
+        padding: 0.5rem;
+    }
+    
+    .admin-dashboard-page .data-table table {
+        min-width: 600px;
+    }
+}
+
+/* Subtle Glow Effects */
+.admin-dashboard-page .glass-card:hover,
+.admin-dashboard-page .data-section:hover,
+.admin-dashboard-page .admin-nav button:hover {
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
