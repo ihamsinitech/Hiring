@@ -292,6 +292,12 @@ html, body {
   .job-card {
     max-width: 100%;
   }
+  .profile-avatar {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
 }
 
 /* Extra Mobile Responsive (for < 768px screens) */
@@ -314,7 +320,22 @@ html, body {
   .profile-section {
     width: 100%;
     justify-content: space-between;
+    gap: 10px;
+    padding: 8px 0;
   }
+
+  
+  .profile-section {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  /* Center the avatar by adjusting its margins */
+  .profile-avatar {
+    margin: 0 auto;
+  }
+
 
   /* Sidebar moves on top */
   .main-content {

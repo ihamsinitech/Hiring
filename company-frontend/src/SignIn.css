@@ -22,15 +22,55 @@ html, body, #root {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   z-index: 10000;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding-top: 80px; /* JUST ADDED: Space for header */
 }
+
+/* Animation Header */
+.animation-header {
+  position: fixed; /* JUST CHANGED: from absolute to fixed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10001;
+  animation: headerSlideDown 1s ease-out 0.3s both;
+  height: 80px; /* JUST ADDED: Fixed height for header */
+}
+
+.animation-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.animation-logo img {
+  height: 40px;
+  border-radius: 8px;
+}
+
+.animation-logo h1 {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 
 .gif-container {
   position: relative;
   width: 95%;
-  height: 90%;
+  height: calc(100vh - 100px);
   display: flex;
   border-radius: 24px;
   overflow: hidden;
@@ -83,7 +123,7 @@ html, body, #root {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.2),
@@ -110,7 +150,7 @@ html, body, #root {
 
 .welcome-icon {
   font-size: 3.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   animation: bounce 2s infinite;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
@@ -128,8 +168,8 @@ html, body, #root {
 }
 
 .welcome-message h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.8rem;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
   background: linear-gradient(135deg, #fff, hsl(180, 15%, 90%));
   -webkit-background-clip: text;
@@ -139,8 +179,8 @@ html, body, #root {
 }
 
 .welcome-subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
   opacity: 0.9;
   font-weight: 300;
   line-height: 1.5;
@@ -156,7 +196,7 @@ html, body, #root {
 }
 
 .user-greeting p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 0;
   font-weight: 500;
 }
@@ -181,7 +221,7 @@ html, body, #root {
 /* Continue Button */
 .continue-button {
   width: 100%;
-  padding: 16px 32px;
+  padding: 14px 28px;
   background: linear-gradient(135deg, #667eea 0%, #2654de 100%);
   color: white;
   border: none;
@@ -305,6 +345,419 @@ html, body, #root {
   margin-bottom: 1rem;
   text-align: center;
   font-weight: 500;
+}
+/* Mobile-specific fixes for animation page */
+/* Professional Mobile View Fixes */
+@media (max-width: 768px) {
+  .fullscreen-gif-overlay {
+    padding-top: 70px;
+    justify-content: flex-start;
+    padding-bottom: 20px;
+  }
+
+  .animation-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 0;
+    height: 70px;
+    z-index: 10001;
+    backdrop-filter: blur(15px);
+  }
+
+  .animation-header-content {
+    padding: 0 20px;
+  }
+
+  .animation-logo {
+    padding: 8px 0;
+  }
+
+  .animation-logo img {
+    height: 35px;
+  }
+
+  .animation-logo h1 {
+    font-size: 1.3rem;
+  }
+
+  .gif-container {
+    flex-direction: column;
+    width: 95%;
+    height: auto;
+    min-height: calc(100vh - 90px);
+    border-radius: 20px;
+    margin: 10px auto;
+    overflow: visible;
+  }
+
+  .video-section {
+    flex: none;
+    height: 40vh;
+    min-height: 250px;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    padding: 15px;
+  }
+
+  .welcome-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+  }
+
+  .message-section {
+    flex: none;
+    min-height: 50vh;
+    width: 100%;
+    padding: 20px;
+    border-radius: 0 0 20px 20px;
+    align-items: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .glassmorphism-overlay {
+    width: 100%;
+    max-width: 100%;
+    padding: 25px 20px;
+    margin: 0;
+    border-radius: 15px;
+    backdrop-filter: blur(25px);
+  }
+
+  .welcome-message {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .welcome-icon {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .welcome-message h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .welcome-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    opacity: 0.9;
+  }
+
+  .user-greeting {
+    padding: 1.2rem;
+    margin: 1rem 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .user-greeting p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .user-email {
+    font-size: 0.9rem;
+    word-break: break-all;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .welcome-quote {
+    padding: 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+    border-left: 3px solid #00ff88;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+  }
+
+  .continue-button {
+    width: 100%;
+    padding: 16px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #2654de 100%);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    animation: mobileButtonPulse 2s infinite;
+  }
+
+  @keyframes mobileButtonPulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+      transform: scale(1.02);
+      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+    }
+  }
+
+  /* Ensure proper scrolling */
+  .message-section::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .message-section::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+
+  .message-section::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fullscreen-gif-overlay {
+    padding-top: 60px;
+    padding-bottom: 15px;
+  }
+
+  .animation-header {
+    height: 60px;
+    padding: 10px 0;
+  }
+
+  .animation-header-content {
+    padding: 0 15px;
+  }
+
+  .animation-logo img {
+    height: 30px;
+  }
+
+  .animation-logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .gif-container {
+    width: 97%;
+    min-height: calc(100vh - 80px);
+    border-radius: 18px;
+  }
+
+  .video-section {
+    height: 35vh;
+    min-height: 200px;
+    padding: 12px;
+  }
+
+  .message-section {
+    min-height: 45vh;
+    padding: 15px;
+  }
+
+  .glassmorphism-overlay {
+    padding: 20px 15px;
+    border-radius: 12px;
+  }
+
+  .welcome-icon {
+    font-size: 2.2rem;
+  }
+
+  .welcome-message h1 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .user-greeting {
+    padding: 1rem;
+    margin: 0.8rem 0;
+  }
+
+  .user-greeting p {
+    font-size: 0.85rem;
+  }
+
+  .welcome-quote {
+    padding: 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.85rem;
+  }
+
+  .continue-button {
+    padding: 14px 24px;
+    font-size: 1rem;
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .fullscreen-gif-overlay {
+    padding-top: 55px;
+  }
+
+  .animation-header {
+    height: 55px;
+  }
+
+  .animation-logo {
+    gap: 8px;
+  }
+
+  .animation-logo img {
+    height: 28px;
+  }
+
+  .animation-logo h1 {
+    font-size: 1rem;
+  }
+
+  .gif-container {
+    width: 98%;
+    min-height: calc(100vh - 70px);
+  }
+
+  .video-section {
+    height: 30vh;
+    min-height: 180px;
+  }
+
+  .glassmorphism-overlay {
+    padding: 18px 12px;
+  }
+
+  .welcome-message h1 {
+    font-size: 1.3rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .continue-button {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 320px) {
+  .welcome-message h1 {
+    font-size: 1.2rem;
+  }
+  
+  .welcome-subtitle {
+    font-size: 0.75rem;
+  }
+  
+  .user-greeting p,
+  .welcome-quote {
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape mode fixes */
+@media (max-width: 768px) and (orientation: landscape) {
+  .gif-container {
+    flex-direction: row;
+    height: calc(100vh - 80px);
+  }
+
+  .video-section {
+    height: 100%;
+    min-height: auto;
+    flex: 1;
+  }
+
+  .message-section {
+    height: 100%;
+    min-height: auto;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .glassmorphism-overlay {
+    max-height: 100%;
+    overflow-y: auto;
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  .fullscreen-gif-overlay {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+  
+  .animation-header {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+}
+/* Additional very small screen fixes */
+@media (max-width: 320px) {
+  .fullscreen-gif-overlay {
+    padding-top: 55px;
+  }
+
+  .animation-header {
+    height: 55px;
+    padding: 10px 0;
+  }
+
+  .animation-logo {
+    padding: 5px 10px;
+  }
+
+  .animation-logo img {
+    height: 25px;
+  }
+
+  .animation-logo h1 {
+    font-size: 1rem;
+  }
+
+  .gif-container {
+    width: 99%;
+    height: calc(100vh - 60px);
+  }
+
+  .video-section {
+    min-height: 30vh;
+  }
+
+  .message-section {
+    min-height: 40vh;
+  }
+
+  .glassmorphism-overlay {
+    padding: 0.8rem;
+  }
+
+  .welcome-message h1 {
+    font-size: 1.1rem;
+  }
+
+  .continue-button {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
 }
 
 

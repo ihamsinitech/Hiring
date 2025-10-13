@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './SignIn.css';
@@ -31,11 +30,11 @@ const SignIn = () => {
       // Navigate after a very short delay to show the animation
       const navigationTimer = setTimeout(() => {
         handleNavigation();
-      }, 5000); // Show animation for 2 seconds then navigate
+      }, 5000); // Show animation for 5 seconds then navigate
 
       return () => clearTimeout(navigationTimer);
     }
-  }, [showAnimation , navigationData]);
+  }, [showAnimation, navigationData]);
 
   const handleNavigation = () => {
     if (navigationData) {
@@ -103,6 +102,14 @@ const SignIn = () => {
       {/* Full Screen GIF Overlay */}
       {showAnimation && (
         <div className="fullscreen-gif-overlay">
+          {/* Header with Logo and Name */}
+          <header className="animation-header">
+            <div className="animation-logo">
+              <img src="logo-website.png" alt="HM Hire Logo" />
+              <h1>HM Hire</h1>
+            </div>
+          </header>
+
           <div className="gif-container">
             
             {/* Video Section (Left Side) */}
@@ -121,9 +128,8 @@ const SignIn = () => {
               >
                 <source src='143765-784138221_small.mp4' type='video/mp4'/>
                   Your browser does not support the video tag.
-                  </video>
+              </video>
             </div>
-
 
             {/* Message Section (Right Side) */}
             <div className="message-section">

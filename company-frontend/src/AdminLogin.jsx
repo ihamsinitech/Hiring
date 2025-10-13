@@ -32,7 +32,7 @@ const AdminLogin = () => {
                 localStorage.setItem('adminToken', 'admin-authenticated');
                 localStorage.setItem('adminEmail', response.data.email);
                 localStorage.setItem('adminId', response.data.adminId);
-                navigate('/admin-dashboard');
+                navigate('/admindashboard');
             }
         } catch (error) {
             setError(error.response?.data || 'Login failed. Please check your credentials and try again.');

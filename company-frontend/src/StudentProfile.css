@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-image: url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,16 +20,123 @@
   z-index: 9999;
 }
 
+/* Add blur overlay for background image */
+.logout-animation-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+  z-index: -1;
+}
+
+/* Add overlay for better contrast */
+.logout-animation-page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+/* Header with logo aligned to left */
+.animation-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 10;
+}
+
+.animation-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-start; /* Align to left */
+  align-items: center;
+}
+
+.animation-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 25px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: slideInFromTop 0.8s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.logo-icon img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.logo-icon a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.company-name {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: white;
+  text-shadow: 
+    2px 2px 12px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.8px;
+}
+
 /* Main Container for Side-by-Side Layout */
 .animation-main-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: calc(100vh - 80px);
+  height: 100vh; /* Full viewport height */
   padding: 0 40px;
-  margin-top: 80px;
   box-sizing: border-box;
+  margin-top: 0; /* Remove margin since header is absolute */
 }
 
 /* Left Side - Image Section */
@@ -36,11 +147,14 @@
   align-items: center;
   padding: 40px;
   max-width: 50%;
+  height: 80vh; /* Equal height */
 }
 
 .animation-side-image {
-  max-width: 100%;
-  max-height: 70vh;
+  width: 100%;
+  height: 100%; /* Equal height */
+  max-width: 500px;
+  max-height: 500px;
   object-fit: contain;
   border-radius: 20px;
   box-shadow: 
@@ -68,19 +182,26 @@
   align-items: center;
   padding: 40px;
   max-width: 50%;
+  height: 80vh; /* Equal height */
 }
 
 .animation-glass-card {
-  background: rgba(255, 255, 255, 0.25); /* Increased opacity for better clarity */
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Stronger border */
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 60px 50px;
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.3),
     0 0 50px rgba(255, 255, 255, 0.1);
   text-align: center;
-  min-width: 400px;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   animation: cardSlideIn 1.2s ease-out 0.3s both;
   position: relative;
   overflow: hidden;
@@ -117,6 +238,11 @@
 .animation-content {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .logout-animation-page .thank-you-text {
@@ -182,87 +308,6 @@
   }
 }
 
-/* Animation Header Styles - Remove blur */
-.animation-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 0;
-  background: rgba(255, 255, 255, 0.2); /* Increased opacity */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  z-index: 10;
-}
-
-.animation-header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.animation-logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px 25px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.25); /* Increased opacity */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  animation: slideInFromTop 0.8s ease-out;
-}
-
-@keyframes slideInFromTop {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.logo-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-icon img {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-  transition: all 0.3s ease;
-}
-
-.logo-icon img:hover {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.logo-icon a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.company-name {
-  font-size: 1.6em;
-  font-weight: 700;
-  color: white;
-  text-shadow: 
-    2px 2px 12px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.8px;
-}
-
 /* Remove overlay blur */
 .animation-overlay {
   position: absolute;
@@ -283,11 +328,18 @@
   .animation-image-section,
   .animation-message-section {
     padding: 30px;
+    height: 75vh;
   }
   
   .animation-glass-card {
-    min-width: 350px;
+    max-width: 450px;
+    max-height: 450px;
     padding: 50px 40px;
+  }
+  
+  .animation-side-image {
+    max-width: 450px;
+    max-height: 450px;
   }
   
   .logout-animation-page .thank-you-text {
@@ -298,118 +350,235 @@
     font-size: 3em;
   }
 }
-
+/* Mobile-specific fixes for entire logout animation page */
 @media (max-width: 768px) {
+  .logout-animation-page {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding-top: 70px; /* Space for fixed header */
+  }
+
+  .animation-header {
+    position: fixed; /* Fixed header for mobile */
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 0;
+    height: 70px;
+    z-index: 10001;
+  }
+
+  .animation-header-content {
+    padding: 0 15px;
+  }
+
+  .animation-logo {
+    padding: 8px 16px;
+  }
+
+  .logo-icon img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .company-name {
+    font-size: 1.3em;
+  }
+
   .animation-main-container {
     flex-direction: column;
-    justify-content: center;
-    padding: 0 20px;
-    margin-top: 70px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 15px;
+    height: auto;
+    min-height: calc(100vh - 70px);
+    margin-top: 0;
+    gap: 20px;
   }
-  
-  .animation-image-section,
+
+  .animation-image-section {
+    max-width: 100%;
+    width: 100%;
+    padding: 15px;
+    height: auto;
+    min-height: 40vh;
+    order: 1; /* Image first on mobile */
+  }
+
   .animation-message-section {
     max-width: 100%;
-    padding: 20px;
+    width: 100%;
+    padding: 15px;
+    height: auto;
+    min-height: 40vh;
+    order: 2; /* Message second on mobile */
   }
-  
-  .animation-image-section {
-    flex: 0 0 auto;
-    height: 40vh;
-  }
-  
+
   .animation-side-image {
-    max-height: 35vh;
+    max-height: 250px;
+    max-width: 250px;
+    width: 100%;
+    height: auto;
   }
-  
-  .animation-message-section {
-    flex: 0 0 auto;
-    height: 40vh;
-  }
-  
+
   .animation-glass-card {
-    min-width: 300px;
-    padding: 40px 30px;
+    max-width: 100%;
+    width: 100%;
+    max-height: none;
+    padding: 30px 20px;
     border-radius: 20px;
+    height: auto;
+    min-height: 300px;
   }
-  
+
   .logout-animation-page .thank-you-text {
-    font-size: 2.2em;
+    font-size: 1.8em;
+    margin: 15px 0;
+    text-align: center;
   }
-  
+
   .logout-animation-page .bye-text {
-    font-size: 2.8em;
+    font-size: 2.2em;
+    margin: 15px 0;
+    text-align: center;
   }
-  
+
   .logout-animation-page .visitor-counter {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    margin-top: 15px;
+    text-align: center;
   }
-  
-  .animation-header {
-    padding: 15px 0;
-  }
-  
-  .animation-logo {
-    padding: 10px 20px;
-  }
-  
-  .logo-icon img {
-    width: 38px;
-    height: 38px;
-  }
-  
-  .company-name {
-    font-size: 1.4em;
+
+  .animation-content {
+    gap: 15px;
   }
 }
 
 @media (max-width: 480px) {
-  .animation-main-container {
-    padding: 0 15px;
-    margin-top: 60px;
+  .logout-animation-page {
+    padding-top: 60px;
   }
-  
-  .animation-image-section,
-  .animation-message-section {
-    padding: 15px;
+
+  .animation-header {
+    padding: 12px 0;
+    height: 60px;
   }
-  
-  .animation-side-image {
-    max-height: 30vh;
-    border-radius: 15px;
+
+  .animation-header-content {
+    padding: 0 10px;
   }
-  
-  .animation-glass-card {
-    min-width: 260px;
-    padding: 30px 20px;
-    border-radius: 18px;
+
+  .animation-logo {
+    padding: 6px 12px;
+    gap: 10px;
   }
-  
-  .logout-animation-page .thank-you-text {
-    font-size: 1.8em;
+
+  .logo-icon img {
+    width: 30px;
+    height: 30px;
   }
-  
-  .logout-animation-page .bye-text {
-    font-size: 2.2em;
-  }
-  
-  .logout-animation-page .visitor-counter {
+
+  .company-name {
     font-size: 1.1em;
   }
-  
-  .animation-logo {
-    padding: 8px 16px;
+
+  .animation-main-container {
+    padding: 15px 10px;
+    min-height: calc(100vh - 60px);
+    gap: 15px;
   }
-  
-  .logo-icon img {
-    width: 32px;
-    height: 32px;
+
+  .animation-image-section,
+  .animation-message-section {
+    padding: 10px;
+    min-height: 35vh;
   }
-  
-  .company-name {
-    font-size: 1.2em;
+
+  .animation-side-image {
+    max-height: 200px;
+    max-width: 200px;
+  }
+
+  .animation-glass-card {
+    padding: 25px 15px;
+    border-radius: 18px;
+    min-height: 250px;
+  }
+
+  .logout-animation-page .thank-you-text {
+    font-size: 1.5em;
+  }
+
+  .logout-animation-page .bye-text {
+    font-size: 1.8em;
+  }
+
+  .logout-animation-page .visitor-counter {
+    font-size: 1em;
   }
 }
+
+/* Additional fixes for very small screens */
+@media (max-width: 320px) {
+  .logout-animation-page {
+    padding-top: 55px;
+  }
+
+  .animation-header {
+    height: 55px;
+    padding: 10px 0;
+  }
+
+  .animation-logo {
+    padding: 5px 10px;
+  }
+
+  .logo-icon img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .company-name {
+    font-size: 1em;
+  }
+
+  .animation-main-container {
+    min-height: calc(100vh - 55px);
+    padding: 10px 8px;
+    gap: 10px;
+  }
+
+  .animation-image-section,
+  .animation-message-section {
+    padding: 8px;
+    min-height: 30vh;
+  }
+
+  .animation-side-image {
+    max-height: 180px;
+    max-width: 180px;
+  }
+
+  .animation-glass-card {
+    padding: 20px 12px;
+    min-height: 220px;
+  }
+
+  .logout-animation-page .thank-you-text {
+    font-size: 1.3em;
+  }
+
+  .logout-animation-page .bye-text {
+    font-size: 1.6em;
+  }
+
+  .logout-animation-page .visitor-counter {
+    font-size: 0.9em;
+  }
+}
+
 
 
 /* Rest of your existing CSS remains the same */
@@ -773,5 +942,44 @@
   .edit-btn, .save-btn, .cancel-btn {
     padding: 12px 20px;
     font-size: 14px;
+  }
+}
+/* Fix for the profile page mobile view */
+@media (max-width: 768px) {
+  .profile-page {
+    min-height: 100vh;
+    padding-top: 70px; /* Account for any fixed headers */
+  }
+
+  .profile-container {
+    padding: 15px;
+    margin-top: 0;
+  }
+
+  .profile-header {
+    position: relative;
+    margin-top: 0;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .header-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Ensure all content is properly spaced on mobile */
+@media (max-width: 768px) {
+  body, html {
+    overflow-x: hidden;
+  }
+  
+  #root {
+    min-height: 100vh;
   }
 }

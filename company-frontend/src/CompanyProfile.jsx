@@ -30,12 +30,28 @@ const LogoutAnimation = () => {
       </div>
       
       <div className="animation-overlay"></div>
-      <div className="floating-hearts" id="heartsContainer"></div>
-      <div className="animation-container">
-        <div className="animation-glass-card">
-          <div className="bye-text bye-above">👋</div>
-          <div className="thank-you-text">Thank You for Visiting!</div>
-          <div className="visitor-counter">See you soon!</div>
+      
+      {/* Main Content Container */}
+      <div className="animation-main-container">
+        {/* Left Side - Image */}
+        <div className="animation-image-section">
+          <img 
+            src='animation-24.png' 
+            alt="Goodbye Animation"
+            className="animation-side-image"
+          />
+        </div>
+
+        {/* Right Side - Glass Card Message */}
+        <div className="animation-message-section">
+          <div className="animation-glass-card">
+            <div className="animation-content">
+              <div className="bye-text bye-above">👋</div>
+              <div className="thank-you-text">Thank You for Visiting!</div>
+              <div className="visitor-counter">See you soon!</div>
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>

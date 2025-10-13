@@ -95,6 +95,14 @@ const SignUp = () => {
       {/* Full Screen Video Message after Success */}
       {showVideoMessage && (
         <div className="fullscreen-success-container">
+          {/* Animation Header */}
+          <header className="animation-header">
+            <div className="animation-logo">
+              <img src="logo-website.png" alt="HM Hire Logo" />
+              <h1>HM Hire</h1>
+            </div>
+          </header>
+
           {/* Full Screen Video Background */}
           <div className="fullscreen-video-background">
             <video
