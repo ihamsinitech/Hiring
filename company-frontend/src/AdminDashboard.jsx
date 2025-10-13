@@ -28,7 +28,7 @@ const AdminDashboard = () => {
         const token = localStorage.getItem('adminToken');
         const email = localStorage.getItem('adminEmail');
         if (!token || !email) {
-            navigate('/admin-login');
+            navigate('/adminlogin');
         }
     };
 
