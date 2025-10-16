@@ -60,6 +60,9 @@ public class Application {
     @Column(name = "has_reply")
     private Boolean hasReply = false; 
 
+    private String companyResponse;
+    
+
     
     
 }

@@ -129,7 +129,7 @@ const JobList = () => {
               <a href='/'>
                 <img src="/logo-website.png" alt="CareerConnect" className="logo-img" />
               </a>
-                <h1>Career Hire</h1>
+                <h1>Career Spott</h1>
               </div>
             </div>
 

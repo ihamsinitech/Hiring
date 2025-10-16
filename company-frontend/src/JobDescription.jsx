@@ -31,7 +31,7 @@ const JobDescription = () => {
     <div className="job-description">
       <header className="jobdescription-header">
         <div className="jobdescription-logo">
-          <h1>HM Hire</h1>
+          <h1>Career Spott</h1>
           <Link to="/companyDashboard"  className="back-to-dashboard">Back to Dashboard</Link>
         </div>
       </header>

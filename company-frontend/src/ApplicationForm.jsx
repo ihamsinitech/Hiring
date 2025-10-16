@@ -108,7 +108,7 @@ const ApplicationForm = () => {
 
       <header className="apply-header">
         <div className="apply-logo">
-          <h1>HM Hire</h1>
+          <h1>Career Spott</h1>
           
            <a href="/jobs">
             &emsp; Home

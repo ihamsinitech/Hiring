@@ -61,7 +61,7 @@ const ForgotPassword = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>HM Hire</h1>
+          <h1>Career Spott</h1>
         </div>
       </header>
 

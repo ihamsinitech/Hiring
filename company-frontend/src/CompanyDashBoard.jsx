@@ -6,6 +6,7 @@ const CompanyDashBoard = () => {
   const [companyProfile, setCompanyProfile] = useState(null);
   const [postedJobsCount, setPostedJobsCount] = useState(0);
   const [applicationsCount, setApplicationsCount] = useState(0);
+   const [shortlistedCount, setShortlistedCount] = useState(0);
   const [messagesCount, setMessagesCount] = useState(0);
   const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState({
@@ -41,6 +42,7 @@ const CompanyDashBoard = () => {
           setCompanyProfile(data);
           setPostedJobsCount(data.postedJobsCount || 0);
           setApplicationsCount(data.applicationsCount || 0);
+          setShortlistedCount(data.shortlistedCount || 0);
           setMessagesCount(data.messagesCount || 0);
           setError('');
         })
@@ -52,6 +54,7 @@ const CompanyDashBoard = () => {
             companyName: storedUser.email || 'Company',
             postedJobsCount: 0,
             applicationsCount: 0,
+            shortlistedCount: 0,
             messagesCount: 0
           });
         });
@@ -194,7 +197,7 @@ useEffect(() => {
                 <a href='/'>
                   <img src="/logo-website.png" alt="CareerConnect" className="logo-img" />
                 </a>
-                <h1>Career Hire</h1>
+                <h1>Career Spott</h1>
               </div>
             </div>
 

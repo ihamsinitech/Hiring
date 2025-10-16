@@ -98,8 +98,8 @@ const SignUp = () => {
           {/* Animation Header */}
           <header className="animation-header">
             <div className="animation-logo">
-              <img src="logo-website.png" alt="HM Hire Logo" />
-              <h1>HM Hire</h1>
+              <img src="logo-website.png" alt="Career Spott Logo" />
+              <h1>Career Spott</h1>
             </div>
           </header>
 
@@ -127,7 +127,7 @@ const SignUp = () => {
             <div className="message-content">
               <div className="success-icon">🎉</div>
               <h2>Hello, {successUsername}!</h2>
-              <p className="welcome-message">Welcome to HM Hire</p>
+              <p className="welcome-message">Welcome to Career Spott</p>
               
               <div className="success-card">
                 <p className="success-main">Successfully created account!</p>
@@ -147,7 +147,7 @@ const SignUp = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>HM Hire</h1>
+          <h1>Career Spott</h1>
         </div>
       </header>
 

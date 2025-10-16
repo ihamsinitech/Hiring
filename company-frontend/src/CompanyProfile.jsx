@@ -16,7 +16,7 @@ const LogoutAnimation = () => {
 
   return (
     <div className="logout-animation-page">
-      {/* Added Header with Logo and HM Hire */}
+      {/* Added Header with Logo and Career Spott */}
       <div className="animation-header">
         <div className="animation-header-content">
           <div className="animation-logo">
@@ -24,7 +24,7 @@ const LogoutAnimation = () => {
               <a href="/signin">
                 <img src="logo-website.png" alt="Company Logo" />
               </a></div>
-            <span className="company-name">HM Hire</span>
+            <span className="company-name">Career Spott</span>
           </div>
         </div>
       </div>

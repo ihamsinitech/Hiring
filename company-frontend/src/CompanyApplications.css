@@ -437,3 +437,319 @@
     font-size: 1.6rem;
   }
 }
+/* Application Status Badges */
+.application-status {
+  margin-bottom: 15px;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.status-badge.new {
+  background: rgba(25, 118, 210, 0.2);
+  color: #1770c9;
+  border-color: rgba(25, 118, 210, 0.3);
+}
+
+.status-badge.shortlisted {
+  background: rgba(27, 183, 35, 0.779);
+  color: black;
+  border-color: rgba(46, 125, 50, 0.3);
+}
+
+.status-badge.replied {
+  background: rgba(245, 124, 0, 0.2);
+  color: #23d317;
+  border-color: rgba(245, 124, 0, 0.3);
+}
+
+/* Application Actions */
+.application-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.resume-btn, .shortlist-btn, .respond-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.resume-btn {
+  background: rgba(40, 167, 69, 0.2);
+  color: black;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+}
+
+.resume-btn:hover {
+  background: rgba(40, 167, 69, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+}
+
+.shortlist-btn {
+  background: rgba(255, 193, 7, 0.411);
+  color: black;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}
+
+.shortlist-btn:hover:not(:disabled) {
+  background: rgba(255, 193, 7, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.3);
+}
+
+.shortlist-btn:disabled {
+  background: rgba(108, 117, 125, 0.2);
+  color: black;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.respond-btn {
+  background: rgba(23, 163, 184, 0.354);
+  color: black;
+  box-shadow: 0 4px 15px rgba(23, 162, 184, 0.2);
+}
+
+.respond-btn:hover {
+  background: rgba(23, 162, 184, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  width: 90%;
+  max-width: 500px;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-content h3 {
+  margin: 0 0 20px 0;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.modal-content textarea {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: black;
+  min-height: 120px;
+  transition: all 0.3s ease;
+}
+
+.modal-content textarea:focus {
+  outline: none;
+  border-color: rgba(0, 123, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.modal-content textarea::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cancel-btn, .send-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancel-btn {
+  background: rgba(39, 41, 44, 0.879);
+  color: black;
+}
+
+.cancel-btn:hover {
+  background: rgba(108, 117, 125, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.2);
+}
+
+.send-btn {
+  background: rgba(0, 123, 255, 0.2);
+  color: black;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.send-btn:hover {
+  background: rgba(0, 123, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Application Header Layout */
+.application-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.application-header h3 {
+  margin: 0;
+  flex: 1;
+}
+
+/* Enhanced Loading States */
+.loading-container p {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+
+
+/* Responsive Actions */
+@media (max-width: 768px) {
+  .application-actions {
+    flex-direction: column;
+  }
+  
+  .resume-btn, .shortlist-btn, .respond-btn {
+    flex: none;
+    width: 100%;
+  }
+  
+  .modal-content {
+    margin: 20px;
+    padding: 24px;
+    width: calc(100% - 40px);
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  .cancel-btn, .send-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .application-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .status-badge {
+    align-self: flex-start;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+.application-card * {
+  transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.resume-btn:focus,
+.shortlist-btn:focus,
+.respond-btn:focus,
+.cancel-btn:focus,
+.send-btn:focus {
+  outline: 2px solid rgba(0, 123, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Disabled state improvements */
+.resume-btn:disabled,
+.shortlist-btn:disabled,
+.respond-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}

@@ -23,6 +23,13 @@ const ShortlistedJobs = () => {
     }
   }, []);
 
+  const handleJobClick = (jobId) => {
+    // Navigate to job details page with the job ID
+    navigate(`/jobs/${jobId}`);
+  };
+
+  
+
   if (loading) return <div className="loading">Loading...</div>;
 
   return (
@@ -47,7 +54,12 @@ const ShortlistedJobs = () => {
           ) : (
             <div className="shortlisted-jobs-list">
               {shortlistedJobs.map(job => (
-                <div key={job.id} className="shortlisted-job-card">
+                <div 
+                  key={job.id} 
+                  className="shortlisted-job-card"
+                  onClick={() => handleJobClick(job.id)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <div className="job-info">
                     <h3>{job.jobTitle}</h3>
                     <p className="company">{job.companyName}</p>

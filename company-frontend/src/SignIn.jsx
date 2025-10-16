@@ -105,8 +105,8 @@ const SignIn = () => {
           {/* Header with Logo and Name */}
           <header className="animation-header">
             <div className="animation-logo">
-              <img src="logo-website.png" alt="HM Hire Logo" />
-              <h1>HM Hire</h1>
+              <img src="logo-website.png" alt="Career Spott Logo" />
+              <h1>Career Spott</h1>
             </div>
           </header>
 
@@ -136,7 +136,7 @@ const SignIn = () => {
               <div className="glassmorphism-overlay">
                 <div className="welcome-message">
                   <div className="welcome-icon">🎉</div>
-                  <h1>Welcome to HM Hire!</h1>
+                  <h1>Welcome to Career Spott!</h1>
                   <p className="welcome-subtitle">Your Career Journey Starts Here</p>
                   <div className="user-greeting">
                     <p>Hello, <span className="user-email">{form.email}</span></p>
@@ -160,7 +160,7 @@ const SignIn = () => {
             <div className="fallback-animation" style={{ display: 'none' }}>
               <div className="animated-content">
                 <div className="success-icon">✓</div>
-                <h2>Welcome to HM Hire!</h2>
+                <h2>Welcome to Career Spott!</h2>
                 <p>Successfully signed in. Redirecting...</p>
               </div>
             </div>
@@ -174,7 +174,7 @@ const SignIn = () => {
           <a href="/">
             <img src="logo-website.png" alt="Company Logo" />
           </a>
-          <h1>HM Hire</h1>
+          <h1>Career Spott</h1>
         </div>
       </header>
 
