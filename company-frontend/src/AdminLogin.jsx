@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AdminLogin.css';
 
@@ -78,6 +78,11 @@ const AdminLogin = () => {
                             ⚠️ {error}
                         </div>
                     )}
+
+                    <div className="admin-links">
+                        <Link to="/admin-forgot-password">Forgot Password?</Link>
+                    </div>
+
                     
                     <button 
                         type="submit" 

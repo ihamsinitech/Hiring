@@ -35,7 +35,7 @@ public class AdminController {
     private ApplicationRepository applicationRepository;
 
     private final String ADMIN_EMAIL = "admin@company.com";
-    private final String ADMIN_PASSWORD = "admin123";
+    private String adminPassword = "admin123";
 
     @PostMapping("/login")
     public ResponseEntity<?> adminLogin(@RequestBody Map<String, String> credentials) {
@@ -47,7 +47,7 @@ public class AdminController {
                 return ResponseEntity.badRequest().body("Email and password are required");
             }
             
-            if (ADMIN_EMAIL.equals(email) && ADMIN_PASSWORD.equals(password)) {
+            if (ADMIN_EMAIL.equals(email) && adminPassword.equals(password)) { // Use variable instead of final
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "Admin login successful");
                 response.put("userType", "admin");
@@ -261,4 +261,47 @@ public class AdminController {
             return ResponseEntity.internalServerError().body("Error deleting application: " + e.getMessage());
         }
     }
+
+    // Add this method to your existing AdminController class
+@PostMapping("/forgot-password")
+    public ResponseEntity<?> adminForgotPassword(@RequestBody Map<String, String> request) {
+        try {
+            String email = request.get("email");
+            String newPassword = request.get("newPassword");
+            String confirmPassword = request.get("confirmPassword");
+            
+            // Validation
+            if (email == null || newPassword == null || confirmPassword == null) {
+                return ResponseEntity.badRequest().body("All fields are required");
+            }
+            
+            if (!newPassword.equals(confirmPassword)) {
+                return ResponseEntity.badRequest().body("Passwords do not match");
+            }
+            
+            // Check if it's the admin email
+            if (!ADMIN_EMAIL.equals(email)) {
+                return ResponseEntity.badRequest().body("Admin email not found");
+            }
+            
+            // Password validation
+            boolean hasLowerCase = newPassword.matches(".*[a-z].*");
+            boolean hasUpperCase = newPassword.matches(".*[A-Z].*");
+            boolean hasNumber = newPassword.matches(".*[0-9].*");
+            boolean hasSpecialChar = newPassword.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
+            
+            if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
+                return ResponseEntity.badRequest().body("Password must contain lowercase, uppercase, number, and special character");
+            }
+            
+            // ✅ ACTUALLY UPDATE THE PASSWORD
+            adminPassword = newPassword;
+            
+            return ResponseEntity.ok("Admin password reset successfully. Please use the new password to login.");
+            
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("An error occurred: " + e.getMessage());
+        }
+    }
+
 }

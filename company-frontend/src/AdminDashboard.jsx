@@ -71,7 +71,7 @@ const AdminDashboard = () => {
         localStorage.removeItem('adminToken');
         localStorage.removeItem('adminEmail');
         localStorage.removeItem('adminId');
-        navigate('/admin-login');
+        navigate('/adminlogin');
     };
 
     if (loading) {

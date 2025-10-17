@@ -895,4 +895,55 @@ public ResponseEntity<?> getStudentMessages(@PathVariable Long id) {
                     .body("Error fetching job applications: " + e.getMessage());
         }
     }
+
+    @PostMapping("/forgot-password")
+public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request) {
+    try {
+        String email = request.get("email");
+        String newPassword = request.get("newPassword");
+        String confirmPassword = request.get("confirmPassword");
+        
+        // Validation
+        if (email == null || newPassword == null || confirmPassword == null) {
+            return ResponseEntity.badRequest().body("All fields are required");
+        }
+        
+        if (!newPassword.equals(confirmPassword)) {
+            return ResponseEntity.badRequest().body("Passwords do not match");
+        }
+        
+        // Password validation
+        boolean hasLowerCase = newPassword.matches(".*[a-z].*");
+        boolean hasUpperCase = newPassword.matches(".*[A-Z].*");
+        boolean hasNumber = newPassword.matches(".*[0-9].*");
+        boolean hasSpecialChar = newPassword.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
+        
+        if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
+            return ResponseEntity.badRequest().body("Password must contain lowercase, uppercase, number, and special character");
+        }
+        
+        // Check if email exists in student table
+        Optional<Student> studentOptional = studentRepository.findByEmail(email);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            student.setPassword(newPassword);
+            studentRepository.save(student);
+            return ResponseEntity.ok("Password reset successfully");
+        }
+        
+        // Check if email exists in company table
+        Optional<Company> companyOptional = companyRepository.findByEmail(email);
+        if (companyOptional.isPresent()) {
+            Company company = companyOptional.get();
+            company.setPassword(newPassword);
+            companyRepository.save(company);
+            return ResponseEntity.ok("Password reset successfully");
+        }
+        
+        return ResponseEntity.badRequest().body("Email not found");
+        
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError().body("An error occurred: " + e.getMessage());
+    }
+}
 }

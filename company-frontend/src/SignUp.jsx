@@ -70,7 +70,7 @@ const SignUp = () => {
 
         // Navigate to signin after video message
         setTimeout(() => {
-          navigate('/signin');
+          navigate('/student-registration');
         }, 5000);
        
       } else {
@@ -86,7 +86,7 @@ const SignUp = () => {
   };
 
   const skipVideo = () => {
-    navigate('/signin');
+    navigate('/student-registration');
   };
 
   return (
@@ -113,7 +113,7 @@ const SignUp = () => {
               onLoadedData={() => console.log('Video loaded successfully')}
               onError={(e) => {
                 console.log('Video loading error', e);
-                setTimeout(() => navigate('/signin'), 2000);
+                setTimeout(() => navigate('/student-registration'), 2000);
               }}
             >
               <source src='/istockphoto-1371124982-640_adpp_is.mp4' type='video/mp4'/>
@@ -135,7 +135,7 @@ const SignUp = () => {
               </div>
 
               <button className="continue-btn" onClick={skipVideo}>
-                Continue to Sign In
+                Continue to Registration
               </button>
             </div>
           </div>

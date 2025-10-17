@@ -26,6 +26,7 @@ import CompanyDashBoard from './CompanyDashBoard';
 import StudentProfile from './StudentProfile';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
+import AdminForgotPassword from './AdminForgotPassword';
 
 
 
@@ -61,6 +62,8 @@ function App() {
 
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
+
+          <Route path="/admin-forgot-password" element={<AdminForgotPassword />} />
         
         </Routes>
       </div>

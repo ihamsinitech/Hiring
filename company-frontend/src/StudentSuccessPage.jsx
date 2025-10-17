@@ -10,7 +10,7 @@ const StudentSuccessPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/signin");
+      navigate("/jobs");
     }, 5000); // 5000ms = 5 seconds
 
     return () => clearTimeout(timer); // cleanup
@@ -28,7 +28,7 @@ const StudentSuccessPage = () => {
         <p>Thank you for registering. Our team will support your carrer .</p>
 
 
-        <Link to="/signin" className="home-btn">Go to Home</Link>
+        <Link to="/jobs" className="home-btn">Go to Home</Link>
 
       </div>
     </div>

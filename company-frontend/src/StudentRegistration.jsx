@@ -26,10 +26,7 @@ const StudentRegistration = () => {
     if (userData.email) {
       setUserEmail(userData.email);
       setForm((prev) => ({ ...prev, email: userData.email }));
-    } else {
-      // If no user data, redirect to signin
-      navigate('/signin');
-    }
+    } 
   }, [navigate]);
 
   const handleChange = (e) => {
@@ -104,7 +101,7 @@ const StudentRegistration = () => {
             <input
               type="email"
               id="email"
-              value={form.email || ""}
+              value={form.email || userEmail || ""}
               onChange={handleChange}
               placeholder="Email"
               className={errors.email ? 'error' : ''}
