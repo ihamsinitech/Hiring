@@ -14,6 +14,11 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [showVideoMessage, setShowVideoMessage] = useState(false);
   const [successUsername, setSuccessUsername] = useState('');
+  
+  // Password visibility states
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,6 +27,16 @@ const SignUp = () => {
       ...form,
       [id]: id === 'fullName' ? value.toUpperCase() : value
     });
+  };
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // Toggle confirm password visibility
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -186,30 +201,52 @@ const SignUp = () => {
                 disabled={loading}
               />
               
+              {/* Password Field with ALWAYS VISIBLE toggle icon */}
               <label>Password *</label>
-              <input 
-                type="password" 
-                id="password" 
-                value={form.password} 
-                onChange={handleChange} 
-                placeholder="Password" 
-                required 
-                disabled={loading}
-              />
+              <div className="password-input-container">
+                <input 
+                  type={showPassword ? "text" : "password"}
+                  id="password" 
+                  value={form.password} 
+                  onChange={handleChange} 
+                  placeholder="Password" 
+                  required 
+                  disabled={loading}
+                />
+                <button 
+                  type="button"
+                  className="password-toggle-icon"
+                  onClick={togglePasswordVisibility}
+                  tabIndex="-1"
+                >
+                  {showPassword ? '👁️‍🗨️' : '👁️'}
+                </button>
+              </div>
               <div className="password-requirements">
-                  Password must contain a lowercase, uppercase, number, and special character.
+                Password must contain a lowercase, uppercase, number, and special character.
               </div>
               
+              {/* Confirm Password Field with ALWAYS VISIBLE toggle icon */}
               <label>Confirm Password *</label>
-              <input 
-                type="password" 
-                id="confirmPassword" 
-                value={form.confirmPassword} 
-                onChange={handleChange} 
-                placeholder="Confirm Password" 
-                required 
-                disabled={loading}
-              />
+              <div className="password-input-container">
+                <input 
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword" 
+                  value={form.confirmPassword} 
+                  onChange={handleChange} 
+                  placeholder="Confirm Password" 
+                  required 
+                  disabled={loading}
+                />
+                <button 
+                  type="button"
+                  className="password-toggle-icon"
+                  onClick={toggleConfirmPasswordVisibility}
+                  tabIndex="-1"
+                >
+                  {showConfirmPassword ? '👁️‍🗨️' : '👁️'}
+                </button>
+              </div>
               
               <button type="submit" disabled={loading}>
                 {loading ? 'Processing...' : 'Sign Up'}

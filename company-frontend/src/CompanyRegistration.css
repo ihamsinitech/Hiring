@@ -260,4 +260,92 @@ html, body, #root {
     padding: 8px;
   }
 }
+/* Password Input Container with ALWAYS VISIBLE toggle */
+.password-input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.password-input-container input {
+  width: 100%;
+  padding-right: 45px; /* Space for our custom icon */
+}
+
+/* Hide ALL default browser password toggles */
+.password-input-container input[type="password"]::-webkit-credentials-auto-fill-button,
+.password-input-container input[type="password"]::-webkit-strong-password-auto-fill-button,
+.password-input-container input[type="text"]::-webkit-credentials-auto-fill-button,
+.password-input-container input[type="text"]::-webkit-strong-password-auto-fill-button {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* For Microsoft Edge */
+.password-input-container input[type="password"]::-ms-reveal,
+.password-input-container input[type="text"]::-ms-reveal {
+  display: none;
+}
+
+/* For Firefox */
+.password-input-container input[type="password"]::-moz-textfield-decoration,
+.password-input-container input[type="text"]::-moz-textfield-decoration {
+  display: none;
+}
+
+/* Password Toggle Icon - ALWAYS VISIBLE */
+.password-toggle-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(34, 33, 33, 0.8);
+  font-size: 1.2rem;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  outline: none;
+}
+
+.password-toggle-icon:hover {
+  color: rgba(34, 33, 33, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Remove focus styles completely */
+.password-toggle-icon:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Remove any active state borders */
+.password-toggle-icon:active {
+  border: none;
+  outline: none;
+}
+
+/* Mobile responsive for password icons */
+@media (max-width: 768px) {
+  .password-input-container input {
+    padding-right: 40px;
+  }
+  
+  .password-toggle-icon {
+    right: 12px;
+    font-size: 1.1rem;
+    width: 25px;
+    height: 25px;
+  }
+}
 

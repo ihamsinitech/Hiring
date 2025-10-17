@@ -264,297 +264,6 @@ html, body, #root {
   }
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .fullscreen-success-container {
-    padding: 0 30px;
-  }
-  
-  .success-animation-gif {
-    max-width: 500px;
-  }
-  
-  .glass-message-panel {
-    width: 350px;
-  }
-}
-
-@media (max-width: 968px) {
-  .fullscreen-success-container {
-    flex-direction: column;
-    justify-content: center;
-    gap: 30px;
-    padding: 40px 20px;
-  }
-  
-  .video-content-container {
-    order: 2;
-    height: auto;
-  }
-  
-  .success-animation-gif {
-    max-width: 400px;
-    max-height: 50vh;
-  }
-  
-  .glass-message-panel {
-    order: 1;
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .message-content h2 {
-    font-size: 1.8rem;
-  }
-  
-  .welcome-message {
-    font-size: 1.1rem;
-  }
-}
-
-/* Mobile-specific fixes for animation page */
-@media (max-width: 768px) {
-  .fullscreen-success-container {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 70px 15px 20px !important; /* Top padding for header */
-    gap: 20px;
-    height: 100vh;
-    overflow-y: auto;
-  }
-
-  .animation-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 15px 0;
-    height: 70px;
-    z-index: 10001;
-  }
-
-  .animation-header-content {
-    padding: 0 15px;
-  }
-
-  .animation-logo {
-    padding: 8px 16px;
-  }
-
-  .animation-logo img {
-    height: 35px;
-  }
-
-  .animation-logo h1 {
-    font-size: 1.3rem;
-  }
-
-  .video-content-container {
-    order: 1;
-    height: auto;
-    min-height: 40vh;
-    padding: 0 20px !important;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-  }
-
-  .success-animation-gif {
-    max-width: 100%;
-    max-height: 35vh;
-    width: auto;
-    height: auto;
-  }
-
-  .glass-message-panel {
-    order: 2;
-    width: 100%;
-    max-width: 400px;
-    padding: 25px 20px;
-    margin: 0 auto;
-  }
-
-  .message-content h2 {
-    font-size: 1.6rem;
-    margin-bottom: 8px;
-  }
-
-  .welcome-message {
-    font-size: 1rem;
-    margin-bottom: 20px;
-  }
-
-  .welcome-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .success-card {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .success-main {
-    font-size: 1rem;
-  }
-
-  .signin-instruction {
-    font-size: 0.9rem;
-  }
-
-  .continue-btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .fullscreen-success-container {
-    padding: 60px 10px 15px;
-    gap: 15px;
-  }
-
-  .animation-header {
-    padding: 12px 0;
-    height: 60px;
-  }
-
-  .animation-header-content {
-    padding: 0 10px;
-  }
-
-  .animation-logo {
-    padding: 6px 12px;
-    gap: 10px;
-  }
-
-  .animation-logo img {
-    height: 30px;
-  }
-
-  .animation-logo h1 {
-    font-size: 1.1rem;
-  }
-
-  .video-content-container {
-    min-height: 35vh;
-    padding: 5px;
-  }
-
-  .success-animation-gif {
-    max-height: 30vh;
-  }
-
-  .glass-message-panel {
-    padding: 20px 15px;
-    max-width: 350px;
-  }
-
-  .message-content h2 {
-    font-size: 1.4rem;
-  }
-
-  .welcome-message {
-    font-size: 0.9rem;
-  }
-
-  .welcome-icon {
-    font-size: 2rem;
-  }
-
-  .success-card {
-    padding: 15px;
-  }
-
-  .success-main {
-    font-size: 0.9rem;
-  }
-
-  .signin-instruction {
-    font-size: 0.8rem;
-  }
-
-  .continue-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-}
-
-/* Additional fixes for very small screens */
-@media (max-width: 320px) {
-  .fullscreen-success-container {
-    padding: 55px 8px 10px;
-  }
-
-  .animation-header {
-    height: 55px;
-    padding: 10px 0;
-  }
-
-  .animation-logo {
-    padding: 5px 10px;
-  }
-
-  .animation-logo img {
-    height: 25px;
-  }
-
-  .animation-logo h1 {
-    font-size: 1rem;
-  }
-
-  .video-content-container {
-    min-height: 30vh;
-  }
-
-  .success-animation-gif {
-    max-height: 25vh;
-  }
-
-  .glass-message-panel {
-    padding: 15px 12px;
-    max-width: 300px;
-  }
-
-  .message-content h2 {
-    font-size: 1.2rem;
-  }
-
-  .welcome-message {
-    font-size: 0.8rem;
-  }
-
-  .welcome-icon {
-    font-size: 1.8rem;
-  }
-
-  .continue-btn {
-    padding: 8px 16px;
-    font-size: 0.8rem;
-  }
-}
-
-/* Ensure proper layout on all mobile devices */
-@media (max-width: 768px) {
-  .signup-container {
-    min-height: 100vh;
-
-  }
-  
-  .fullscreen-success-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-  }
-}
-
 /* Rest of your existing CSS for the signup form */
 .signup-header {
   position: absolute;
@@ -667,6 +376,7 @@ html, body, #root {
   border: 1px solid rgba(255,255,255,0.3);
   background: rgba(255,255,255,0.15);
   color: black;
+  width: 100%;
 }
 
 .signup-form input::placeholder {
@@ -681,11 +391,13 @@ html, body, #root {
 
 .password-requirements {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.8);
+  color: #040303a7;
   font-style: italic;
+  margin-top: -0.1rem;
+  margin-bottom: 0.1rem;
 }
 
-.signup-form button {
+.signup-form button[type="submit"] {
   margin-top: 1rem;
   padding: 1rem;
   border: none;
@@ -697,7 +409,7 @@ html, body, #root {
   transition: all 0.3s ease;
 }
 
-.signup-form button:hover {
+.signup-form button[type="submit"]:hover {
   background: linear-gradient(135deg, rgba(8, 8, 248, 0.662));
 }
 
@@ -716,7 +428,107 @@ html, body, #root {
   text-decoration: underline;
 }
 
-/* Mobile View Fix */
+/* Password Input Container with ALWAYS VISIBLE toggle */
+.password-input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.password-input-container input {
+  width: 100%;
+  padding-right: 45px; /* Space for our custom icon */
+}
+
+/* Hide ALL default browser password toggles */
+.password-input-container input[type="password"]::-webkit-credentials-auto-fill-button,
+.password-input-container input[type="password"]::-webkit-strong-password-auto-fill-button,
+.password-input-container input[type="text"]::-webkit-credentials-auto-fill-button,
+.password-input-container input[type="text"]::-webkit-strong-password-auto-fill-button {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* For Microsoft Edge */
+.password-input-container input[type="password"]::-ms-reveal,
+.password-input-container input[type="text"]::-ms-reveal {
+  display: none;
+}
+
+/* For Firefox */
+.password-input-container input[type="password"]::-moz-textfield-decoration,
+.password-input-container input[type="text"]::-moz-textfield-decoration {
+  display: none;
+}
+
+
+/* Password Toggle Icon - ALWAYS VISIBLE */
+/* Password Toggle Icon - ALWAYS VISIBLE */
+.password-toggle-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(34, 33, 33, 0.8);
+  font-size: 1.2rem;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  outline: none; /* Remove focus outline */
+}
+
+.password-toggle-icon:hover {
+  color: rgba(34, 33, 33, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Remove focus styles completely */
+.password-toggle-icon:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Remove any active state borders */
+.password-toggle-icon:active {
+  border: none;
+  outline: none;
+}
+
+/* Error and Success Messages */
+.error-message {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.success-message {
+  color: #51cf66;
+  background: rgba(81, 207, 102, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(81, 207, 102, 0.3);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Mobile responsive for password icons */
 @media (max-width: 768px) {
   .signup-section {
     min-height: auto;
@@ -756,12 +568,97 @@ html, body, #root {
     font-size: 0.95rem;
   }
 
-  .signup-form button {
+  .password-input-container input {
+    padding-right: 40px;
+  }
+  
+  .password-toggle-icon {
+    right: 12px;
+    font-size: 1.1rem;
+    width: 25px;
+    height: 25px;
+  }
+
+  .signup-form button[type="submit"] {
     padding: 0.8rem;
     font-size: 1rem;
   }
 
   .auth-redirect {
     font-size: 0.9rem;
+  }
+}
+
+/* Responsive Design for success page */
+@media (max-width: 1200px) {
+  .fullscreen-success-container {
+    padding: 0 30px;
+  }
+  
+  .success-animation-gif {
+    max-width: 500px;
+  }
+  
+  .glass-message-panel {
+    width: 350px;
+  }
+}
+
+@media (max-width: 968px) {
+  .fullscreen-success-container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 20px;
+  }
+  
+  .video-content-container {
+    order: 2;
+    height: auto;
+  }
+  
+  .success-animation-gif {
+    max-width: 400px;
+    max-height: 50vh;
+  }
+  
+  .glass-message-panel {
+    order: 1;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .message-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .welcome-message {
+    font-size: 1.1rem;
+  }
+}
+
+/* Additional mobile fixes */
+@media (max-width: 480px) {
+  .fullscreen-success-container {
+    padding: 60px 10px 15px;
+    gap: 15px;
+  }
+
+  .animation-header {
+    padding: 12px 0;
+    height: 60px;
+  }
+
+  .success-animation-gif {
+    max-height: 30vh;
+  }
+
+  .glass-message-panel {
+    padding: 20px 15px;
+    max-width: 350px;
+  }
+
+  .message-content h2 {
+    font-size: 1.4rem;
   }
 }

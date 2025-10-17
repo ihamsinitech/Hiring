@@ -10,6 +10,7 @@ const AdminLogin = () => {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -19,6 +20,11 @@ const AdminLogin = () => {
         });
         setError('');
     };
+
+     const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,17 +66,27 @@ const AdminLogin = () => {
                         />
                     </div>
                     
-                    <div className="form-group">
+                    <div className="form-group password-input-container">
                         <label>🔑 Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            placeholder="Enter your password"
-                            disabled={loading}
-                        />
+                        <div className="password-input-wrapper">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                                placeholder="Enter your password"
+                                disabled={loading}
+                            />
+                            <button 
+                                type="button"
+                                className="password-toggle-icon"
+                                onClick={togglePasswordVisibility}
+                                tabIndex="-1"
+                            >
+                                {showPassword ? '👁️‍🗨️' : '👁️'}
+                            </button>
+                        </div>
                     </div>
                     
                     {error && (

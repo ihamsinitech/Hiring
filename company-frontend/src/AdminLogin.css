@@ -190,3 +190,14 @@
     text-decoration: underline;
     color: #333;
 }
+
+/* For AdminLogin component wrapper */
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 45px;
+}
