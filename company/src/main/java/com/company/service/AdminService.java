@@ -1,4 +1,4 @@
-// AdminService.java - UPDATED with database fix
+// AdminService.java - FIXED VERSION
 package com.company.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class AdminService {
             System.out.println("=== 🚀 INITIALIZING ADMIN ACCOUNT ===");
             System.out.println("📧 Admin email: " + ADMIN_EMAIL);
             
-            // First, let's check what's actually in the database
+            // Check current database state
             System.out.println("🔍 Checking current database state...");
             long totalAdmins = adminRepository.count();
             System.out.println("📊 Total admins in database: " + totalAdmins);
@@ -50,15 +50,15 @@ public class AdminService {
                 System.out.println("   Email: " + savedAdmin.getEmail());
                 System.out.println("   Password: " + savedAdmin.getPassword());
             } else {
-                System.out.println("ℹ️ Admin account already exists");
+                System.out.println("ℹ️ Admin account already exists - KEEPING EXISTING PASSWORD");
+                // REMOVED THE PASSWORD RESET CODE - THIS IS THE FIX!
                 
-                // Update password to ensure it's correct
                 Admin existingAdmin = adminRepository.findByEmail(ADMIN_EMAIL);
                 if (existingAdmin != null) {
-                    System.out.println("🔄 Ensuring correct password...");
-                    existingAdmin.setPassword("admin123");
-                    adminRepository.save(existingAdmin);
-                    System.out.println("✅ Password reset to: admin123");
+                    System.out.println("📋 Current admin details:");
+                    System.out.println("   ID: " + existingAdmin.getId());
+                    System.out.println("   Email: " + existingAdmin.getEmail());
+                    System.out.println("   Password: " + existingAdmin.getPassword());
                 }
             }
             
@@ -115,7 +115,16 @@ public class AdminService {
                 Admin updatedAdmin = adminRepository.save(admin);
                 System.out.println("✅ Password updated for: " + email);
                 System.out.println("📝 New password: " + updatedAdmin.getPassword());
-                return true;
+                
+                // Immediate verification
+                Admin verifyAdmin = adminRepository.findByEmail(email);
+                if (verifyAdmin != null && verifyAdmin.getPassword().equals(newPassword)) {
+                    System.out.println("✅ Password update verified in database");
+                    return true;
+                } else {
+                    System.out.println("❌ Password update verification failed");
+                    return false;
+                }
             }
             System.out.println("❌ Admin not found for password update: " + email);
             return false;
