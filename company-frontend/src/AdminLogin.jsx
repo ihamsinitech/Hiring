@@ -66,29 +66,29 @@ const AdminLogin = () => {
                         />
                     </div>
                     
-                    <div className="form-group password-input-container">
-                        <label>🔑 Password</label>
-                        <div className="password-input-wrapper">
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                                placeholder="Enter your password"
-                                disabled={loading}
-                            />
-                            <button 
-                                type="button"
-                                className="password-toggle-icon"
-                                onClick={togglePasswordVisibility}
-                                tabIndex="-1"
-                            >
-                                {showPassword ? '👁️‍🗨️' : '👁️'}
-                            </button>
-                        </div>
-                    </div>
-                    
+                    <div className="form-group">
+                     <label>🔑 Password</label>
+                    <div className="password-input-wrapper">
+                    <input
+                       type={showPassword ? "text" : "password"}
+                       name="password"
+                       value={formData.password}
+                       onChange={handleChange}
+                       required
+                       placeholder="Enter your password"
+                       disabled={loading}
+                     />
+                     <button 
+                        type="button"
+                        className={`password-toggle-icon ${showPassword ? 'visible' : 'hidden'}`}
+                        onClick={togglePasswordVisibility}
+                        tabIndex="-1"
+                      >
+                      {showPassword ? '👁️':'👁️‍🗨️' }
+                    </button>
+                  </div>
+                </div>
+
                     {error && (
                         <div className="error-message">
                             ⚠️ {error}

@@ -89,6 +89,7 @@ html, body, #root {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
+
 .company-image {
   flex: 1;
   display: flex;
@@ -96,6 +97,7 @@ html, body, #root {
   align-items: center;
   padding: 20px;
 }
+
 .company-image img {
   width: 100%;
   max-width: 500px;
@@ -111,8 +113,10 @@ html, body, #root {
   justify-content: center;
 }
 
-.company-form h1 {
+.company-form h2 {
   margin-bottom: 20px;
+  text-align: center;
+  color: #2c3e50;
 }
 
 .company-form form {
@@ -125,66 +129,113 @@ html, body, #root {
   margin-bottom: 5px;
   font-size: 14px;
   font-weight: 500;
+  color: #2c3e50;
 }
 
 .company-form input,
 .company-form textarea {
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   outline: none;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.2);
   color: black;
+  transition: all 0.3s ease;
+}
+
+.company-form input:focus,
+.company-form textarea:focus {
+  border-color: #3498db;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .company-form input::placeholder {
-  color: black;
-}
-.company-form textarea {
-  min-height: 60px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
-.company-form button {
+.company-form textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.company-form button[type="submit"] {
   margin-top: 20px;
   padding: 12px;
   border-radius: 8px;
   border: none;
   background: #1c47d4;
-  color: black;
+  color: white;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-.company-form button:hover {
-  background: #14328da2;
+.company-form button[type="submit"]:hover:not(:disabled) {
+  background: #14328d;
+}
+
+.company-form button[type="submit"]:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
 }
 
 /* Error & success */
 .error {
-  color: #ff4d4d;
+  color: #e74c3c;
   font-size: 13px;
   margin-top: 5px;
+  font-weight: 500;
 }
 
 .success {
-  color: #aaffaa;
+  color: #27ae60;
   margin: 10px 0;
+  font-weight: 500;
+  text-align: center;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 /* Trial info box */
 .company-trial-box {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(46, 204, 113, 0.2);
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  text-align: center;
+}
+
+.company-trial-box h3 {
+  color: #27ae60;
+  margin-bottom: 8px;
+}
+
+.company-trial-box p {
+  color: #2c3e50;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.company-trial-box small {
+  color: #7f8c8d;
+  font-style: italic;
 }
 
 /* Terms text */
 .company-terms {
   font-size: 13px;
   margin-top: 10px;
+  color: #7f8c8d;
+  text-align: center;
+  line-height: 1.4;
 }
 
 /* Right image */
@@ -198,68 +249,11 @@ html, body, #root {
 
 .company-image img {
   width: 90%;
-  height: auto;   /* make it taller */
-  object-fit: cover;  /* cover full area */
-  border-radius: 0; 
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .company-box {
-    flex-direction: column;  /* stack image and form */
-    padding: 20px;
-    margin-top: 70px;
-    margin-bottom: 40px;
-  }
-
-  .company-image {
-    width: 100%;
-    padding: 10px 0;
-  }
-
-  .company-image img {
-    width: 80%;
-    height: auto;
-  }
-
-  .company-form {
-    width: 100%;
-    padding: 20px 10px;
-  }
-
-  .company-form h1 {
-    font-size: 1.3rem;
-    text-align: center;
-  }
-
-  .company-form input,
-  .company-form textarea {
-    font-size: 13px;
-    padding: 8px;
-  }
-
-  .company-form button {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-
-/* Very small phones */
-@media (max-width: 480px) {
-  .company-form h1 {
-    font-size: 1.1rem;
-  }
-
-  .company-form input,
-  .company-form textarea {
-    font-size: 12px;
-  }
-
-  .company-form button {
-    font-size: 13px;
-    padding: 8px;
-  }
-}
 /* Password Input Container with ALWAYS VISIBLE toggle */
 .password-input-container {
   position: relative;
@@ -337,6 +331,44 @@ html, body, #root {
 
 /* Mobile responsive for password icons */
 @media (max-width: 768px) {
+  .company-box {
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 70px;
+    margin-bottom: 40px;
+  }
+
+  .company-image {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .company-image img {
+    width: 80%;
+    height: auto;
+  }
+
+  .company-form {
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+  .company-form h2 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .company-form input,
+  .company-form textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .company-form button[type="submit"] {
+    font-size: 14px;
+    padding: 10px;
+  }
+
   .password-input-container input {
     padding-right: 40px;
   }
@@ -349,3 +381,31 @@ html, body, #root {
   }
 }
 
+/* Very small phones */
+@media (max-width: 480px) {
+  .company-form h2 {
+    font-size: 1.1rem;
+  }
+
+  .company-form input,
+  .company-form textarea {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .company-form button[type="submit"] {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .password-toggle-icon {
+    right: 10px;
+    font-size: 1rem;
+    width: 22px;
+    height: 22px;
+  }
+  
+  .password-input-container input {
+    padding-right: 35px;
+  }
+}

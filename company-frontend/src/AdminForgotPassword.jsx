@@ -11,6 +11,9 @@ const AdminForgotPassword = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false); 
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -20,6 +23,15 @@ const AdminForgotPassword = () => {
         });
         setError('');
     };
+
+    const toggleNewPasswordVisibility = () => {
+        setShowNewPassword(!showNewPassword);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -83,15 +95,24 @@ const AdminForgotPassword = () => {
 
                     <div className="form-group">
                         <label>New Password</label>
-                        <input
-                            type="password"
-                            id="newPassword"
-                            value={form.newPassword}
-                            onChange={handleChange}
-                            placeholder="Enter new password"
-                            required
-                            disabled={loading}
-                        />
+                        <div className="password-input-container">
+                            <input
+                                type={showNewPassword ? "text" : "password"}
+                                id="newPassword"
+                                value={form.newPassword}
+                                onChange={handleChange}
+                                placeholder="Enter new password"
+                                required
+                                disabled={loading}
+                            />
+                            <button 
+                                type="button"
+                                className="password-toggle-icon"
+                                onClick={toggleNewPasswordVisibility}
+                            >
+                                {showNewPassword ? '👁️' : '👁️‍🗨️'}
+                            </button>
+                        </div>
                         <div className="password-requirements">
                             Password must contain lowercase, uppercase, number, and special character.
                         </div>
@@ -99,16 +120,26 @@ const AdminForgotPassword = () => {
 
                     <div className="form-group">
                         <label>Confirm Password</label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            value={form.confirmPassword}
-                            onChange={handleChange}
-                            placeholder="Confirm new password"
-                            required
-                            disabled={loading}
-                        />
+                        <div className="password-input-container">
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                id="confirmPassword"
+                                value={form.confirmPassword}
+                                onChange={handleChange}
+                                placeholder="Confirm new password"
+                                required
+                                disabled={loading}
+                            />
+                            <button 
+                                type="button"
+                                className="password-toggle-icon"
+                                onClick={toggleConfirmPasswordVisibility}
+                            >
+                                {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+                            </button>
+                        </div>
                     </div>
+
 
                     <button type="submit" disabled={loading} className="reset-btn">
                         {loading ? 'Resetting...' : 'Reset Password'}

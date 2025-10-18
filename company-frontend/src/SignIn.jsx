@@ -11,6 +11,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
   const [navigationData, setNavigationData] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,6 +19,10 @@ const SignIn = () => {
       ...form,
       [e.target.id]: e.target.value
     });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   // Navigate immediately when animation is shown
@@ -197,15 +202,23 @@ const SignIn = () => {
               />
               
               <label htmlFor="password">Password *</label>
-              <input 
-                type="password" 
-                id="password" 
-                value={form.password} 
-                onChange={handleChange} 
-                placeholder="Enter your password" 
-                required 
-                disabled={loading || showAnimation}
-              />
+              <div className="password-input-container">
+                <input 
+                  type={showPassword ? "text" : "password"}
+                  id="password" 
+                  value={form.password} 
+                  onChange={handleChange} 
+                  placeholder="Enter your password" 
+                  required 
+                  disabled={loading || showAnimation}
+                />
+                <span 
+                  className="password-toggle-icon"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? '👁️': '👁️‍🗨️' }
+                </span>
+              </div>
               
               <div className="auth-links">
                 <Link to="/forgot-password">Forgot Password?</Link>

@@ -219,7 +219,7 @@ const SignUp = () => {
                   onClick={togglePasswordVisibility}
                   tabIndex="-1"
                 >
-                  {showPassword ? '👁️‍🗨️' : '👁️'}
+                  {showPassword ?  '👁️' :'👁️‍🗨️' }
                 </button>
               </div>
               <div className="password-requirements">
@@ -244,7 +244,7 @@ const SignUp = () => {
                   onClick={toggleConfirmPasswordVisibility}
                   tabIndex="-1"
                 >
-                  {showConfirmPassword ? '👁️‍🗨️' : '👁️'}
+                  {showConfirmPassword ? '👁️':'👁️‍🗨️' }
                 </button>
               </div>
               
