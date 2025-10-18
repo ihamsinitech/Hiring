@@ -10,6 +10,9 @@ const ForgotPassword = () => {
   });
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,6 +21,15 @@ const ForgotPassword = () => {
       [e.target.id]: e.target.value
     });
   };
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,24 +98,42 @@ const ForgotPassword = () => {
             />
 
             <label>New Password:</label>
-            <input
-              type="password"
-              id="newPassword"
-              value={form.newPassword}
-              onChange={handleChange}
-              placeholder="New Password"
-              required
-            />
+              <div className="password-input-container">
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  id="newPassword"
+                  value={form.newPassword}
+                  onChange={handleChange}
+                  placeholder="New Password"
+                  required
+                />
+                <button 
+                  type="button"
+                  className="password-toggle-icon"
+                  onClick={toggleNewPasswordVisibility}
+                >
+                  {showNewPassword ? '👁️' : '👁️‍🗨️'}
+                </button>
+              </div>
 
-            <label>Confirm Password:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-              required
-            />
+              <label>Confirm Password:</label>
+              <div className="password-input-container">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  required
+                />
+                <button 
+                  type="button"
+                  className="password-toggle-icon"
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+                </button>
+              </div>
 
             <button type="submit">Reset Password</button>
           </form>

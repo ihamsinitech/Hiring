@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.company.model.Admin;
 import com.company.model.Application;
 import com.company.model.Company;
 import com.company.model.PostingForm;
@@ -16,6 +17,7 @@ import com.company.repository.ApplicationRepository;
 import com.company.repository.CompanyRepository;
 import com.company.repository.JobRepository;
 import com.company.repository.StudentRepository;
+import com.company.service.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -34,8 +36,8 @@ public class AdminController {
     @Autowired
     private ApplicationRepository applicationRepository;
 
-    private final String ADMIN_EMAIL = "admin@company.com";
-    private String adminPassword = "admin123";
+    @Autowired
+    private AdminService adminService;
 
     @PostMapping("/login")
     public ResponseEntity<?> adminLogin(@RequestBody Map<String, String> credentials) {
@@ -43,11 +45,16 @@ public class AdminController {
             String email = credentials.get("email");
             String password = credentials.get("password");
             
+            System.out.println("=== ADMIN LOGIN ATTEMPT ===");
+            System.out.println("Email: " + email);
+            System.out.println("Password provided: " + password);
+            
             if (email == null || password == null) {
                 return ResponseEntity.badRequest().body("Email and password are required");
             }
             
-            if (ADMIN_EMAIL.equals(email) && adminPassword.equals(password)) { // Use variable instead of final
+            if (adminService.validateCredentials(email, password)) {
+                System.out.println("✅ LOGIN SUCCESSFUL");
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "Admin login successful");
                 response.put("userType", "admin");
@@ -56,13 +63,81 @@ public class AdminController {
                 response.put("redirect", "/admin-dashboard");
                 return ResponseEntity.ok(response);
             } else {
+                System.out.println("❌ LOGIN FAILED - Invalid credentials");
                 return ResponseEntity.badRequest().body("Invalid email or password");
             }
             
         } catch (Exception e) {
+            System.out.println("❌ Error during admin login: " + e.getMessage());
             return ResponseEntity.internalServerError().body("An error occurred during admin login: " + e.getMessage());
         }
     }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> adminForgotPassword(@RequestBody Map<String, String> request) {
+        try {
+            String email = request.get("email");
+            String newPassword = request.get("newPassword");
+            String confirmPassword = request.get("confirmPassword");
+            
+            System.out.println("=== PASSWORD RESET REQUEST ===");
+            System.out.println("Email: " + email);
+            System.out.println("New Password: " + newPassword);
+            
+            // Validation
+            if (email == null || newPassword == null || confirmPassword == null) {
+                return ResponseEntity.badRequest().body("All fields are required");
+            }
+            
+            if (!newPassword.equals(confirmPassword)) {
+                return ResponseEntity.badRequest().body("Passwords do not match");
+            }
+            
+            // Check if it's the admin email
+            if (!adminService.getAdminEmail().equals(email)) {
+                return ResponseEntity.badRequest().body("Admin email not found");
+            }
+            
+            // Password validation
+            boolean hasLowerCase = newPassword.matches(".*[a-z].*");
+            boolean hasUpperCase = newPassword.matches(".*[A-Z].*");
+            boolean hasNumber = newPassword.matches(".*[0-9].*");
+            boolean hasSpecialChar = newPassword.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
+            
+            if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
+                return ResponseEntity.badRequest().body("Password must contain lowercase, uppercase, number, and special character");
+            }
+            
+            // ✅ UPDATE PASSWORD IN DATABASE
+            boolean updateSuccess = adminService.updatePassword(email, newPassword);
+            
+            if (updateSuccess) {
+                System.out.println("✅ Password updated and persisted for: " + email);
+                return ResponseEntity.ok("Admin password reset successfully. Please use the new password to login.");
+            } else {
+                return ResponseEntity.badRequest().body("Failed to update password");
+            }
+            
+        } catch (Exception e) {
+            System.out.println("❌ Error resetting admin password: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("An error occurred: " + e.getMessage());
+        }
+    }
+
+    // Test endpoint to check admin status
+    @GetMapping("/test-admin")
+    public ResponseEntity<?> testAdmin() {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            response.put("adminEmail", adminService.getAdminEmail());
+            response.put("message", "Admin service is working");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Admin service error: " + e.getMessage());
+        }
+    }
+
+
 
     @GetMapping("/dashboard")
     public ResponseEntity<?> getAdminDashboard() {
@@ -262,46 +337,24 @@ public class AdminController {
         }
     }
 
-    // Add this method to your existing AdminController class
-@PostMapping("/forgot-password")
-    public ResponseEntity<?> adminForgotPassword(@RequestBody Map<String, String> request) {
-        try {
-            String email = request.get("email");
-            String newPassword = request.get("newPassword");
-            String confirmPassword = request.get("confirmPassword");
-            
-            // Validation
-            if (email == null || newPassword == null || confirmPassword == null) {
-                return ResponseEntity.badRequest().body("All fields are required");
-            }
-            
-            if (!newPassword.equals(confirmPassword)) {
-                return ResponseEntity.badRequest().body("Passwords do not match");
-            }
-            
-            // Check if it's the admin email
-            if (!ADMIN_EMAIL.equals(email)) {
-                return ResponseEntity.badRequest().body("Admin email not found");
-            }
-            
-            // Password validation
-            boolean hasLowerCase = newPassword.matches(".*[a-z].*");
-            boolean hasUpperCase = newPassword.matches(".*[A-Z].*");
-            boolean hasNumber = newPassword.matches(".*[0-9].*");
-            boolean hasSpecialChar = newPassword.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
-            
-            if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
-                return ResponseEntity.badRequest().body("Password must contain lowercase, uppercase, number, and special character");
-            }
-            
-            // ✅ ACTUALLY UPDATE THE PASSWORD
-            adminPassword = newPassword;
-            
-            return ResponseEntity.ok("Admin password reset successfully. Please use the new password to login.");
-            
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("An error occurred: " + e.getMessage());
+    // Add this method to your AdminController
+@GetMapping("/debug-admin")
+public ResponseEntity<?> debugAdmin() {
+    try {
+        Admin admin = adminService.getAdminDetails();
+        if (admin != null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", admin.getId());
+            response.put("email", admin.getEmail());
+            response.put("password", admin.getPassword());
+            response.put("exists", true);
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.ok(Map.of("exists", false, "message", "Admin not found in database"));
         }
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError().body("Error debugging admin: " + e.getMessage());
     }
+}
 
 }

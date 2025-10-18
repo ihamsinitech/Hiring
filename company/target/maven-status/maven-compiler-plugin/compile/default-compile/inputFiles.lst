@@ -2,12 +2,15 @@ C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\Compa
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\config\CorsConfig.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\controller\AdminController.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\controller\AuthController.java
+C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\model\Admin.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\model\Application.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\model\Company.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\model\JobApplicationDTO.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\model\PostingForm.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\model\Student.java
+C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\repository\AdminRepository.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\repository\ApplicationRepository.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\repository\CompanyRepository.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\repository\JobRepository.java
 C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\repository\StudentRepository.java
+C:\Users\DELL\OneDrive\Documents\Company\company\src\main\java\com\company\service\AdminService.java
