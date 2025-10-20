@@ -73,7 +73,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/forgot-password")
+    @PostMapping("/reset-password")
     public ResponseEntity<?> adminForgotPassword(@RequestBody Map<String, String> request) {
         try {
             String email = request.get("email");
