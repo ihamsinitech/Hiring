@@ -47,7 +47,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"},allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8085"},allowedHeaders = "*")
 public class AuthController {
     
     

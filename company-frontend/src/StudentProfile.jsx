@@ -50,9 +50,7 @@ const LogoutAnimation = () => {
             <div className="animation-content">
               <div className="bye-text bye-above">👋</div>
               <div className="thank-you-text">Thank You for Visiting!</div>
-              <div className="visitor-counter">See you soon!</div>
-              
-            </div>
+              </div>
           </div>
         </div>
       </div>
@@ -70,7 +68,7 @@ const StudentProfile = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`)
+      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setStudent(data);
@@ -87,7 +85,7 @@ const StudentProfile = () => {
 
   const handleSave = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`, {
+    fetch(`http://localhost:8085/api/auth/student/${userData.userId}/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

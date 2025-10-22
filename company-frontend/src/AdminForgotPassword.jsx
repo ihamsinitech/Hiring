@@ -46,7 +46,7 @@ const AdminForgotPassword = () => {
         }
 
         try {
-            const response = await fetch('http://15.206.41.13:8085/api/admin/reset-password', {
+            const response = await fetch('http://localhost:8085/api/admin/reset-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

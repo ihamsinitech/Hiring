@@ -19,7 +19,7 @@ const CompanyApplications = () => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     if (storedUser) {
       console.log("Fetching applications for company:", storedUser.userId);
-      fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/applications`)
+      fetch(`http://localhost:8085/api/auth/company/${storedUser.userId}/applications`)
         .then(res => {
           if (!res.ok) {
             throw new Error('Applications not found');
@@ -51,7 +51,7 @@ const CompanyApplications = () => {
   const handleShortlist = (application) => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     
-    fetch(`http://15.206.41.13:8085/api/auth/application/${application.id}/respond`, {
+    fetch(`http://localhost:8085/api/auth/application/${application.id}/respond`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const CompanyApplications = () => {
 
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     
-    fetch(`http://15.206.41.13:8085/api/auth/application/${selectedApplication.id}/respond`, {
+    fetch(`http://localhost:8085/api/auth/application/${selectedApplication.id}/respond`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ const CompanyApplications = () => {
   };
 
   const downloadResume = (applicationId) => {
-    window.open(`http://15.206.41.13:8085/api/auth/resume/${applicationId}`, '_blank');
+    window.open(`http://localhost:8085/api/auth/resume/${applicationId}`, '_blank');
   };
 
   if (loading) {

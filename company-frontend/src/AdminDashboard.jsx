@@ -37,7 +37,7 @@ const AdminDashboard = () => {
             setError('');
             setLoading(true);
             
-            const response = await axios.get('http://15.206.41.13:8085/api/admin/dashboard', {
+            const response = await axios.get('http://localhost:8085/api/admin/dashboard', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
                 }
@@ -278,7 +278,7 @@ const StudentsTab = () => {
     const fetchStudents = async () => {
         try {
             setError('');
-            const response = await axios.get('http://15.206.41.13:8085/api/admin/students');
+            const response = await axios.get('http://localhost:8085/api/admin/students');
             setStudents(response.data);
         } catch (error) {
             setError('Failed to load students: ' + (error.response?.data || error.message));
@@ -351,7 +351,7 @@ const CompaniesTab = () => {
     const fetchCompanies = async () => {
         try {
             setError('');
-            const response = await axios.get('http://15.206.41.13:8085/api/admin/companies');
+            const response = await axios.get('http://localhost:8085/api/admin/companies');
             setCompanies(response.data);
         } catch (error) {
             setError('Failed to load companies: ' + (error.response?.data || error.message));
@@ -414,7 +414,7 @@ const JobsTab = () => {
     const fetchJobs = async () => {
         try {
             setError('');
-            const response = await axios.get('http://15.206.41.13:8085/api/admin/jobs');
+            const response = await axios.get('http://localhost:8085/api/admin/jobs');
             setJobs(response.data);
         } catch (error) {
             setError('Failed to load jobs: ' + (error.response?.data || error.message));
@@ -487,7 +487,7 @@ const ApplicationsTab = () => {
     const fetchApplications = async () => {
         try {
             setError('');
-            const response = await axios.get('http://15.206.41.13:8085/api/admin/applications');
+            const response = await axios.get('http://localhost:8085/api/admin/applications');
             setApplications(response.data);
         } catch (error) {
             setError('Failed to load applications: ' + (error.response?.data || error.message));
