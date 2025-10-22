@@ -27,7 +27,7 @@ const JobList = () => {
     console.log("User Type:", storedUser.userType);
 
     // Fetch student profile & stats
-    fetch(`http://localhost:8085/api/auth/student/${storedUser.userId}/profile`)
+    fetch(`http://15.206.41.13:8085/api/auth/student/${storedUser.userId}/profile`)
       .then(res => res.json())
       .then(data => {
         console.log("Fetched Profile:", data);
@@ -43,7 +43,7 @@ const JobList = () => {
 
   // ✅ Fetch jobs
   useEffect(() => {
-    fetch('http://localhost:8085/api/auth')
+    fetch('http://15.206.41.13:8085/api/auth')
       .then(res => res.json())
       .then(data => setJobs(data))
       .catch(err => console.error("Error fetching jobs:", err));

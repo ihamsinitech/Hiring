@@ -67,7 +67,7 @@ const CompanyProfile = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://localhost:8085/api/auth/company/${userData.userId}/profile`)
+      fetch(`http://15.206.41.13:8085/api/auth/company/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setCompany(data);
@@ -84,7 +84,7 @@ const CompanyProfile = () => {
 
   const handleSave = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    fetch(`http://localhost:8085/api/auth/company/${userData.userId}/profile`, {
+    fetch(`http://15.206.41.13:8085/api/auth/company/${userData.userId}/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

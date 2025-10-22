@@ -32,7 +32,7 @@ const AdminLogin = () => {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:8085/api/admin/login', formData);
+            const response = await axios.post('http://15.206.41.13:8085/api/admin/login', formData);
             
             if (response.data.message === "Admin login successful") {
                 localStorage.setItem('adminToken', 'admin-authenticated');

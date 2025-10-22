@@ -13,7 +13,7 @@ const Messages = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://localhost:8085/api/auth/student/${userData.userId}/messages`)
+      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/messages`)
         .then(res => res.json())
         .then(data => {
           console.log("Raw messages data:", data); // Debug log
@@ -61,7 +61,7 @@ const Messages = () => {
 
     try {
       // Send professional reply to backend
-      const response = await fetch(`http://localhost:8085/api/auth/application/${selectedMessage.id}/student-reply`, {
+      const response = await fetch(`http://15.206.41.13:8085/api/auth/application/${selectedMessage.id}/student-reply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

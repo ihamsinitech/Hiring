@@ -10,7 +10,7 @@ const JobDetails = () => {
  
 
   useEffect(() => {
-    fetch(`http://localhost:8085/api/auth/${id}`)
+    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
       .then(res => res.json())
       .then(data => {
         console.log("Job Data from API:", data); // ✅ Debug check
