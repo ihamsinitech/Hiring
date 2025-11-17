@@ -10,14 +10,14 @@ import com.company.model.Admin;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
-    
+
     // Use the correct column name in query
     @Query("SELECT a FROM Admin a WHERE a.email = :email")
     Admin findByEmail(@Param("email") String email);
-    
+
     @Query("SELECT COUNT(a) > 0 FROM Admin a WHERE a.email = :email")
     boolean existsByEmail(@Param("email") String email);
-    
+
     @Modifying
     @Query("UPDATE Admin a SET a.password = :password WHERE a.email = :email")
     void updatePassword(@Param("email") String email, @Param("password") String password);

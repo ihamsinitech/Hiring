@@ -21,7 +21,7 @@ const JobDetails = () => {
 
   // ✅ Fetch applied jobs for the student
   const fetchAppliedJobs = (studentId) => {
-    fetch(`http://www.careerspott.com/api/auth/student/${studentId}/applied-jobs`)
+    fetch(`http://localhost:8085/api/auth/student/${studentId}/applied-jobs`)
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch applied jobs');
@@ -41,7 +41,7 @@ const JobDetails = () => {
   };
 
   useEffect(() => {
-    fetch(`http://www.careerspott.com/api/auth/${id}`)
+    fetch(`http://localhost:8085/api/auth/${id}`)
       .then(res => res.json())
       .then(data => {
         console.log("Job Data from API:", data);

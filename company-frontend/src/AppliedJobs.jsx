@@ -28,7 +28,7 @@ const AppliedJobs = () => {
     setLoading(true);
     console.log('🔍 Frontend: Fetching applied jobs for student:', studentId);
     
-    const response = await fetch(`http://www.careerspott.com/api/auth/student/${studentId}/applied-jobs`);
+    const response = await fetch(`http://localhost:8085/api/auth/student/${studentId}/applied-jobs`);
     
     console.log('📡 Frontend: Main endpoint response status:', response.status);
     

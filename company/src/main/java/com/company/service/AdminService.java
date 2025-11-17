@@ -20,30 +20,30 @@ public class AdminService {
         try {
             System.out.println("=== 🚀 INITIALIZING ADMIN ACCOUNT ===");
             System.out.println("📧 Admin email: " + ADMIN_EMAIL);
-            
+
             // Check current database state
             System.out.println("🔍 Checking current database state...");
             long totalAdmins = adminRepository.count();
             System.out.println("📊 Total admins in database: " + totalAdmins);
-            
+
             // List all admins for debugging
             java.util.List<Admin> allAdmins = adminRepository.findAll();
             System.out.println("🔍 All admins in database:");
             for (Admin admin : allAdmins) {
-                System.out.println("   - ID: " + admin.getId() + 
-                                 ", Email: " + admin.getEmail() + 
-                                 ", Password: " + admin.getPassword());
+                System.out.println("   - ID: " + admin.getId() +
+                        ", Email: " + admin.getEmail() +
+                        ", Password: " + admin.getPassword());
             }
-            
+
             boolean adminExists = adminRepository.existsByEmail(ADMIN_EMAIL);
             System.out.println("🔎 Admin exists by email check: " + adminExists);
-            
+
             if (!adminExists) {
                 System.out.println("🆕 Creating default admin account...");
                 Admin defaultAdmin = new Admin();
                 defaultAdmin.setEmail(ADMIN_EMAIL);
                 defaultAdmin.setPassword("admin123");
-                
+
                 Admin savedAdmin = adminRepository.save(defaultAdmin);
                 System.out.println("✅ Default admin account created:");
                 System.out.println("   ID: " + savedAdmin.getId());
@@ -52,7 +52,7 @@ public class AdminService {
             } else {
                 System.out.println("ℹ️ Admin account already exists - KEEPING EXISTING PASSWORD");
                 // REMOVED THE PASSWORD RESET CODE - THIS IS THE FIX!
-                
+
                 Admin existingAdmin = adminRepository.findByEmail(ADMIN_EMAIL);
                 if (existingAdmin != null) {
                     System.out.println("📋 Current admin details:");
@@ -61,7 +61,7 @@ public class AdminService {
                     System.out.println("   Password: " + existingAdmin.getPassword());
                 }
             }
-            
+
             // Final verification
             System.out.println("🔍 Final verification...");
             Admin finalAdmin = adminRepository.findByEmail(ADMIN_EMAIL);
@@ -73,7 +73,7 @@ public class AdminService {
             } else {
                 System.out.println("❌ FINAL VERIFICATION FAILED");
             }
-            
+
         } catch (Exception e) {
             System.out.println("❌ ERROR initializing admin: " + e.getMessage());
             e.printStackTrace();
@@ -85,18 +85,18 @@ public class AdminService {
         try {
             System.out.println("🔐 Validating credentials for: " + email);
             Admin admin = adminRepository.findByEmail(email);
-            
+
             if (admin == null) {
                 System.out.println("❌ Admin not found for email: " + email);
                 return false;
             }
-            
+
             boolean isValid = admin.getPassword().equals(password);
             System.out.println("🔑 Password validation result: " + isValid);
             System.out.println("📧 Stored email: " + admin.getEmail());
             System.out.println("🔑 Stored password: " + admin.getPassword());
             System.out.println("🔑 Provided password: " + password);
-            
+
             return isValid;
         } catch (Exception e) {
             System.out.println("❌ Error validating credentials: " + e.getMessage());
@@ -108,14 +108,14 @@ public class AdminService {
         try {
             System.out.println("🔄 Updating password for: " + email);
             Admin admin = adminRepository.findByEmail(email);
-            
+
             if (admin != null) {
                 System.out.println("📝 Old password: " + admin.getPassword());
                 admin.setPassword(newPassword);
                 Admin updatedAdmin = adminRepository.save(admin);
                 System.out.println("✅ Password updated for: " + email);
                 System.out.println("📝 New password: " + updatedAdmin.getPassword());
-                
+
                 // Immediate verification
                 Admin verifyAdmin = adminRepository.findByEmail(email);
                 if (verifyAdmin != null && verifyAdmin.getPassword().equals(newPassword)) {
@@ -138,7 +138,7 @@ public class AdminService {
     public String getAdminEmail() {
         return ADMIN_EMAIL;
     }
-    
+
     public Admin getAdminDetails() {
         try {
             Admin admin = adminRepository.findByEmail(ADMIN_EMAIL);
@@ -149,7 +149,7 @@ public class AdminService {
             return null;
         }
     }
-    
+
     public java.util.List<Admin> getAllAdmins() {
         return adminRepository.findAll();
     }

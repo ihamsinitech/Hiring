@@ -30,7 +30,7 @@ const JobList = () => {
       setUser(storedUser);
 
       // Fetch student profile & stats
-      fetch(`http://www.careerspott.com/api/auth/student/${storedUser.userId}/profile`)
+      fetch(`http://localhost:8085/api/auth/student/${storedUser.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           console.log("Fetched Profile:", data);
@@ -46,7 +46,7 @@ const JobList = () => {
   }, []);
 
   const fetchAppliedJobs = (studentId) => {
-  fetch(`http://www.careerspott.com/api/auth/student/${studentId}/applied-jobs`)
+  fetch(`http://localhost:8085/api/auth/student/${studentId}/applied-jobs`)
     .then(res => {
       if (!res.ok) {
         throw new Error('Failed to fetch applied jobs');
@@ -72,7 +72,7 @@ const JobList = () => {
 
   // ✅ Fetch jobs
   useEffect(() => {
-    fetch('http://www.careerspott.com/api/auth')
+    fetch('http://localhost:8085/api/auth')
       .then(res => res.json())
       .then(data => setJobs(data))
       .catch(err => console.error("Error fetching jobs:", err));
@@ -120,7 +120,7 @@ const JobList = () => {
       // You need to handle resume file upload - for now using a placeholder
       // formData.append('resume', resumeFile);
 
-      const response = await fetch('http://www.careerspott.com/api/auth/apply', {
+      const response = await fetch('http://localhost:8085/api/auth/apply', {
         method: 'POST',
         body: formData
         // Don't set Content-Type header for FormData - browser will set it automatically

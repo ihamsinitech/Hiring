@@ -19,7 +19,7 @@ const CompanyApplications = () => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     if (storedUser) {
       console.log("Fetching applications for company:", storedUser.userId);
-      fetch(`http://www.careerspott.com/api/auth/company/${storedUser.userId}/applications`)
+      fetch(`http://localhost:8085/api/auth/company/${storedUser.userId}/applications`)
         .then(res => {
           if (!res.ok) {
             throw new Error('Applications not found');
@@ -48,7 +48,7 @@ const CompanyApplications = () => {
       console.log(`📥 Processing resume for application: ${applicationId}`);
       
       // First mark as viewed
-      const viewResponse = await fetch(`http://www.careerspott.com/api/auth/application/${applicationId}/view`, {
+      const viewResponse = await fetch(`http://localhost:8085/api/auth/application/${applicationId}/view`, {
         method: 'PUT'
       });
       
@@ -56,7 +56,7 @@ const CompanyApplications = () => {
         console.log('✅ Application marked as viewed:', applicationId);
         
         // Then download the resume
-        const resumeUrl = `http://www.careerspott.com/api/auth/resume/${applicationId}`;
+        const resumeUrl = `http://localhost:8085/api/auth/resume/${applicationId}`;
         
         // Test if resume exists
         const testResponse = await fetch(resumeUrl);
@@ -88,7 +88,7 @@ const CompanyApplications = () => {
   const handleShortlist = (application) => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     
-    fetch(`http://www.careerspott.com/api/auth/application/${application.id}/respond`, {
+    fetch(`http://localhost:8085/api/auth/application/${application.id}/respond`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ const CompanyApplications = () => {
 
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     
-    fetch(`http://www.careerspott.com/api/auth/application/${selectedApplication.id}/respond`, {
+    fetch(`http://localhost:8085/api/auth/application/${selectedApplication.id}/respond`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

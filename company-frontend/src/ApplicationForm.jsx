@@ -1,353 +1,182 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './CompanyApplications.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import "./ApplicationForm.css";
 
-const CompanyApplications = () => {
-  const [applications, setApplications] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [selectedApplication, setSelectedApplication] = useState(null);
-  const [responseMessage, setResponseMessage] = useState('');
-  const [showResponseModal, setShowResponseModal] = useState(false);
+const ApplicationForm = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [job, setJob] = useState(null);
+  const [resumeFile, setResumeFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    mobile: "",
+    skills: "",
+    fresherOrExp: "Fresher",
+    companyName: "",
+    role: "",
+    yearsOfExperience: "",
+    previousPackage: "",
+    expectedPackage: "",
+    description: ""
+  });
+
+  const storedUser = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
-    fetchApplications();
-  }, []);
+    fetch(`http://www.careerspott.com/api/auth/${id}`)
+      .then((res) => res.json())
+      .then((data) => setJob(data))
+      .catch((err) => console.error("Error fetching job:", err));
+  }, [id]);
 
-  const fetchApplications = () => {
-    const storedUser = JSON.parse(localStorage.getItem("userData"));
-    if (storedUser) {
-      console.log("Fetching applications for company:", storedUser.userId);
-      fetch(`http://www.careerspott.com/api/auth/company/${storedUser.userId}/applications`)
-        .then(res => {
-          if (!res.ok) {
-            throw new Error('Applications not found');
-          }
-          return res.json();
-        })
-        .then(data => {
-          console.log("Applications data:", data);
-          setApplications(Array.isArray(data) ? data : []);
-          setError('');
-        })
-        .catch(err => {
-          console.error("Error fetching applications:", err);
-          setError('Failed to load applications');
-          setApplications([]);
-        })
-        .finally(() => setLoading(false));
-    }
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setForm({ ...form, [id]: value });
   };
 
-  const goBack = () => navigate('/companyDashboard');
+  const handleFileChange = (e) => {
+    setResumeFile(e.target.files[0]); // ✅ store selected file
+  };
 
-  // ✅ COMBINED FUNCTION: Mark as viewed AND download resume
-  const handleResumeDownload = async (applicationId, fullName) => {
+
+  const handleSubmit = async (e) => {
+     e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
     try {
-      console.log(`📥 Processing resume for application: ${applicationId}`);
-      
-      // First mark as viewed
-      const viewResponse = await fetch(`http://www.careerspott.com/api/auth/application/${applicationId}/view`, {
-        method: 'PUT'
+       const formData = new FormData();
+      Object.keys(form).forEach((key) => {
+        formData.append(key, form[key] ? String(form[key]) : "");
       });
-      
-      if (viewResponse.ok) {
-        console.log('✅ Application marked as viewed:', applicationId);
-        
-        // Then download the resume
-        const resumeUrl = `http://www.careerspott.com/api/auth/resume/${applicationId}`;
-        
-        // Test if resume exists
-        const testResponse = await fetch(resumeUrl);
-        if (testResponse.ok) {
-          // Open in new tab for download
-          window.open(resumeUrl, '_blank');
-          alert(`Resume downloaded for ${fullName}! Application marked as viewed.`);
-        } else {
-          alert(`No resume found for ${fullName}. Application marked as viewed.`);
-        }
-        
-        // Refresh applications to update the viewed status
-        fetchApplications();
-      } else {
-        alert('Error marking application as viewed');
+
+      formData.append("jobId" ,id);
+      formData.append("companyEmail", job.contactEmail || "");
+
+      formData.append("appliedDate", new Date().toISOString());
+
+      if (storedUser && storedUser.userId) {
+        formData.append("studentId", storedUser.userId);
       }
-    } catch (error) {
-      console.error('Error processing resume:', error);
-      alert('Error processing resume download');
-    }
-  };
 
-  const handleRespond = (application) => {
-    setSelectedApplication(application);
-    setResponseMessage('');
-    setShowResponseModal(true);
-  };
-
-  const handleShortlist = (application) => {
-    const storedUser = JSON.parse(localStorage.getItem("userData"));
-    
-    fetch(`http://www.careerspott.com/api/auth/application/${application.id}/respond`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        message: `Congratulations! Your application for the position has been shortlisted. We will contact you soon for the next steps.`,
-        companyName: storedUser.companyName || 'Our Company',
-        actionType: 'SHORTLIST' 
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        alert('Application shortlisted successfully!');
-        fetchApplications(); // Refresh the list
-      } else {
-        alert('Error: ' + data.message);
+      if (resumeFile) {
+        formData.append("resume", resumeFile); // resume file
       }
-    })
-    .catch(err => {
-      console.error('Error shortlisting:', err);
-      alert('Error shortlisting application');
-    });
-  };
 
-  const sendResponse = () => {
-    if (!responseMessage.trim()) {
-      alert('Please enter a response message');
-      return;
-    }
 
-    const storedUser = JSON.parse(localStorage.getItem("userData"));
-    
-    fetch(`http://www.careerspott.com/api/auth/application/${selectedApplication.id}/respond`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        message: responseMessage,
-        companyName: storedUser.companyName || 'Our Company',
-        actionType: 'RESPONSE' 
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        alert('Response sent successfully!');
-        setShowResponseModal(false);
-        setSelectedApplication(null);
-        setResponseMessage('');
-        fetchApplications(); // Refresh the list
-      } else {
-        alert('Error: ' + data.message);
-      }
-    })
-    .catch(err => {
-      console.error('Error sending response:', err);
-      alert('Error sending response');
-    });
-  };
 
-  //  Helper function to check if a field has value
-  const hasValue = (value) => {
-    return value !== null && value !== undefined && value !== '';
-  };
-
-  //  Helper function to format date
-  const formatDate = (dateString) => {
-    if (!dateString) return 'Not available';
-    try {
-      return new Date(dateString).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+      const response = await fetch("http://www.careerspott.com/api/auth/apply", {
+        method: "POST",
+        body: formData, // send multipart/form-data
       });
-    } catch {
-      return 'Invalid date';
+
+
+      if (response.ok) {
+        navigate("/success");
+        setMessage("Application submitted successfully!");
+        setForm({
+          fullName: "",
+          email: "",
+          mobile: "",
+          skills: "",
+          fresherOrExp: "Fresher",
+          companyName: "",
+          role: "",
+          yearsOfExperience: "",
+          previousPackage: "",
+          expectedPackage: "",
+          description: ""
+        });
+
+        setResumeFile(null);
+      } else {
+        const errorText = await response.text();
+        setMessage("❌ Error submitting application: " + errorText);
+      }
+    } catch (err) {
+      setMessage("❌ Failed to submit application: " + err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="applications-container">
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading applications...</p>
-        </div>
-      </div>
-    );
-  }
+  if (!job) return <p>Loading...</p>;
 
   return (
-    <div className="applications-container">
-      {/* Background elements */}
-      <div className="background-container">
-        <div className="background-image"></div>
-        <div className="background-overlay"></div>
-      </div>
+    <div className="apply-container">
 
-      {/* Main content */}
-      <div className="applications-content">
-        {/* Professional header */}
-        <header className="applications-header">
-          <div className="header-content">
-            <button onClick={goBack} className="back-button">
-              ← Back to Dashboard
-            </button>
-            <div className="header-title">
-              <h1>Job Applications ({applications.length})</h1>
-              <p>Manage and review all candidate applications</p>
-            </div>
-          </div>
+      <header className="apply-header">
+        <div className="apply-logo">
+          <h1>Career Spott</h1>
+          
+           <a href="/jobs">
+            &emsp; Home
+          </a>
+        </div>
         </header>
 
-        {error && (
-          <div className="error-message">
-            <div className="error-icon">⚠️</div>
-            {error}
-          </div>
-        )}
+      <div className="apply-box">
+        <h2>Apply for {job.jobTitle}</h2>
+        <p><b>Company</b> {job.companyName}</p>
 
-        {/* Applications list */}
-        <div className="applications-main">
-          <div className="applications-list">
-            {applications.length === 0 ? (
-              <div className="no-applications">
-                <h2>No Applications Yet</h2>
-                <p>Applications will appear here when candidates apply to your jobs</p>
-              </div>
-            ) : (
-              applications.map((application, index) => (
-                <div key={application.id || index} className="application-card">
-                  <div className="application-header">
-                    <h3>{application.fullName || 'No Name Provided'}</h3>
-                    <div className="application-status">
-                      <span className={`status-badge ${application.status?.toLowerCase() || 'new'}`}>
-                        {application.status || 'NEW'}
-                      </span>
-                      {!application.viewedByCompany && (
-                        <span className="status-badge new">UNVIEWED</span>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="application-details">
-                    {/* ✅ COMMON FIELDS - Always show */}
-                    <div className="field-group">
-                      <h4>Basic Information</h4>
-                      <p><strong>Email:</strong> {application.email || 'Not provided'}</p>
-                      <p><strong>Mobile:</strong> {application.mobile || 'Not provided'}</p>
-                      <p><strong>Skills:</strong> {application.skills || 'Not provided'}</p>
-                      <p><strong>Experience Level:</strong> {application.fresherOrExp || 'Not specified'}</p>
-                    </div>
+        <form onSubmit={handleSubmit}>
+          <label>Full Name *</label>
+          <input type="text" id="fullName" value={form.fullName} onChange={handleChange} required />
 
-                    {/* ✅ EXPERIENCE FIELDS - Only show if applicant is experienced */}
-                    {application.fresherOrExp === 'Experienced' && (
-                      <div className="field-group">
-                        <h4>Experience Details</h4>
-                        {hasValue(application.companyName) && (
-                          <p><strong>Previous Company:</strong> {application.companyName}</p>
-                        )}
-                        {hasValue(application.role) && (
-                          <p><strong>Role:</strong> {application.role}</p>
-                        )}
-                        {hasValue(application.yearsOfExperience) && (
-                          <p><strong>Years of Experience:</strong> {application.yearsOfExperience}</p>
-                        )}
-                        {hasValue(application.previousPackage) && (
-                          <p><strong>Previous Package:</strong> {application.previousPackage}</p>
-                        )}
-                        {hasValue(application.expectedPackage) && (
-                          <p><strong>Expected Package:</strong> {application.expectedPackage}</p>
-                        )}
-                      </div>
-                    )}
+          <label>Email *</label>
+          <input type="email" id="email" value={form.email} onChange={handleChange} required />
 
-                    {/* ✅ ADDITIONAL INFORMATION */}
-                    <div className="field-group">
-                      <h4>Additional Information</h4>
-                      {hasValue(application.description) ? (
-                        <p><strong>Description:</strong> {application.description}</p>
-                      ) : (
-                        <p><strong>Description:</strong> No additional description provided</p>
-                      )}
-                    </div>
+          <label>Mobile *</label>
+          <input type="text" id="mobile" value={form.mobile} onChange={handleChange} required />
 
-                    {/* ✅ APPLICATION METADATA - Always show */}
-                    <div className="field-group">
-                      <h4>Application Details</h4>
-                      <p><strong>Applied Date:</strong> {formatDate(application.appliedDate)}</p>
-                      <p><strong>Status:</strong> 
-                        {application.viewedByCompany ? ' Viewed' : ' Unviewed'}
-                      </p>
-                      {application.viewedAt && (
-                        <p><strong>Viewed At:</strong> {formatDate(application.viewedAt)}</p>
-                      )}
-                    </div>
-                  </div>
+          <label>Skills *</label>
+          <input type="text" id="skills" value={form.skills} onChange={handleChange} required />
 
-                  {/* Action Buttons */}
-                  <div className="application-actions">
-                    {/* ✅ SINGLE BUTTON: Download Resume + Mark as Viewed */}
-                    <button 
-                      className="resume-btn"
-                      onClick={() => handleResumeDownload(application.id, application.fullName)}
-                    >
-                      {application.viewedByCompany ? '📄 Download Resume' : '📄 Download Resume & Mark Viewed'}
-                    </button>
-                    
-                    {/* Shortlist Button */}
-                    <button 
-                      className="shortlist-btn"
-                      onClick={() => handleShortlist(application)}
-                      disabled={application.status === 'SHORTLISTED'}
-                    >
-                      {application.status === 'SHORTLISTED' ? '✅ Shortlisted' : '✅ Shortlist'}
-                    </button>
-                    
-                    {/* Respond Button */}
-                    <button 
-                      className="respond-btn"
-                      onClick={() => handleRespond(application)}
-                    >
-                       Respond
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
+          <label required>Fresher / Experienced *</label>
+          <select id="fresherOrExp" value={form.fresherOrExp} onChange={handleChange}>
+            <option>Fresher</option>
+            <option>Experienced</option>
+          </select>
+
+          {form.fresherOrExp === "Experienced" && (
+            <>
+              <label required>Company Name *</label>
+              <input type="text" id="companyName" value={form.companyName} onChange={handleChange} />
+
+              <label required>Role *</label>
+              <input type="text" id="role" value={form.role} onChange={handleChange} />
+
+              <label required> Years of Experience *</label>
+              <input type="number" id="yearsOfExperience" value={form.yearsOfExperience} onChange={handleChange} />
+
+              <label required>Previous Package *</label>
+              <input type="text" id="previousPackage" value={form.previousPackage} onChange={handleChange} />
+
+              <label required>Expected Package *</label>
+              <input type="text" id="expectedPackage" value={form.expectedPackage} onChange={handleChange} />
+            </>
+          )}
+
+          <label>Additional Description</label>
+          <textarea id="description" value={form.description} onChange={handleChange}></textarea>
+
+          {/* ✅ Resume Upload */}
+          <label>Upload Resume (PDF/DOC) *</label>
+          <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} required />
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Submitting..." : "Submit Application"}
+          </button>
+        </form>
+        {loading && <p style={{ color: "blue" }}>Submitting...</p>}
+        {message && <p>{message}</p>}
+       
       </div>
-
-      {showResponseModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>Respond to {selectedApplication?.fullName}</h3>
-            <textarea
-              value={responseMessage}
-              onChange={(e) => setResponseMessage(e.target.value)}
-              placeholder="Enter your response message to the candidate..."
-              rows="6"
-            />
-            <div className="modal-actions">
-              <button onClick={() => setShowResponseModal(false)} className="cancel-btn">
-                Cancel
-              </button>
-              <button onClick={sendResponse} className="send-btn">
-                Send Response
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default CompanyApplications;
+export default ApplicationForm;

@@ -21,12 +21,12 @@ import com.company.service.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "http://www.careerspott.com", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
 public class AdminController {
 
     @Autowired
     private StudentRepository studentRepository;
-    
+
     @Autowired
     private CompanyRepository companyRepository;
 
@@ -44,15 +44,15 @@ public class AdminController {
         try {
             String email = credentials.get("email");
             String password = credentials.get("password");
-            
+
             System.out.println("=== ADMIN LOGIN ATTEMPT ===");
             System.out.println("Email: " + email);
             System.out.println("Password provided: " + password);
-            
+
             if (email == null || password == null) {
                 return ResponseEntity.badRequest().body("Email and password are required");
             }
-            
+
             if (adminService.validateCredentials(email, password)) {
                 System.out.println("✅ LOGIN SUCCESSFUL");
                 Map<String, Object> response = new HashMap<>();
@@ -66,7 +66,7 @@ public class AdminController {
                 System.out.println("❌ LOGIN FAILED - Invalid credentials");
                 return ResponseEntity.badRequest().body("Invalid email or password");
             }
-            
+
         } catch (Exception e) {
             System.out.println("❌ Error during admin login: " + e.getMessage());
             return ResponseEntity.internalServerError().body("An error occurred during admin login: " + e.getMessage());
@@ -79,45 +79,46 @@ public class AdminController {
             String email = request.get("email");
             String newPassword = request.get("newPassword");
             String confirmPassword = request.get("confirmPassword");
-            
+
             System.out.println("=== PASSWORD RESET REQUEST ===");
             System.out.println("Email: " + email);
             System.out.println("New Password: " + newPassword);
-            
+
             // Validation
             if (email == null || newPassword == null || confirmPassword == null) {
                 return ResponseEntity.badRequest().body("All fields are required");
             }
-            
+
             if (!newPassword.equals(confirmPassword)) {
                 return ResponseEntity.badRequest().body("Passwords do not match");
             }
-            
+
             // Check if it's the admin email
             if (!adminService.getAdminEmail().equals(email)) {
                 return ResponseEntity.badRequest().body("Admin email not found");
             }
-            
+
             // Password validation
             boolean hasLowerCase = newPassword.matches(".*[a-z].*");
             boolean hasUpperCase = newPassword.matches(".*[A-Z].*");
             boolean hasNumber = newPassword.matches(".*[0-9].*");
             boolean hasSpecialChar = newPassword.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
-            
+
             if (!hasLowerCase || !hasUpperCase || !hasNumber || !hasSpecialChar) {
-                return ResponseEntity.badRequest().body("Password must contain lowercase, uppercase, number, and special character");
+                return ResponseEntity.badRequest()
+                        .body("Password must contain lowercase, uppercase, number, and special character");
             }
-            
+
             // ✅ UPDATE PASSWORD IN DATABASE
             boolean updateSuccess = adminService.updatePassword(email, newPassword);
-            
+
             if (updateSuccess) {
                 System.out.println("✅ Password updated and persisted for: " + email);
                 return ResponseEntity.ok("Admin password reset successfully. Please use the new password to login.");
             } else {
                 return ResponseEntity.badRequest().body("Failed to update password");
             }
-            
+
         } catch (Exception e) {
             System.out.println("❌ Error resetting admin password: " + e.getMessage());
             return ResponseEntity.internalServerError().body("An error occurred: " + e.getMessage());
@@ -137,49 +138,47 @@ public class AdminController {
         }
     }
 
-
-
     @GetMapping("/dashboard")
     public ResponseEntity<?> getAdminDashboard() {
         try {
             System.out.println("=== ADMIN DASHBOARD REQUESTED ===");
-            
+
             Map<String, Object> dashboardData = new HashMap<>();
-            
+
             // Get counts
             long totalStudents = studentRepository.count();
             long totalCompanies = companyRepository.count();
             long totalJobs = jobRepository.count();
             long totalApplications = applicationRepository.count();
-            
-            System.out.println("📊 Counts - Students: " + totalStudents + ", Companies: " + totalCompanies + 
-                              ", Jobs: " + totalJobs + ", Applications: " + totalApplications);
-            
+
+            System.out.println("📊 Counts - Students: " + totalStudents + ", Companies: " + totalCompanies +
+                    ", Jobs: " + totalJobs + ", Applications: " + totalApplications);
+
             // Get ALL data
             List<Student> allStudents = studentRepository.findAll();
             List<Company> allCompanies = companyRepository.findAll();
             List<PostingForm> allJobs = jobRepository.findAll();
             List<Application> allApplications = applicationRepository.findAll();
-            
+
             // EXTENSIVE DEBUGGING
             System.out.println("=== ACTUAL RECORDS FOUND ===");
             System.out.println("Students: " + allStudents.size());
             System.out.println("Companies: " + allCompanies.size());
             System.out.println("Jobs: " + allJobs.size());
             System.out.println("Applications: " + allApplications.size());
-            
+
             if (!allStudents.isEmpty()) {
-                System.out.println("👥 Sample Student: ID=" + allStudents.get(0).getId() + 
-                                 ", Name=" + allStudents.get(0).getFullName() + 
-                                 ", Email=" + allStudents.get(0).getEmail());
+                System.out.println("👥 Sample Student: ID=" + allStudents.get(0).getId() +
+                        ", Name=" + allStudents.get(0).getFullName() +
+                        ", Email=" + allStudents.get(0).getEmail());
             }
-            
+
             if (!allCompanies.isEmpty()) {
-                System.out.println("🏢 Sample Company: ID=" + allCompanies.get(0).getId() + 
-                                 ", Name=" + allCompanies.get(0).getCompanyName() + 
-                                 ", Email=" + allCompanies.get(0).getEmail());
+                System.out.println("🏢 Sample Company: ID=" + allCompanies.get(0).getId() +
+                        ", Name=" + allCompanies.get(0).getCompanyName() +
+                        ", Email=" + allCompanies.get(0).getEmail());
             }
-            
+
             dashboardData.put("totalStudents", totalStudents);
             dashboardData.put("totalCompanies", totalCompanies);
             dashboardData.put("totalJobs", totalJobs);
@@ -188,10 +187,10 @@ public class AdminController {
             dashboardData.put("allCompanies", allCompanies);
             dashboardData.put("allJobs", allJobs);
             dashboardData.put("allApplications", allApplications);
-            
+
             System.out.println("✅ Dashboard data prepared successfully");
             return ResponseEntity.ok(dashboardData);
-            
+
         } catch (Exception e) {
             System.out.println("❌ ERROR in dashboard: " + e.getMessage());
             e.printStackTrace();
@@ -204,15 +203,15 @@ public class AdminController {
         try {
             List<Student> students = studentRepository.findAll();
             System.out.println("👥 GET /students - Returning: " + students.size() + " students");
-            
+
             // Debug first student
             if (!students.isEmpty()) {
                 Student first = students.get(0);
-                System.out.println("📝 First student - ID: " + first.getId() + 
-                                 ", Name: " + first.getFullName() + 
-                                 ", Email: " + first.getEmail());
+                System.out.println("📝 First student - ID: " + first.getId() +
+                        ", Name: " + first.getFullName() +
+                        ", Email: " + first.getEmail());
             }
-            
+
             return ResponseEntity.ok(students);
         } catch (Exception e) {
             System.out.println("❌ Error in /students: " + e.getMessage());
@@ -225,14 +224,14 @@ public class AdminController {
         try {
             List<Company> companies = companyRepository.findAll();
             System.out.println("🏢 GET /companies - Returning: " + companies.size() + " companies");
-            
+
             if (!companies.isEmpty()) {
                 Company first = companies.get(0);
-                System.out.println("📝 First company - ID: " + first.getId() + 
-                                 ", Name: " + first.getCompanyName() + 
-                                 ", Email: " + first.getEmail());
+                System.out.println("📝 First company - ID: " + first.getId() +
+                        ", Name: " + first.getCompanyName() +
+                        ", Email: " + first.getEmail());
             }
-            
+
             return ResponseEntity.ok(companies);
         } catch (Exception e) {
             System.out.println("❌ Error in /companies: " + e.getMessage());
@@ -245,14 +244,14 @@ public class AdminController {
         try {
             List<PostingForm> jobs = jobRepository.findAll();
             System.out.println("💼 GET /jobs - Returning: " + jobs.size() + " jobs");
-            
+
             if (!jobs.isEmpty()) {
                 PostingForm first = jobs.get(0);
-                System.out.println("📝 First job - ID: " + first.getId() + 
-                                 ", Title: " + first.getJobTitle() + 
-                                 ", Company: " + first.getCompanyName());
+                System.out.println("📝 First job - ID: " + first.getId() +
+                        ", Title: " + first.getJobTitle() +
+                        ", Company: " + first.getCompanyName());
             }
-            
+
             return ResponseEntity.ok(jobs);
         } catch (Exception e) {
             System.out.println("❌ Error in /jobs: " + e.getMessage());
@@ -265,14 +264,14 @@ public class AdminController {
         try {
             List<Application> applications = applicationRepository.findAll();
             System.out.println("📝 GET /applications - Returning: " + applications.size() + " applications");
-            
+
             if (!applications.isEmpty()) {
                 Application first = applications.get(0);
-                System.out.println("📝 First application - ID: " + first.getId() + 
-                                 ", Name: " + first.getFullName() + 
-                                 ", Email: " + first.getEmail());
+                System.out.println("📝 First application - ID: " + first.getId() +
+                        ", Name: " + first.getFullName() +
+                        ", Email: " + first.getEmail());
             }
-            
+
             return ResponseEntity.ok(applications);
         } catch (Exception e) {
             System.out.println("❌ Error in /applications: " + e.getMessage());
@@ -338,23 +337,23 @@ public class AdminController {
     }
 
     // Add this method to your AdminController
-@GetMapping("/debug-admin")
-public ResponseEntity<?> debugAdmin() {
-    try {
-        Admin admin = adminService.getAdminDetails();
-        if (admin != null) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("id", admin.getId());
-            response.put("email", admin.getEmail());
-            response.put("password", admin.getPassword());
-            response.put("exists", true);
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.ok(Map.of("exists", false, "message", "Admin not found in database"));
+    @GetMapping("/debug-admin")
+    public ResponseEntity<?> debugAdmin() {
+        try {
+            Admin admin = adminService.getAdminDetails();
+            if (admin != null) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("id", admin.getId());
+                response.put("email", admin.getEmail());
+                response.put("password", admin.getPassword());
+                response.put("exists", true);
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.ok(Map.of("exists", false, "message", "Admin not found in database"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error debugging admin: " + e.getMessage());
         }
-    } catch (Exception e) {
-        return ResponseEntity.internalServerError().body("Error debugging admin: " + e.getMessage());
     }
-}
 
 }

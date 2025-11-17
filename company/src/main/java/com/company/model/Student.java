@@ -1,6 +1,5 @@
 package com.company.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,24 +10,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "students")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student  {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    
+
     private String fullName;
     private String email;
     private String password;
     private String education;
-    
+
     @Column(name = "year_of_passing")
     private String yearOfPassing;
     private String place;
@@ -53,7 +50,4 @@ public class Student  {
     @Column(name = "messages")
     private Integer messages = 0;
 
-    
-    
-    
 }

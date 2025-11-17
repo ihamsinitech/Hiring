@@ -50,7 +50,7 @@ import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins =  "http://www.careerspott.com",allowedHeaders = "*")
+@CrossOrigin(origins = {"http://localhost:5173", "http://www.careerspott.com"},allowedHeaders = "*")
 public class AuthController {
     
     

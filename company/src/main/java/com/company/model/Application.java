@@ -1,9 +1,5 @@
 package com.company.model;
 
-
-
-
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -16,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Entity
 @Table(name = "applications")
@@ -53,23 +48,21 @@ public class Application {
     private String companyEmail;
     private String resumePath;
     private Long studentId;
-    
+
     private String status;
 
     @Column(name = "has_reply")
-    private Boolean hasReply = false; 
+    private Boolean hasReply = false;
 
     private String companyResponse;
 
-    
-    
     // FIX: Change from primitive boolean to wrapper Boolean
     @Column(name = "viewed_by_company")
     private Boolean viewedByCompany = false;
-    
+
     @Column(name = "viewed_at")
     private LocalDateTime viewedAt;
-    
+
     @Column(name = "applied_date")
     private LocalDateTime appliedDate;
 
@@ -77,21 +70,20 @@ public class Application {
     public Boolean getViewedByCompany() {
         return viewedByCompany != null ? viewedByCompany : false;
     }
-    
+
     // Add safe getter for hasReply
     public Boolean getHasReply() {
         return hasReply != null ? hasReply : false;
     }
-    
-    //  Add safe getter for status
+
+    // Add safe getter for status
     public String getStatus() {
         return status != null ? status : "Applied";
     }
-    
+
     // Add safe getter for appliedDate
     public LocalDateTime getAppliedDate() {
         return appliedDate != null ? appliedDate : LocalDateTime.now();
     }
 
-}    
-
+}

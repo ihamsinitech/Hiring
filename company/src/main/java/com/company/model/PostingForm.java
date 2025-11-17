@@ -16,12 +16,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostingForm {
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long companyId;
-    
+
     private String jobTitle;
     private String companyName;
     private String jobType;
@@ -30,19 +30,18 @@ public class PostingForm {
     private String salary;
     private String experienceLevel;
     private String educationRequired;
-    
+
     @Column(length = 1000)
     private String skillsRequired;
-    
+
     @Column(length = 2000)
     private String jobDescription;
-    
+
     @Column(length = 1500)
     private String responsibilities;
-    
+
     @Column(length = 1000)
     private String benefits;
-    
 
     private String contactEmail;
     private String website;

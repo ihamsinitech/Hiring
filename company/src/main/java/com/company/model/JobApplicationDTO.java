@@ -3,6 +3,7 @@ package com.company.model;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
+
 @Data
 public class JobApplicationDTO {
     private Long jobId;

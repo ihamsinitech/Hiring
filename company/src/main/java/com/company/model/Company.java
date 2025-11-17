@@ -13,7 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "companies")
 @Data
@@ -28,24 +27,24 @@ public class Company {
     @NotBlank
     @Column(name = "company_name", nullable = false)
     private String companyName;
-    
+
     @Column(nullable = false, unique = true)
     private String email;
     private String password;
     @NotBlank
     private String mobile;
-    
+
     @NotBlank
     private String address;
     @Column(name = "payment_status")
     private String paymentStatus;
-    
+
     @Column(name = "trial_start_date")
     private LocalDate trialStartDate;
-    
+
     @Column(name = "trial_end_date")
     private LocalDate trialEndDate;
-    
+
     @Column(name = "subscription_end_date")
     private LocalDate subscriptionEndDate;
 

@@ -12,44 +12,44 @@ import com.company.model.PostingForm;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
-    long countByStudentId(Long studentId);
-    long countByStudentIdAndStatus(Long studentId, String status);
-    long countByStudentIdAndHasReply(Long studentId, Boolean hasReply); 
-   
-    // ✅ ADD THESE MISSING METHODS
-    List<Application> findByJobId(Long jobId);
-    List<Application> findByStudentIdAndStatus(Long studentId, String status);
+   long countByStudentId(Long studentId);
 
-    @Query("SELECT j FROM PostingForm j WHERE j.id IN (SELECT a.jobId FROM Application a WHERE a.studentId = :studentId)")
-    List<PostingForm> findAppliedJobsByStudentId(@Param("studentId") Long studentId);
+   long countByStudentIdAndStatus(Long studentId, String status);
 
-    List<Application> findByStudentIdAndHasReply(@Param("studentId") Long studentId, @Param("hasReply") boolean hasReply);
+   long countByStudentIdAndHasReply(Long studentId, Boolean hasReply);
 
-    @Query("SELECT j FROM PostingForm j JOIN Application a ON j.id = a.jobId WHERE a.studentId = :studentId AND a.status = 'SHORTLISTED'")
-    List<PostingForm> findShortlistedJobsByStudentId(@Param("studentId") Long studentId);
+   // ✅ ADD THESE MISSING METHODS
+   List<Application> findByJobId(Long jobId);
 
-    @Query("SELECT COUNT(a) FROM Application a WHERE a.jobId IN (SELECT j.id FROM PostingForm j WHERE j.companyId = :companyId)")
-    long countApplicationsByCompanyId(@Param("companyId") Long companyId);
+   List<Application> findByStudentIdAndStatus(Long studentId, String status);
 
-    List<Application> findByJobIdIn(List<Long> jobIds);
+   @Query("SELECT j FROM PostingForm j WHERE j.id IN (SELECT a.jobId FROM Application a WHERE a.studentId = :studentId)")
+   List<PostingForm> findAppliedJobsByStudentId(@Param("studentId") Long studentId);
 
-    long countByJobId(Long jobId);
+   List<Application> findByStudentIdAndHasReply(@Param("studentId") Long studentId,
+         @Param("hasReply") boolean hasReply);
 
-    
+   @Query("SELECT j FROM PostingForm j JOIN Application a ON j.id = a.jobId WHERE a.studentId = :studentId AND a.status = 'SHORTLISTED'")
+   List<PostingForm> findShortlistedJobsByStudentId(@Param("studentId") Long studentId);
 
-// Count applications by job IDs and status
+   @Query("SELECT COUNT(a) FROM Application a WHERE a.jobId IN (SELECT j.id FROM PostingForm j WHERE j.companyId = :companyId)")
+   long countApplicationsByCompanyId(@Param("companyId") Long companyId);
+
+   List<Application> findByJobIdIn(List<Long> jobIds);
+
+   long countByJobId(Long jobId);
+
+   // Count applications by job IDs and status
    long countByJobIdInAndStatus(List<Long> jobIds, String status);
 
-// Count applications by job IDs and hasReply
+   // Count applications by job IDs and hasReply
    long countByJobIdInAndHasReply(List<Long> jobIds, boolean hasReply);
 
-// Count applications by student ID and hasReply
+   // Count applications by student ID and hasReply
    long countByStudentIdAndHasReply(Long studentId, boolean hasReply);
 
-   
    long countByJobIdIn(List<Long> jobIds);
 
    List<Application> findByStudentId(Long studentId);
 
-   
 }
