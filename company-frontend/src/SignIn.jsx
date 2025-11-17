@@ -54,7 +54,7 @@ const SignIn = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://localhost:8085/api/auth/signin', {
+      const response = await fetch('http://www.careerspott.com/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
