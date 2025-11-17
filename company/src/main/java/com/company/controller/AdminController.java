@@ -21,7 +21,7 @@ import com.company.service.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
+@CrossOrigin(origins = "http://www.careerspott.com", allowedHeaders = "*")
 public class AdminController {
 
     @Autowired
