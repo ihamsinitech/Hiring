@@ -93,7 +93,7 @@ const CompanyRegistration = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signup/company', {
+      const response = await fetch('http://www.careerspott.com/api/auth/signup/company', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ const CompanyRegistration = () => {
                   className="password-toggle-icon"
                   onClick={toggleConfirmPasswordVisibility}
                 >
-                  {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+                  {showConfirmPassword ? <i class="fa-solid fa-eye"></i> : <i class="fa-solid fa-eye-slash"></i>}
                 </button>
               </div>
               {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}

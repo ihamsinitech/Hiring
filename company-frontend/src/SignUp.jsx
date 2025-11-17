@@ -64,7 +64,7 @@ const SignUp = () => {
     }
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signup/student', {
+      const response = await fetch('http://www.careerspott.com/api/auth/signup/student', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -244,7 +244,7 @@ const SignUp = () => {
                   onClick={toggleConfirmPasswordVisibility}
                   tabIndex="-1"
                 >
-                  {showConfirmPassword ? '👁️':'👁️‍🗨️' }
+                  {showConfirmPassword ? <i class="fa-solid fa-eye"></i> : <i class="fa-solid fa-eye-slash"></i> }
                 </button>
               </div>
               

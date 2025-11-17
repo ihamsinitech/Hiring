@@ -54,7 +54,7 @@ const SignIn = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/signin', {
+      const response = await fetch('http://www.careerspott.com/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -216,7 +216,7 @@ const SignIn = () => {
                   className="password-toggle-icon"
                   onClick={togglePasswordVisibility}
                 >
-                  {showPassword ? '👁️': '👁️‍🗨️' }
+                  {showPassword ? <i class="fa-solid fa-eye"></i> : <i class="fa-solid fa-eye-slash"></i> }
                 </span>
               </div>
               

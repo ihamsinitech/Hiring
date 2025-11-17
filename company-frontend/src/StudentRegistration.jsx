@@ -42,7 +42,7 @@ const StudentRegistration = () => {
     setMessage('');
     
     try {
-      const response = await fetch('http://15.206.41.13:8085/api/auth/complete-student-registration', { 
+      const response = await fetch('http://www.careerspott.com/api/auth/complete-student-registration', { 
        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ const StudentRegistration = () => {
               value={form.mobile || ""}
               onChange={handleChange}
               placeholder="Enter mobile number"
-              pattern="[0-9]{10}" // ✅ simple validation (10 digits)
+              pattern="[0-9]{10}" //  simple validation (10 digits)
               required
             />
 

@@ -4,6 +4,8 @@ package com.company.model;
 
 
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +30,6 @@ public class Application {
     private Long id;
 
     private Long companyId;
-
     private Long jobId;
 
     @Column(nullable = false)
@@ -49,10 +50,8 @@ public class Application {
     @Column(length = 2000)
     private String description;
 
-     
     private String companyEmail;
-
-    private String resumePath;  // Store uploaded resume file path
+    private String resumePath;
     private Long studentId;
     
     private String status;
@@ -61,8 +60,38 @@ public class Application {
     private Boolean hasReply = false; 
 
     private String companyResponse;
-    
 
     
     
-}
+    // FIX: Change from primitive boolean to wrapper Boolean
+    @Column(name = "viewed_by_company")
+    private Boolean viewedByCompany = false;
+    
+    @Column(name = "viewed_at")
+    private LocalDateTime viewedAt;
+    
+    @Column(name = "applied_date")
+    private LocalDateTime appliedDate;
+
+    // Add safe getter for viewedByCompany
+    public Boolean getViewedByCompany() {
+        return viewedByCompany != null ? viewedByCompany : false;
+    }
+    
+    // Add safe getter for hasReply
+    public Boolean getHasReply() {
+        return hasReply != null ? hasReply : false;
+    }
+    
+    //  Add safe getter for status
+    public String getStatus() {
+        return status != null ? status : "Applied";
+    }
+    
+    // Add safe getter for appliedDate
+    public LocalDateTime getAppliedDate() {
+        return appliedDate != null ? appliedDate : LocalDateTime.now();
+    }
+
+}    
+

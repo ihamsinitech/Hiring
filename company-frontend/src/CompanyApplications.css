@@ -456,7 +456,7 @@
 
 .status-badge.new {
   background: rgba(25, 118, 210, 0.2);
-  color: #1770c9;
+  color: white;
   border-color: rgba(25, 118, 210, 0.3);
 }
 
@@ -683,6 +683,21 @@
   font-size: 1.1rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.8);
+}
+
+.mark-viewed-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.mark-viewed-btn:hover {
+  background-color: #0056b3;
 }
 
 

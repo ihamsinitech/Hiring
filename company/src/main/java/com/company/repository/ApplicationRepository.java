@@ -49,5 +49,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
    
    long countByJobIdIn(List<Long> jobIds);
 
+   List<Application> findByStudentId(Long studentId);
+
    
 }

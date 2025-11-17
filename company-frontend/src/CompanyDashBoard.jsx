@@ -6,7 +6,7 @@ const CompanyDashBoard = () => {
   const [companyProfile, setCompanyProfile] = useState(null);
   const [postedJobsCount, setPostedJobsCount] = useState(0);
   const [applicationsCount, setApplicationsCount] = useState(0);
-   const [shortlistedCount, setShortlistedCount] = useState(0);
+  const [shortlistedCount, setShortlistedCount] = useState(0);
   const [messagesCount, setMessagesCount] = useState(0);
   const [jobs, setJobs] = useState([]);
   const [filters, setFilters] = useState({
@@ -18,6 +18,7 @@ const CompanyDashBoard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState(''); // Added search query state
 
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const CompanyDashBoard = () => {
       console.log("Company ID:", storedUser.userId);
 
       // Fetch company profile & stats
-      fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/profile`)
+      fetch(`http://www.careerspott.com/api/auth/company/${storedUser.userId}/profile`)
         .then(res => {
           if (!res.ok) {
             throw new Error('Profile not found');
@@ -65,7 +66,7 @@ const CompanyDashBoard = () => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
     if (storedUser) {
-      fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/jobs`)
+      fetch(`http://www.careerspott.com/api/auth/company/${storedUser.userId}/jobs`)
         .then(res => {
           if (!res.ok) {
             throw new Error('Jobs not found');
@@ -88,35 +89,43 @@ const CompanyDashBoard = () => {
   }, []);
 
   // ✅ Fetch company's posted jobs with application counts
-useEffect(() => {
-  const storedUser = JSON.parse(localStorage.getItem("userData"));
-  if (storedUser) {
-    fetch(`http://15.206.41.13:8085/api/auth/company/${storedUser.userId}/jobs-with-applications`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Jobs not found');
-        }
-        return res.json();
-      })
-      .then(data => {
-        console.log("Fetched Jobs with Applications:", data);
-        setJobs(Array.isArray(data) ? data : []);
-        setError('');
-      })
-      .catch(err => {
-        console.error("Error fetching company jobs:", err);
-        setError('Failed to load jobs');
-        setJobs([]);
-      })
-      .finally(() => setLoading(false));
-  }
-}, []);
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("userData"));
+    if (storedUser) {
+      fetch(`http://www.careerspott.com/api/auth/company/${storedUser.userId}/jobs-with-applications`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Jobs not found');
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log("Fetched Jobs with Applications:", data);
+          setJobs(Array.isArray(data) ? data : []);
+          setError('');
+        })
+        .catch(err => {
+          console.error("Error fetching company jobs:", err);
+          setError('Failed to load jobs');
+          setJobs([]);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, []);
 
+  // ✅ Handle search - Added search functionality
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
+  // ✅ Clear search - Added clear search functionality
+  const clearSearch = () => {
+    setSearchQuery('');
+  };
 
   // ✅ Header actions
   const goToApplications = () => navigate('/companyApplications');
   const goToProfile = () => navigate('/companyProfile');
-  
   
   // ✅ Create new job
   const createNewJob = () => {
@@ -151,8 +160,16 @@ useEffect(() => {
     setFilters((prev) => ({ ...prev, experience: Number(e.target.value) }));
   };
 
-  // ✅ Apply filters to jobs
+  // ✅ Apply filters to jobs - Updated to include search
   const filteredJobs = Array.isArray(jobs) ? jobs.filter((job) => {
+    // Search filter - Added search functionality
+    const matchesSearch = searchQuery === '' || 
+      (job.jobTitle && job.jobTitle.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (job.companyName && job.companyName.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (job.skillsRequired && job.skillsRequired.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (job.location && job.location.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (job.jobDescription && job.jobDescription.toLowerCase().includes(searchQuery.toLowerCase()));
+
     const matchWorkMode =
       filters.workModes.length === 0 ||
       filters.workModes.some((mode) =>
@@ -178,7 +195,7 @@ useEffect(() => {
     const matchExperience =
       !filters.experience || jobExperience >= filters.experience;
 
-    return matchWorkMode && matchSkillsOrTitle && matchExperience;
+    return matchesSearch && matchWorkMode && matchSkillsOrTitle && matchExperience;
   }) : [];
 
   if (loading) {
@@ -198,6 +215,27 @@ useEffect(() => {
                   <img src="/logo-website.png" alt="CareerConnect" className="logo-img" />
                 </a>
                 <h1>Career Spott</h1>
+              </div>
+            </div>
+
+            {/* ✅ Search Bar - Added search bar */}
+            <div className="header-center">
+              <div className="search-container">
+                <div className="search-box">
+                  <input
+                    type="text"
+                    placeholder="Search your jobs by title, skills, or location..."
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    className="search-input"
+                  />
+                  {searchQuery && (
+                    <button className="clear-search" onClick={clearSearch}>
+                      ✕
+                    </button>
+                  )}
+                  <span className="search-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
+                </div>
               </div>
             </div>
 
@@ -332,7 +370,7 @@ useEffect(() => {
                 </button>
               </div>
             ))}
-            {filteredJobs.length === 0 && <p className="no-results">No jobs posted yet.</p>}
+            {filteredJobs.length === 0 && <p className="no-results">No jobs found for selected filters.</p>}
           </div>
         </div>
       </div>

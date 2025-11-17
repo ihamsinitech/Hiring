@@ -68,7 +68,7 @@ const StudentProfile = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`)
+      fetch(`http://www.careerspott.com/api/auth/student/${userData.userId}/profile`)
         .then(res => res.json())
         .then(data => {
           setStudent(data);
@@ -85,7 +85,7 @@ const StudentProfile = () => {
 
   const handleSave = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/profile`, {
+    fetch(`http://www.careerspott.com/api/auth/student/${userData.userId}/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

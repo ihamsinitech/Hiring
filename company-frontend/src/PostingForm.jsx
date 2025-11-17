@@ -86,14 +86,14 @@ const PostingForm = () => {
     
     console.log("Sending companyId:", companyId); // Debug log
     
-    const response = await fetch('http://15.206.41.13:8085/api/auth/post', {
+    const response = await fetch('http://www.careerspott.com/api/auth/post', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         ...form,
-        companyId: companyId, // ✅ CRITICAL: Add companyId to the request
+        companyId: companyId, //  CRITICAL: Add companyId to the request
         companyEmail: form.contactEmail
       }),
     });

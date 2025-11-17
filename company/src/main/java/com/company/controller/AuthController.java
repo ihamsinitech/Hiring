@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,13 +43,14 @@ import com.company.repository.StudentRepository;
 
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import java.util.Collections;
 
 
 
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://15.206.41.13", "http://15.206.41.13:8085"},allowedHeaders = "*")
+@CrossOrigin(origins =  "http://www.careerspott.com",allowedHeaders = "*")
 public class AuthController {
     
     
@@ -440,15 +443,18 @@ public class AuthController {
             app.setCompanyEmail(dto.getCompanyEmail());
             app.setResumePath(resumePath);
 
+            app.setAppliedDate(LocalDateTime.now());
+            app.setViewedByCompany(false);
+
             if (dto.getStudentId() != null) {
                 app.setStudentId(dto.getStudentId());
             }
 
-            applicationRepository.save(app);
+           Application savedApplication = applicationRepository.save(app);
 
             // ✅ Send professional email to company ONLY
             if (dto.getCompanyEmail() != null && !dto.getCompanyEmail().isEmpty()) {
-                sendProfessionalApplicationEmail(dto);
+                sendProfessionalApplicationEmail(dto, savedApplication);
             }
 
             Map<String, Object> cleanResponse = new HashMap<>();
@@ -469,55 +475,68 @@ public class AuthController {
     }
     }
 
-    private void sendProfessionalApplicationEmail(JobApplicationDTO dto) {
+    private void sendProfessionalApplicationEmail(JobApplicationDTO dto, Application savedApplication) {
     try {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        // ✅ PROFESSIONAL: Hidden email with professional display name
-        helper.setFrom(new InternetAddress("lavanyagorle2003@gmail.com", "Career Spott Portal"));  
+        // ✅ ADD THIS: Create tracking URL for email opens
+        String trackingUrl = "http://www.careerspott.com/api/auth/application/" + savedApplication.getId() + "/email-opened";
         
-        // ✅ Send to company ONLY - REMOVED CC/BCC to yourself
-        helper.setTo(dto.getCompanyEmail());
-        
-        // ✅ Set reply-to for direct communication between company and student
-        helper.setReplyTo(dto.getEmail());
-        
-        helper.setSubject("New Job Application: " + dto.getFullName() + " for " + dto.getCompanyName());
-        
-        // ✅ Professional email content
+        // ✅ ADD THIS: HTML email with tracking pixel
         String emailContent = 
-            "APPLICANT INFORMATION:\n" +
-            "─────────────────────\n" +
-            "• Full Name: " + dto.getFullName() + "\n" +
-            "• Email: " + dto.getEmail() + "\n" +
-            "• Mobile: " + dto.getMobile() + "\n" +
-            "• Skills: " + dto.getSkills() + "\n" +
-            "• Experience Level: " + dto.getFresherOrExp() + "\n";
+            "<!DOCTYPE html>" +
+            "<html>" +
+            "<head>" +
+                "<meta charset='UTF-8'>" +
+                "<style>" +
+                    "body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }" +
+                    ".container { max-width: 600px; margin: 0 auto; padding: 20px; }" +
+                "</style>" +
+            "</head>" +
+            "<body>" +
+                "<div class='container'>" +
+                    "APPLICANT INFORMATION:<br>" +
+                    "─────────────────────<br>" +
+                    "• Full Name: " + dto.getFullName() + "<br>" +
+                    "• Email: " + dto.getEmail() + "<br>" +
+                    "• Mobile: " + dto.getMobile() + "<br>" +
+                    "• Skills: " + dto.getSkills() + "<br>" +
+                    "• Experience Level: " + dto.getFresherOrExp() + "<br>";
             
         // Add experience details if provided
         if ("Experience".equals(dto.getFresherOrExp())) {
             if (dto.getYearsOfExperience() != null) {
-                emailContent += "• Years of Experience: " + dto.getYearsOfExperience() + "\n";
+                emailContent += "• Years of Experience: " + dto.getYearsOfExperience() + "<br>";
             }
             if (dto.getPreviousPackage() != null) {
-                emailContent += "• Previous Package: " + dto.getPreviousPackage() + "\n";
+                emailContent += "• Previous Package: " + dto.getPreviousPackage() + "<br>";
             }
             if (dto.getExpectedPackage() != null) {
-                emailContent += "• Expected Package: " + dto.getExpectedPackage() + "\n";
+                emailContent += "• Expected Package: " + dto.getExpectedPackage() + "<br>";
             }
             if (dto.getRole() != null) {
-                emailContent += "• Previous Role: " + dto.getRole() + "\n";
+                emailContent += "• Previous Role: " + dto.getRole() + "<br>";
             }
         }
         
         emailContent += 
-            "\nAPPLICATION DETAILS:\n" +
-            "───────────────────\n" +
-            "• Application Date: " + LocalDate.now() + "\n" +
-            "• Resume: Attached\n\n";
+                    "<br>APPLICATION DETAILS:<br>" +
+                    "───────────────────<br>" +
+                    "• Application Date: " + LocalDate.now() + "<br>" +
+                    "• Resume: Attached<br><br>" +
+                "</div>" +
+                
+                // ✅ ADD THIS: TRACKING PIXEL - This will mark as viewed when email is opened
+                "<img src='" + trackingUrl + "' width='1' height='1' style='display:none;' alt='' />" +
+            "</body>" +
+            "</html>";
 
-        helper.setText(emailContent);
+        helper.setText(emailContent, true); // true = HTML content
+        helper.setFrom(new InternetAddress("lavanyagorle2003@gmail.com", "Career Spott Portal"));  
+        helper.setTo(dto.getCompanyEmail());
+        helper.setReplyTo(dto.getEmail());
+        helper.setSubject("New Job Application: " + dto.getFullName() + " for " + dto.getCompanyName());
 
         // Attach resume file
         if (dto.getResume() != null && !dto.getResume().isEmpty()) {
@@ -527,7 +546,7 @@ public class AuthController {
         mailSender.send(message);
         
         System.out.println("✅ Application email sent to COMPANY ONLY: " + dto.getCompanyEmail());
-        System.out.println("✅ NO email sent to your personal inbox");
+        System.out.println("✅ Email tracking enabled for application: " + savedApplication.getId());
         
     } catch (Exception e) {
         System.err.println("❌ Failed to send application email: " + e.getMessage());
@@ -701,15 +720,92 @@ public ResponseEntity<?> getStudentProfile(@PathVariable Long id) {
     }
 
     @GetMapping("/student/{id}/applied-jobs")
-    public ResponseEntity<?> getAppliedJobs(@PathVariable Long id) {
-        try {
-            List<PostingForm> jobs = applicationRepository.findAppliedJobsByStudentId(id);
-            return ResponseEntity.ok(jobs);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body("Error fetching applied jobs: " + e.getMessage());
+public ResponseEntity<?> getAppliedJobs(@PathVariable Long id) {
+    try {
+        System.out.println("🔍 DEBUG: Fetching applied jobs for student ID: " + id);
+        
+        List<Application> applications = applicationRepository.findByStudentId(id);
+        System.out.println("📊 DEBUG: Raw applications found: " + applications.size());
+        
+        if (applications.isEmpty()) {
+            System.out.println("ℹ️ DEBUG: No applications found for student " + id);
+            return ResponseEntity.ok(Collections.emptyList());
         }
+        
+        List<Map<String, Object>> appliedJobs = new ArrayList<>();
+        
+        for (Application app : applications) {
+            try {
+                System.out.println("🔄 DEBUG: Processing application ID: " + app.getId() + " for job ID: " + app.getJobId());
+                
+                Map<String, Object> jobData = new HashMap<>();
+                
+                // Get job details with null safety
+                if (app.getJobId() != null) {
+                    Optional<PostingForm> jobOpt = jobRepository.findById(app.getJobId());
+                    if (jobOpt.isPresent()) {
+                        PostingForm job = jobOpt.get();
+                        jobData.put("id", job.getId());
+                        jobData.put("jobTitle", job.getJobTitle() != null ? job.getJobTitle() : "No Title");
+                        jobData.put("companyName", job.getCompanyName() != null ? job.getCompanyName() : "Unknown Company");
+                        jobData.put("location", job.getLocation() != null ? job.getLocation() : "Location not specified");
+                        jobData.put("experienceLevel", job.getExperienceLevel() != null ? job.getExperienceLevel() : "Not specified");
+                        jobData.put("salary", job.getSalary() != null ? job.getSalary() : "Salary not specified");
+                        jobData.put("skillsRequired", job.getSkillsRequired() != null ? job.getSkillsRequired() : "Not specified");
+                        jobData.put("workMode", job.getWorkMode() != null ? job.getWorkMode() : "Not specified");
+                    } else {
+                        System.out.println("⚠️ DEBUG: Job not found for ID: " + app.getJobId());
+                        // Add placeholder data
+                        jobData.put("id", app.getJobId());
+                        jobData.put("jobTitle", "Position at Company");
+                        jobData.put("companyName", "Company");
+                        jobData.put("location", "Not specified");
+                        jobData.put("experienceLevel", "Not specified");
+                        jobData.put("salary", "Not specified");
+                        jobData.put("skillsRequired", "Not specified");
+                        jobData.put("workMode", "Not specified");
+                    }
+                } else {
+                    System.out.println("⚠️ DEBUG: Job ID is null for application " + app.getId());
+                    // Add placeholder data
+                    jobData.put("id", 0L);
+                    jobData.put("jobTitle", "Position at Company");
+                    jobData.put("companyName", "Company");
+                    jobData.put("location", "Not specified");
+                    jobData.put("experienceLevel", "Not specified");
+                    jobData.put("salary", "Not specified");
+                    jobData.put("skillsRequired", "Not specified");
+                    jobData.put("workMode", "Not specified");
+                }
+                
+                // Add application-specific data with null safety
+                jobData.put("applicationId", app.getId() != null ? app.getId() : 0L);
+                jobData.put("appliedDate", app.getAppliedDate() != null ? app.getAppliedDate() : LocalDateTime.now());
+                jobData.put("viewedByCompany", app.getViewedByCompany() != null ? app.getViewedByCompany() : false);
+                jobData.put("viewedAt", app.getViewedAt());
+                jobData.put("status", app.getStatus() != null ? app.getStatus() : "Applied");
+                
+                appliedJobs.add(jobData);
+                System.out.println("📝 DEBUG: Successfully added job data for application " + app.getId());
+                
+            } catch (Exception e) {
+                System.err.println("❌ ERROR processing application " + app.getId() + ": " + e.getMessage());
+                e.printStackTrace();
+                // Continue with next application instead of failing completely
+                continue;
+            }
+        }
+        
+        System.out.println("🎯 DEBUG: Final applied jobs list size: " + appliedJobs.size());
+        return ResponseEntity.ok(appliedJobs);
+        
+    } catch (Exception e) {
+        System.err.println("💥 CRITICAL ERROR in getAppliedJobs: " + e.getMessage());
+        e.printStackTrace();
+        return ResponseEntity.internalServerError()
+                .body("Error fetching applied jobs: " + e.getMessage());
     }
+}
 
     @GetMapping("/student/{id}/messages")
 public ResponseEntity<?> getStudentMessages(@PathVariable Long id) {
@@ -815,19 +911,40 @@ public ResponseEntity<?> getStudentMessages(@PathVariable Long id) {
     }
 
     @GetMapping("/company/{companyId}/applications")
-    public ResponseEntity<?> getCompanyApplications(@PathVariable Long companyId) {
-        try {
-            List<PostingForm> companyJobs = jobRepository.findByCompanyId(companyId);
-            List<Long> jobIds = companyJobs.stream()
-                                          .map(PostingForm::getId)
-                                          .collect(Collectors.toList());
-            List<Application> applications = applicationRepository.findByJobIdIn(jobIds);
-            return ResponseEntity.ok(applications);
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError()
-                    .body("Error fetching company applications: " + e.getMessage());
-        }
+public ResponseEntity<?> getCompanyApplications(@PathVariable Long companyId) {
+    try {
+        List<PostingForm> companyJobs = jobRepository.findByCompanyId(companyId);
+        List<Long> jobIds = companyJobs.stream()
+                                      .map(PostingForm::getId)
+                                      .collect(Collectors.toList());
+        List<Application> applications = applicationRepository.findByJobIdIn(jobIds);
+        
+        // Return applications with view status
+        List<Map<String, Object>> applicationData = applications.stream()
+            .map(app -> {
+                Map<String, Object> appData = new HashMap<>();
+                appData.put("id", app.getId());
+                appData.put("jobId", app.getJobId());
+                appData.put("studentId", app.getStudentId());
+                appData.put("fullName", app.getFullName());
+                appData.put("email", app.getEmail());
+                appData.put("mobile", app.getMobile());
+                appData.put("skills", app.getSkills());
+                appData.put("status", app.getStatus());
+                appData.put("viewedByCompany", app.getViewedByCompany() != null ? app.getViewedByCompany() : false);                appData.put("viewedAt", app.getViewedAt()); // Add this getter
+                appData.put("appliedDate", app.getAppliedDate());
+                appData.put("resumePath", app.getResumePath()); 
+                return appData;
+            })
+            .collect(Collectors.toList());
+            
+        return ResponseEntity.ok(applicationData);
+    } catch (Exception e) {
+        return ResponseEntity.internalServerError()
+                .body("Error fetching company applications: " + e.getMessage());
     }
+}
+
 
     @GetMapping("/company/{companyId}/jobs-with-applications")
     public ResponseEntity<?> getJobsWithApplications(@PathVariable Long companyId) {
@@ -946,4 +1063,83 @@ public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request
         return ResponseEntity.internalServerError().body("An error occurred: " + e.getMessage());
     }
 }
+
+@PutMapping("/application/{applicationId}/view")
+public ResponseEntity<?> markApplicationAsViewed(@PathVariable Long applicationId) {
+    try {
+        Optional<Application> applicationOpt = applicationRepository.findById(applicationId);
+        if (applicationOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Application not found");
+        }
+
+        Application application = applicationOpt.get();
+        application.setViewedByCompany(true); // You need to add this field to Application entity
+        application.setViewedAt(LocalDateTime.now()); // Add this field too
+        applicationRepository.save(application);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "Application marked as viewed");
+        
+        return ResponseEntity.ok(response);
+
+    } catch (Exception e) {
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse.put("success", false);
+        errorResponse.put("message", "Error updating application: " + e.getMessage());
+        
+        return ResponseEntity.status(500).body(errorResponse);
+    }
+}
+
+// ✅ ADD THIS ENDPOINT: Track email opens
+@GetMapping("/application/{applicationId}/email-opened")
+public ResponseEntity<byte[]> trackEmailOpen(@PathVariable Long applicationId) {
+    try {
+        System.out.println("📧 Email tracking triggered for application: " + applicationId);
+        
+        Optional<Application> applicationOpt = applicationRepository.findById(applicationId);
+        if (applicationOpt.isPresent()) {
+            Application application = applicationOpt.get();
+            
+            // Mark as viewed via email open
+            if (!application.getViewedByCompany()) {
+                application.setViewedByCompany(true);
+                application.setViewedAt(LocalDateTime.now());
+                applicationRepository.save(application);
+                
+                System.out.println("✅ SUCCESS: Email opened - Application marked as viewed: " + applicationId);
+                System.out.println("📊 Application Details:");
+                System.out.println("   - Company: " + application.getCompanyName());
+                System.out.println("   - Student: " + application.getFullName());
+                System.out.println("   - Viewed At: " + LocalDateTime.now());
+            } else {
+                System.out.println("ℹ️ Application already viewed: " + applicationId);
+            }
+        } else {
+            System.out.println("❌ Application not found: " + applicationId);
+        }
+
+        // Return a transparent 1x1 pixel
+        byte[] transparentPixel = new byte[]{
+            (byte) 0x47, (byte) 0x49, (byte) 0x46, (byte) 0x38, (byte) 0x39, 
+            (byte) 0x61, (byte) 0x01, (byte) 0x00, (byte) 0x01, (byte) 0x00, 
+            (byte) 0x80, (byte) 0x00, (byte) 0x00, (byte) 0xff, (byte) 0xff, 
+            (byte) 0xff, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x2c, 
+            (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x01, 
+            (byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x02, 
+            (byte) 0x02, (byte) 0x44, (byte) 0x01, (byte) 0x00, (byte) 0x3b
+        };
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_GIF)
+                .body(transparentPixel);
+
+    } catch (Exception e) {
+        System.err.println("❌ ERROR in email tracking: " + e.getMessage());
+        e.printStackTrace();
+        return ResponseEntity.status(500).build();
+    }
+}
+
 }

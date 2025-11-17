@@ -169,5 +169,102 @@
     font-size: 13px;
     padding: 8px;
   }
+
+  /* Add these styles to your existing CompanyApplications.css */
+
+/* Field Groups */
+.field-group {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border-left: 3px solid rgba(0, 123, 255, 0.5);
+}
+
+.field-group h4 {
+  margin: 0 0 12px 0;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field-group p {
+  margin: 8px 0;
+  color: black;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.field-group strong {
+  color: black;
+  font-weight: 600;
+  min-width: 160px;
+  display: inline-block;
+}
+
+/* Application Details Layout */
+.application-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-viewed {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+.status-unviewed {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .field-group {
+    padding: 12px;
+  }
+  
+  .field-group h4 {
+    font-size: 1rem;
+  }
+  
+  .field-group p {
+    font-size: 0.95rem;
+  }
+  
+  .field-group strong {
+    min-width: 120px;
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .field-group {
+    padding: 10px;
+  }
+  
+  .field-group h4 {
+    font-size: 0.95rem;
+  }
+  
+  .field-group p {
+    font-size: 0.9rem;
+  }
+}
 }
 

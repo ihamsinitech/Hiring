@@ -14,13 +14,13 @@ html, body {
 /* Blurred background */
 .job-list-container::before {
   content: "";
-  position: fixed;   /* ✅ fixed = covers full viewport */
+  position: fixed;   /* fixed = covers full viewport */
   inset: 0;
   background: url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80')
     no-repeat center center / cover;
   filter: blur(12px);
-  transform: scale(1.1); /* ✅ prevents visible edges */
-  z-index: -1;           /* ✅ behind content */
+  transform: scale(1.1); 
+  z-index: -1;          
 }
 
 
@@ -162,6 +162,7 @@ html, body {
 /* Left Filters */
 .left-sidebar {
   flex: 0 0 250px;
+  margin-top: 15px;
 }
 
 /* Right Job List */
@@ -276,6 +277,21 @@ html, body {
   transform: translateY(-2px);
 }
 
+.apply-btn.applied,
+.apply-btn:disabled {
+  background: #6c757d !important; /* Gray color */
+  color: white !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  opacity: 0.7 !important;
+}
+
+.apply-btn.applied:hover,
+.apply-btn:disabled:hover {
+  background: #6c757d !important;
+  transform: none !important;
+}
+
 .no-results {
   color: black;
   font-size: 1.1rem;
@@ -365,6 +381,143 @@ html, body {
     width: 100%;
     padding: 10px;
     font-size: 0.9rem;
+  }
+}
+/* ✅ Search Bar Styles */
+.header-center {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 20px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  border: 2px solid #e1e5e9;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: white;
+  color: black !important;
+  
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  pointer-events:painted;
+  cursor: pointer;
+}
+
+.clear-search {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.clear-search:hover {
+  background: #f8f9fa;
+  color: #495057;
+}
+
+/* ✅ Search Results Info */
+.search-results-info {
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #007bff;
+}
+
+.search-results-info p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #495057;
+}
+
+.clear-search-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.clear-search-btn:hover {
+  background: #5a6268;
+}
+
+/* ✅ No Results Styling */
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+}
+
+.no-results .clear-search-btn {
+  margin-top: 10px;
+  background: #007bff;
+}
+
+.no-results .clear-search-btn:hover {
+  background: #0056b3;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+  .header-center {
+    order: 3;
+    flex: 0 0 100%;
+    margin: 10px 0 0 0;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  .search-results-info p {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
   }
 }
 

@@ -126,6 +126,35 @@
   background: linear-gradient(135deg, #2575fc, #6a11cb);
 }
 
+.floating-apply-btn.applied,
+.floating-apply-btn:disabled {
+  background: #6c757d !important; /* Gray color */
+  color: white !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.7 !important;
+}
+
+.floating-apply-btn.applied:hover,
+.floating-apply-btn:disabled:hover {
+  background: #6c757d !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+
+/* Make sure the link styles don't interfere */
+a .floating-apply-btn {
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover .floating-apply-btn:not(.applied) {
+  text-decoration: none;
+}
+
 
 
 /* Tablet screens */

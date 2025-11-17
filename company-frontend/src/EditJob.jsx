@@ -25,7 +25,7 @@ const EditJob = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`http://15.206.41.13:8085/api/auth/${id}`)
+    fetch(`http://www.careerspott.com/api/auth/${id}`)
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch job');
@@ -57,7 +57,7 @@ const EditJob = () => {
     setError('');
 
     try {
-      const response = await fetch(`http://15.206.41.13:8085/api/auth/update/${id}`, {
+      const response = await fetch(`http://www.careerspott.com/api/auth/update/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

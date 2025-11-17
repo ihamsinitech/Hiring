@@ -13,7 +13,7 @@ const Messages = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://15.206.41.13:8085/api/auth/student/${userData.userId}/messages`)
+      fetch(`http://www.careerspott.com/api/auth/student/${userData.userId}/messages`)
         .then(res => res.json())
         .then(data => {
           console.log("Raw messages data:", data); // Debug log
@@ -61,7 +61,7 @@ const Messages = () => {
 
     try {
       // Send professional reply to backend
-      const response = await fetch(`http://15.206.41.13:8085/api/auth/application/${selectedMessage.id}/student-reply`, {
+      const response = await fetch(`http://www.careerspott.com/api/auth/application/${selectedMessage.id}/student-reply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const Messages = () => {
       // Fallback alert
       alert(`Reply sent to ${selectedMessage.companyName}: ${replyText}`);
     }
-    
+
     // Close the modal
     setShowReplyModal(false);
     setSelectedMessage(null);
@@ -101,7 +101,7 @@ const Messages = () => {
       if (diffDays === 1) return 'Yesterday';
       if (diffDays < 7) return `${diffDays} days ago`;
       if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
-      
+
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
@@ -120,15 +120,15 @@ const Messages = () => {
       'REJECTED': { text: 'Not Selected', emoji: '❌' },
       'NEW': { text: 'New Message', emoji: '🆕' }
     };
-    
+
     const statusInfo = statusMap[status] || { text: 'New Message', emoji: '💬' };
     return `${statusInfo.emoji} ${statusInfo.text}`;
   };
 
   if (loading) return (
     <div className="loading">
-      <div style={{textAlign: 'center', padding: '40px'}}>
-        <div style={{fontSize: '24px', marginBottom: '10px'}}>📨</div>
+      <div style={{ textAlign: 'center', padding: '40px' }}>
+        <div style={{ fontSize: '24px', marginBottom: '10px' }}>📨</div>
         Loading your professional messages...
       </div>
     </div>
@@ -139,8 +139,8 @@ const Messages = () => {
       {/* Professional Header */}
       <div className="messages-header">
         <div className="header-content">
-          <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
-            <h1>Professional Messages</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <h1>Company Response</h1>
             <span style={{
               background: 'rgba(255, 255, 255, 0.2)',
               padding: '5px 12px',
@@ -163,10 +163,10 @@ const Messages = () => {
         <div className="messages-content">
           {messages.length === 0 ? (
             <div className="no-messages">
-              <div style={{fontSize: '48px', marginBottom: '20px'}}>💼</div>
-              <h2>No Professional Messages Yet</h2>
+              <div style={{ fontSize: '48px', marginBottom: '20px' }}></div>
+              <h2>No Messages Yet</h2>
               <p>When companies respond to your applications, you'll see their messages here.</p>
-              <div style={{display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '25px'}}>
+              <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '25px' }}>
                 <button onClick={() => navigate('/jobs')}>Explore Job Opportunities</button>
                 <button onClick={() => navigate('/applied-jobs')}>View Your Applications</button>
               </div>
@@ -177,7 +177,7 @@ const Messages = () => {
                 <div key={message.id || index} className="message-card">
                   <div className="message-header">
                     <div className="company-info">
-                      <div style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px'}}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                         <div style={{
                           width: '40px',
                           height: '40px',
@@ -198,7 +198,7 @@ const Messages = () => {
                         </div>
                       </div>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '5px'}}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '5px' }}>
                       <span className="message-date">
                         {formatMessageDate(message.displayDate)}
                       </span>
@@ -207,22 +207,22 @@ const Messages = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="message-body">
                     <p className="message-text">
-                      {message.companyResponse || message.message || 
-                       "Thank you for your interest in our company. We appreciate you taking the time to apply and would like to discuss your application further."}
+                      {message.companyResponse || message.message ||
+                        "Thank you for your interest in our company. We appreciate you taking the time to apply and would like to discuss your application further."}
                     </p>
                   </div>
-                  
+
                   <div className="message-actions">
-                    <button 
-                      className="view-job-btn" 
+                    <button
+                      className="view-job-btn"
                       onClick={() => navigate(`/jobs/${message.jobId}`)}
                     >
                       📋 View Job Details
                     </button>
-                    <button 
+                    <button
                       className="reply-btn"
                       onClick={() => handleReply(message)}
                     >
@@ -257,11 +257,11 @@ const Messages = () => {
               borderBottom: '2px solid rgba(0, 0, 0, 0.1)',
               paddingBottom: '15px'
             }}>
-              <h3 style={{margin: 0, color: '#333', fontSize: '22px'}}>
+              <h3 style={{ margin: 0, color: '#333', fontSize: '22px' }}>
                 💌 Reply to {selectedMessage.companyName}
               </h3>
-              <button 
-                onClick={() => setShowReplyModal(false)} 
+              <button
+                onClick={() => setShowReplyModal(false)}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -275,8 +275,8 @@ const Messages = () => {
               </button>
             </div>
 
-            <div style={{marginBottom: '20px'}}>
-              <strong style={{color: '#333', display: 'block', marginBottom: '10px'}}>
+            <div style={{ marginBottom: '20px' }}>
+              <strong style={{ color: '#333', display: 'block', marginBottom: '10px' }}>
                 Original Message from {selectedMessage.companyName}:
               </strong>
               <div style={{
@@ -288,14 +288,14 @@ const Messages = () => {
                 fontSize: '14px',
                 lineHeight: '1.5'
               }}>
-                <p style={{margin: 0}}>
-                  {selectedMessage.companyResponse || selectedMessage.message || 
-                   "Thank you for your application. We are reviewing your profile."}
+                <p style={{ margin: 0 }}>
+                  {selectedMessage.companyResponse || selectedMessage.message ||
+                    "Thank you for your application. We are reviewing your profile."}
                 </p>
               </div>
             </div>
 
-            <div style={{marginBottom: '20px'}}>
+            <div style={{ marginBottom: '20px' }}>
               <label style={{
                 display: 'block',
                 marginBottom: '10px',
@@ -336,8 +336,8 @@ const Messages = () => {
               gap: '15px',
               justifyContent: 'flex-end'
             }}>
-              <button 
-                onClick={() => setShowReplyModal(false)} 
+              <button
+                onClick={() => setShowReplyModal(false)}
                 style={{
                   padding: '12px 25px',
                   background: 'rgba(0, 0, 0, 0.1)',
@@ -354,8 +354,8 @@ const Messages = () => {
               >
                 Cancel
               </button>
-              <button 
-                onClick={sendReply} 
+              <button
+                onClick={sendReply}
                 disabled={!replyText.trim()}
                 style={{
                   padding: '12px 25px',
