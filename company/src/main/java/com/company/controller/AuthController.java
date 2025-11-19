@@ -50,7 +50,7 @@ import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins =  "http://www.careerspott.com",allowedHeaders = "*")
+@CrossOrigin(origins =  "https://www.careerspott.com",allowedHeaders = "*")
 public class AuthController {
     
     
@@ -158,12 +158,13 @@ public class AuthController {
             student.setFullName(fullName.toUpperCase());
             
             // Save the student
-            studentRepository.save(student);
+            Student savedStudent = studentRepository.save(student);
             
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Student registered successfully");
             response.put("redirect", "/student-registration");
             response.put("completed", false);
+            response.put("userId", savedStudent.getId());
             
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -221,20 +222,48 @@ public class AuthController {
     @PostMapping("/complete-student-registration")
     public ResponseEntity<?> completeStudentRegistration(@RequestBody Map<String, Object> request) {
         try {
+
+            System.out.println("DEBUG - Received registration request: " + request);
             String email = (String) request.get("email");
             
             if (email == null) {
+                System.out.println("❌ DEBUG - Email is null in request");
                 return ResponseEntity.badRequest().body("Email is required");
             }
             
+            System.out.println("🔍 DEBUG - Looking for student with email: " + email);
             // Find the student by email
             Optional<Student> studentOptional = studentRepository.findByEmail(email);
+
+                    if (studentOptional.isEmpty()) {
+            System.out.println("❌ DEBUG - Student not found for email: " + email);
+            
+            // Try case insensitive search manually
+            List<Student> allStudents = studentRepository.findAll();
+            Student foundStudent = null;
+            
+            for (Student student : allStudents) {
+                if (student.getEmail() != null && student.getEmail().equalsIgnoreCase(email)) {
+                    foundStudent = student;
+                    break;
+                }
+            }
+            
+            if (foundStudent != null) {
+                System.out.println("✅ DEBUG - Found student with case-insensitive search: " + foundStudent.getEmail());
+                studentOptional = Optional.of(foundStudent);
+            }
+        }
             
             if (studentOptional.isPresent()) {
                 Student student = studentOptional.get();
 
-                // Update student details
+                // ✅ UPDATE FULL NAME IF PROVIDED
+            if (request.containsKey("fullName")) {
+                student.setFullName((String) request.get("fullName"));
+            }
 
+              // Update student details
                 if (request.containsKey("mobile")) {
                     student.setMobile((String) request.get("mobile"));
                 }
@@ -481,7 +510,7 @@ public class AuthController {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         // ✅ ADD THIS: Create tracking URL for email opens
-        String trackingUrl = "http://www.careerspott.com/api/auth/application/" + savedApplication.getId() + "/email-opened";
+        String trackingUrl = "https://www.careerspott.com/api/auth/application/" + savedApplication.getId() + "/email-opened";
         
         // ✅ ADD THIS: HTML email with tracking pixel
         String emailContent = 

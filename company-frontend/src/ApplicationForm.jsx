@@ -26,7 +26,7 @@ const ApplicationForm = () => {
   const storedUser = JSON.parse(localStorage.getItem("userData"));
 
   useEffect(() => {
-    fetch(`http://www.careerspott.com/api/auth/${id}`)
+    fetch(`https://www.careerspott.com/api/auth/${id}`)
       .then((res) => res.json())
       .then((data) => setJob(data))
       .catch((err) => console.error("Error fetching job:", err));
@@ -68,7 +68,7 @@ const ApplicationForm = () => {
 
 
 
-      const response = await fetch("http://www.careerspott.com/api/auth/apply", {
+      const response = await fetch("https://www.careerspott.com/api/auth/apply", {
         method: "POST",
         body: formData, // send multipart/form-data
       });

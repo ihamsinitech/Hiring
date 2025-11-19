@@ -10,7 +10,7 @@ const ShortlistedJobs = () => {
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData && userData.userId) {
-      fetch(`http://www.careerspott.com/api/auth/student/${userData.userId}/shortlisted-jobs`)
+      fetch(`https://www.careerspott.com/api/auth/student/${userData.userId}/shortlisted-jobs`)
         .then(res => res.json())
         .then(data => {
           setShortlistedJobs(data);

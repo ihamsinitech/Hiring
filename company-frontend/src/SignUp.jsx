@@ -64,7 +64,7 @@ const SignUp = () => {
     }
     
     try {
-      const response = await fetch('http://www.careerspott.com/api/auth/signup/student', {
+      const response = await fetch('https://www.careerspott.com/api/auth/signup/student', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,11 +77,32 @@ const SignUp = () => {
         }),
       });
       
-      const data = await response.text();
+      //Parse as JSON to get the userId from response
+    let data;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      // If response is not JSON, try to parse as text
+      const textResponse = await response.text();
+      throw new Error(textResponse || 'Registration failed');
+    }
       
       if (response.ok) {
         setSuccessUsername(form.fullName);
         setShowVideoMessage(true);
+
+        // Save user data to localStorage including userId
+      const userData = {
+        fullName: form.fullName,
+        email: form.email,
+        userId: data.userId, 
+        completed: false,
+        userType: 'student'
+      };
+      localStorage.setItem('userData', JSON.stringify(userData));
+      
+      console.log("User data saved to localStorage:", userData);
+
 
         // Navigate to signin after video message
         setTimeout(() => {
@@ -219,7 +240,7 @@ const SignUp = () => {
                   onClick={togglePasswordVisibility}
                   tabIndex="-1"
                 >
-                  {showPassword ?  '👁️' :'👁️‍🗨️' }
+                  {showPassword ?  <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i> }
                 </button>
               </div>
               <div className="password-requirements">
@@ -244,7 +265,7 @@ const SignUp = () => {
                   onClick={toggleConfirmPasswordVisibility}
                   tabIndex="-1"
                 >
-                  {showConfirmPassword ? <i class="fa-solid fa-eye"></i> : <i class="fa-solid fa-eye-slash"></i> }
+                  {showConfirmPassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i> }
                 </button>
               </div>
               

@@ -11,7 +11,7 @@ const StudentSuccessPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/jobs");
-    }, 5000); // 5000ms = 5 seconds
+    }, 4000); // 5000ms = 5 seconds
 
     return () => clearTimeout(timer); // cleanup
   }, [navigate]);

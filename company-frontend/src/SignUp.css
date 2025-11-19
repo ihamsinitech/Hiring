@@ -465,31 +465,30 @@ html, body, #root {
 
 
 /* Password Toggle Icon - ALWAYS VISIBLE */
-/* Password Toggle Icon - ALWAYS VISIBLE */
 .password-toggle-icon {
   position: absolute;
-  right: 15px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   color: rgba(34, 33, 33, 0.8);
-  font-size: 1.2rem;
-  padding: 5px;
+  font-size: 0.5rem;
+  padding: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   z-index: 10;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   outline: none; /* Remove focus outline */
 }
 
 .password-toggle-icon:hover {
   color: rgba(34, 33, 33, 1);
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(0.5);
 }
 
 /* Remove focus styles completely */
@@ -528,64 +527,940 @@ html, body, #root {
   font-weight: 500;
 }
 
-/* Mobile responsive for password icons */
+/* Mobile Responsive Styles for SignUp */
 @media (max-width: 768px) {
+  .signup-container {
+    min-height: 100vh;
+    background-attachment: scroll;
+    padding: 0;
+  }
+
+  .signup-container::before {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  /* Header - Smaller */
+  .signup-header {
+    position: fixed;
+    top: 0;
+    padding: 0.5rem 0.8rem;
+    height: 55px;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+
+  .signup-logo {
+    gap: 8px;
+  }
+
+  .signup-logo img {
+    height: 28px;
+  }
+
+  .signup-logo h1 {
+    font-size: 1rem;
+  }
+
+  /* Main Section - Compact */
   .signup-section {
-    min-height: auto;
-    padding: 6rem 1rem 2rem;
+    padding: 60px 0.8rem 1rem;
+    min-height: calc(100vh - 60px);
+    margin-top: 0;
   }
 
   .signup-wrapper {
     flex-direction: column;
-    width: 95%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
   }
 
+  /* Image Section - Smaller */
   .signup-image {
-    padding: 1rem;
+    padding: 1rem 0.8rem;
+    background: rgba(255, 255, 255, 0.08);
   }
 
   .signup-image img {
-    max-width: 250px;
+    max-width: 150px;
     height: auto;
   }
 
+  /* Form Section - Compact */
   .signup-form {
     padding: 1.5rem 1rem;
+    width: 100%;
   }
 
   .signup-form h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-align: center;
+    margin-bottom: 1rem;
   }
 
   .signup-form form {
-    gap: 0.8rem;
+    gap: 0.6rem;
+  }
+
+  .signup-form label {
+    font-size: 0.85rem;
+    margin-bottom: 0.1rem;
+    font-weight: 600;
   }
 
   .signup-form input {
-    padding: 0.8rem 1rem;
-    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    margin-bottom: 0.2rem;
+  }
+
+  /* Password Input Container - Smaller */
+  .password-input-container {
+    margin-bottom: 0.2rem;
   }
 
   .password-input-container input {
-    padding-right: 40px;
-  }
-  
-  .password-toggle-icon {
-    right: 12px;
-    font-size: 1.1rem;
-    width: 25px;
-    height: 25px;
+    padding-right: 35px;
   }
 
+  .password-toggle-icon {
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+  }
+
+  .password-requirements {
+    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+
+  /* Submit Button - Smaller */
   .signup-form button[type="submit"] {
-    padding: 0.8rem;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    margin-top: 0.3rem;
+  }
+
+  /* Auth Redirect - Smaller */
+  .auth-redirect {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* Error and Success Messages - Smaller */
+  .error-message,
+  .success-message {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+    border-radius: 5px;
+  }
+
+  /* Success Animation Container - Mobile Compact */
+  .fullscreen-success-container {
+    flex-direction: column;
+    padding: 55px 0 0 0;
+    background: rgba(0, 0, 0, 0.95);
+  }
+
+  /* Animation Header - Smaller */
+  .animation-header {
+    padding: 0.5rem 0.8rem;
+    height: 55px;
+    backdrop-filter: blur(8px);
+  }
+
+  .animation-logo img {
+    height: 28px;
+  }
+
+  .animation-logo h1 {
     font-size: 1rem;
   }
 
-  .auth-redirect {
+  /* Video Background - Smaller */
+  .fullscreen-video-background {
+    position: relative;
+    width: 100%;
+    height: 30vh;
+    min-height: 200px;
+  }
+
+  .fullscreen-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  /* Glass Message Panel - Compact */
+  .right-glass-message-panel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 15px 15px 0 0;
+    padding: 1.5rem 1rem;
+    margin-top: -15px;
+  }
+
+  .message-content {
+    text-align: center;
+  }
+
+  .success-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .message-content h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .welcome-message {
     font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .success-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+
+  .success-main {
+    font-size: 0.9rem;
+  }
+
+  .signin-instruction {
+    font-size: 0.8rem;
+  }
+
+  .continue-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 20px;
+  }
+}
+
+/* Small Mobile Devices - Extra Compact */
+@media (max-width: 480px) {
+  .signup-header {
+    padding: 0.4rem 0.6rem;
+    height: 50px;
+  }
+
+  .signup-logo img {
+    height: 25px;
+  }
+
+  .signup-logo h1 {
+    font-size: 0.9rem;
+  }
+
+  .signup-section {
+    padding: 55px 0.6rem 0.8rem;
+  }
+
+  .signup-wrapper {
+    border-radius: 6px;
+  }
+
+  .signup-form {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .signup-form h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .signup-form input {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .password-toggle-icon {
+    right: 6px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .right-glass-message-panel {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .message-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .welcome-message {
+    font-size: 0.85rem;
+  }
+
+  .success-card {
+    padding: 0.8rem;
+  }
+}
+
+/* Very Small Devices - Ultra Compact */
+@media (max-width: 360px) {
+  .signup-section {
+    padding: 50px 0.4rem 0.6rem;
+  }
+
+  .signup-form {
+    padding: 1rem 0.6rem;
+  }
+
+  .signup-form h2 {
+    font-size: 1.2rem;
+  }
+
+  .signup-form input {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .right-glass-message-panel {
+    padding: 1rem 0.6rem;
+  }
+
+  .message-content h2 {
+    font-size: 1rem;
+  }
+
+  .success-icon {
+    font-size: 1.8rem;
+  }
+}
+
+/* Mobile Responsive Styles for SignUp */
+@media (max-width: 768px) {
+  .signup-container {
+    min-height: 100vh;
+    background-attachment: scroll;
+    padding: 0;
+  }
+
+  .signup-container::before {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  /* Header - Mobile */
+  .signup-header {
+    position: fixed;
+    top: 0;
+    padding: 0.8rem 1rem;
+    height: 60px;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .signup-logo {
+    gap: 10px;
+  }
+
+  .signup-logo img {
+    height: 35px;
+  }
+
+  .signup-logo h1 {
+    font-size: 1.2rem;
+  }
+
+  /* Main Section */
+  .signup-section {
+    padding: 70px 1rem 1rem;
+    min-height: calc(100vh - 70px);
+    margin-top: 0;
+  }
+
+  .signup-wrapper {
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 12px;
+  }
+
+  /* Success Animation Container - Mobile */
+  .fullscreen-success-container {
+    flex-direction: column;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.95);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Animation Header - Mobile */
+  .animation-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    height: 60px;
+    backdrop-filter: blur(10px);
+    z-index: 10001;
+    animation: none;
+  }
+
+  .animation-logo {
+    gap: 10px;
+  }
+
+  .animation-logo img {
+    height: 35px;
+  }
+
+  .animation-logo h1 {
+    font-size: 1.2rem;
+    color: white;
+  }
+
+  /* Video Background - Mobile */
+  .fullscreen-video-background {
+    position: relative;
+    width: 100%;
+    height: 35vh;
+    min-height: 250px;
+    margin-top: 60px; /* Space for header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fullscreen-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-overlay {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Glass Message Panel - Mobile */
+  .right-glass-message-panel {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 25px 25px 0 0;
+    padding: 2rem 1.5rem;
+    margin-top: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .message-content {
+    text-align: center;
+    color: white;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+  }
+
+  .message-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #e0f7fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .welcome-message {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    font-weight: 500;
+  }
+
+  /* Success Card - Mobile */
+  .success-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .success-main {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .signin-instruction {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+
+  /* Continue Button - Mobile */
+  .continue-btn {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    cursor: pointer;
+    backdrop-filter: blur(20px);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .continue-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .signup-header,
+  .animation-header {
+    padding: 0.7rem 0.8rem;
+    height: 55px;
+  }
+
+  .signup-logo img,
+  .animation-logo img {
+    height: 30px;
+  }
+
+  .signup-logo h1,
+  .animation-logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .signup-section {
+    padding: 60px 0.8rem 1rem;
+  }
+
+  .fullscreen-video-background {
+    height: 30vh;
+    min-height: 220px;
+    margin-top: 55px;
+  }
+
+  .right-glass-message-panel {
+    height: 60vh;
+    padding: 1.5rem 1rem;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .message-content {
+    max-width: 100%;
+  }
+
+  .success-icon {
+    font-size: 2.5rem;
+  }
+
+  .message-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .welcome-message {
+    font-size: 1rem;
+  }
+
+  .success-card {
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .success-main {
+    font-size: 0.95rem;
+  }
+
+  .signin-instruction {
+    font-size: 0.85rem;
+  }
+
+  .continue-btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Very Small Devices */
+@media (max-width: 360px) {
+  .signup-header,
+  .animation-header {
+    padding: 0.6rem 0.7rem;
+    height: 50px;
+  }
+
+  .signup-logo img,
+  .animation-logo img {
+    height: 28px;
+  }
+
+  .signup-logo h1,
+  .animation-logo h1 {
+    font-size: 1rem;
+  }
+
+  .signup-section {
+    padding: 55px 0.6rem 0.8rem;
+  }
+
+  .fullscreen-video-background {
+    height: 28vh;
+    min-height: 200px;
+    margin-top: 50px;
+  }
+
+  .right-glass-message-panel {
+    height: 58vh;
+    padding: 1.2rem 0.8rem;
+  }
+
+  .success-icon {
+    font-size: 2.2rem;
+  }
+
+  .message-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .welcome-message {
+    font-size: 0.95rem;
+  }
+
+  .success-card {
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .continue-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .fullscreen-success-container {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .animation-header {
+    height: 50px;
+  }
+
+  .fullscreen-video-background {
+    flex: 1;
+    height: 100vh;
+    margin-top: 50px;
+    min-height: auto;
+  }
+
+  .right-glass-message-panel {
+    flex: 1;
+    height: 100vh;
+    margin-top: 50px;
+    border-radius: 0;
+    padding: 1.5rem;
+  }
+
+  .message-content {
+    max-width: 100%;
+  }
+}
+
+/* Safe Area Insets for Notched Devices */
+@supports (padding: max(0px)) {
+  @media (max-width: 768px) {
+    .signup-section {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .signup-header,
+    .animation-header {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-top: max(0.8rem, env(safe-area-inset-top));
+    }
+  }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    .signup-container {
+      min-height: -webkit-fill-available;
+    }
+    
+    .signup-section {
+      min-height: -webkit-fill-available;
+    }
+    
+    .fullscreen-success-container {
+      height: -webkit-fill-available;
+    }
+  }
+}
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .animation-header {
+    padding: 0.4rem 0.6rem;
+    height: 50px;
+  }
+
+  .fullscreen-video-background {
+    height: 30vh;
+    min-height: 180px;
+    margin-top: 50px; /* Adjust for smaller header */
+  }
+}
+
+/* Very Small Devices */
+@media (max-width: 360px) {
+  .animation-header {
+    height: 48px;
+  }
+
+  .fullscreen-video-background {
+    margin-top: 48px;
+    min-height: 160px;
+  }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .animation-header {
+    height: 50px;
+  }
+
+  .fullscreen-video-background {
+    margin-top: 50px;
+    height: calc(100vh - 50px);
+  }
+}
+/* Improve touch targets */
+@media (max-width: 768px) {
+  .password-toggle-icon,
+  .signup-form button[type="submit"],
+  .continue-btn {
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  .signup-form input {
+    min-height: 44px; /* Better touch experience */
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .signup-header {
+    padding: 0.7rem 0.8rem;
+    height: 60px;
+  }
+
+  .signup-logo img {
+    height: 30px;
+  }
+
+  .signup-logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .signup-section {
+    padding: 70px 0.8rem 1.5rem;
+  }
+
+  .signup-wrapper {
+    border-radius: 10px;
+  }
+
+  .signup-form {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .signup-form h2 {
+    font-size: 1.6rem;
+  }
+
+  .signup-form input {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .password-toggle-icon {
+    right: 10px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .right-glass-message-panel {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .message-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .welcome-message {
+    font-size: 1rem;
+  }
+
+  .success-card {
+    padding: 1rem;
+  }
+}
+
+/* Very Small Devices */
+@media (max-width: 360px) {
+  .signup-section {
+    padding: 65px 0.5rem 1rem;
+  }
+
+  .signup-form {
+    padding: 1.2rem 1rem;
+  }
+
+  .signup-form h2 {
+    font-size: 1.4rem;
+  }
+
+  .signup-form input {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .right-glass-message-panel {
+    padding: 1.2rem 1rem;
+  }
+
+  .message-content h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .signup-section {
+    padding: 70px 1rem 1rem;
+    min-height: auto;
+  }
+
+  .signup-wrapper {
+    flex-direction: row;
+    max-height: 80vh;
+  }
+
+  .signup-image {
+    flex: 1;
+    padding: 1rem;
+  }
+
+  .signup-form {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+
+  .fullscreen-success-container {
+    flex-direction: row;
+    padding: 70px 1rem 1rem;
+  }
+
+  .fullscreen-video-background {
+    height: 80vh;
+    flex: 1;
+  }
+
+  .right-glass-message-panel {
+    flex: 1;
+    height: 80vh;
+    margin-top: 0;
+    border-radius: 0 20px 20px 0;
+  }
+}
+
+/* Safe Area Insets for Notched Devices */
+@supports (padding: max(0px)) {
+  @media (max-width: 768px) {
+    .signup-section {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .signup-header {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-top: max(0.8rem, env(safe-area-inset-top));
+    }
+
+    .animation-header {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-top: max(0.8rem, env(safe-area-inset-top));
+    }
+  }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    .signup-container {
+      min-height: -webkit-fill-available;
+    }
+    
+    .signup-section {
+      min-height: -webkit-fill-available;
+    }
+  }
+}
+
+/* High DPI Mobile Screens */
+@media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+  .signup-wrapper {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  .right-glass-message-panel {
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
   }
 }
 

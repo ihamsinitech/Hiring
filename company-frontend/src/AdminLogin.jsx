@@ -32,7 +32,7 @@ const AdminLogin = () => {
         setError('');
 
         try {
-            const response = await axios.post('http://www.careerspott.com/api/admin/login', formData);
+            const response = await axios.post('https://www.careerspott.com/api/admin/login', formData);
             
             if (response.data.message === "Admin login successful") {
                 localStorage.setItem('adminToken', 'admin-authenticated');
@@ -84,7 +84,7 @@ const AdminLogin = () => {
                         onClick={togglePasswordVisibility}
                         tabIndex="-1"
                       >
-                      {showPassword ? '👁️':'👁️‍🗨️' }
+                      {showPassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i> }
                     </button>
                   </div>
                 </div>

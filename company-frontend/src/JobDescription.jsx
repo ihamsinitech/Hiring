@@ -8,7 +8,7 @@ const JobDescription = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://www.careerspott.com/api/auth/${id}`)
+    fetch(`https://www.careerspott.com/api/auth/${id}`)
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch job');

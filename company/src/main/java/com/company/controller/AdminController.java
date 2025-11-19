@@ -21,10 +21,10 @@ import com.company.service.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "http://www.careerspott.com", allowedHeaders = "*")
+@CrossOrigin(origins = "https://www.careerspott.com", allowedHeaders = "*")
 public class AdminController {
 
-    @Autowired
+    @Autowired 
     private StudentRepository studentRepository;
 
     @Autowired

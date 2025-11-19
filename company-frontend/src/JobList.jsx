@@ -23,15 +23,25 @@ const JobList = () => {
   // ✅ Load user from localStorage & fetch student profile
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
+    console.log("DEBUG - LocalStorage User Data:", storedUser);
 
     if (storedUser) {
       console.log("User ID:", storedUser.userId);
       console.log("User Type:", storedUser.userType);
       setUser(storedUser);
 
+
+      const studentId = Number(storedUser.userId);
+
+      if (!isNaN(studentId)) {
       // Fetch student profile & stats
-      fetch(`http://www.careerspott.com/api/auth/student/${storedUser.userId}/profile`)
-        .then(res => res.json())
+      fetch(`https://www.careerspott.com/api/auth/student/${studentId}/profile`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
+        })
         .then(data => {
           console.log("Fetched Profile:", data);
           setStudentProfile(data);
@@ -39,14 +49,32 @@ const JobList = () => {
           setStatusCounts({ shortlisted: data.shortlisted || 0 });
           setCompanyReplies(data.messages || 0);
         })
-        .catch(err => console.error("Error fetching student profile:", err));
+        .catch(err => {
+          console.error("Error fetching student profile:", err);
+          // Handle the error gracefully
+        });
 
-      fetchAppliedJobs(storedUser.userId);
+      fetchAppliedJobs(studentId);
+    } else {
+      console.error("Invalid user ID:", storedUser.userId);
     }
-  }, []);
+  } else {
+    console.error("No user data or userId found in localStorage");
+    // Redirect to login if no user data
+    navigate('/login');
+  }
+}, [navigate]);
+
 
   const fetchAppliedJobs = (studentId) => {
-  fetch(`http://www.careerspott.com/api/auth/student/${studentId}/applied-jobs`)
+  // Ensure studentId is a valid number
+  if (!studentId || isNaN(studentId)) {
+    console.error("Invalid student ID:", studentId);
+    setAppliedJobs([]);
+    return;
+  }
+
+  fetch(`https://www.careerspott.com/api/auth/student/${studentId}/applied-jobs`)
     .then(res => {
       if (!res.ok) {
         throw new Error('Failed to fetch applied jobs');
@@ -54,12 +82,10 @@ const JobList = () => {
       return res.json();
     })
     .then(data => {
-      console.log('Fetched applied jobs:', data); // Debug log
-      // Extract job IDs from applied jobs - handle both formats
+      console.log('Fetched applied jobs:', data);
       const appliedJobIds = data.map(job => {
-        // Handle different possible ID fields
         return job.id || job.jobId || job.applicationId;
-      }).filter(id => id != null); // Filter out null/undefined
+      }).filter(id => id != null);
       
       setAppliedJobs(appliedJobIds);
     })
@@ -70,9 +96,9 @@ const JobList = () => {
 };
 
 
-  // ✅ Fetch jobs
+  // Fetch jobs
   useEffect(() => {
-    fetch('http://www.careerspott.com/api/auth')
+    fetch('https://www.careerspott.com/api/auth')
       .then(res => res.json())
       .then(data => setJobs(data))
       .catch(err => console.error("Error fetching jobs:", err));
@@ -120,7 +146,7 @@ const JobList = () => {
       // You need to handle resume file upload - for now using a placeholder
       // formData.append('resume', resumeFile);
 
-      const response = await fetch('http://www.careerspott.com/api/auth/apply', {
+      const response = await fetch('https://www.careerspott.com/api/auth/apply', {
         method: 'POST',
         body: formData
         // Don't set Content-Type header for FormData - browser will set it automatically

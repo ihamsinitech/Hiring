@@ -247,22 +247,22 @@ html, body, #root {
 /* Password Toggle Icon - ALWAYS VISIBLE */
 .password-toggle-icon {
   position: absolute;
-  right: 15px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.3);
   border: none;
   cursor: pointer;
   color: rgba(34, 33, 33, 0.8);
-  font-size: 1.2rem;
+  font-size: 0.5rem;
   padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   z-index: 10;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   outline: none;
   border-radius: 4px;
 }
@@ -270,7 +270,7 @@ html, body, #root {
 .password-toggle-icon:hover {
   color: rgba(34, 33, 33, 1);
   background: rgba(255, 255, 255, 0.5);
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(0.5);
 }
 
 /* Remove focus styles completely */

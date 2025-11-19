@@ -42,7 +42,7 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await fetch('http://www.careerspott.com/api/auth/forgot-password', {
+      const response = await fetch('https://www.careerspott.com/api/auth/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const ForgotPassword = () => {
                   className="password-toggle-icon"
                   onClick={toggleNewPasswordVisibility}
                 >
-                  {showNewPassword ? '👁️' : '👁️‍🗨️'}
+                  {showNewPassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
                 </button>
               </div>
 
@@ -131,7 +131,7 @@ const ForgotPassword = () => {
                   className="password-toggle-icon"
                   onClick={toggleConfirmPasswordVisibility}
                 >
-                  {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+                  {showConfirmPassword ? <i className="fa-solid fa-eye"></i> : <i className="fa-solid fa-eye-slash"></i>}
                 </button>
               </div>
 

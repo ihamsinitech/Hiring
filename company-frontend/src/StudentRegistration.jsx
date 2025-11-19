@@ -4,6 +4,7 @@ import './StudentRegistration.css';
 
 const StudentRegistration = () => {
   const [form, setForm] = useState({
+    studentName: '',
     mobile: '',
     education: '',
     yearOfPassing: '',
@@ -17,6 +18,7 @@ const StudentRegistration = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [userFullName, setUserFullName]=useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -25,7 +27,10 @@ const StudentRegistration = () => {
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
     if (userData.email) {
       setUserEmail(userData.email);
-      setForm((prev) => ({ ...prev, email: userData.email }));
+      setUserFullName(userData.fullName || '');
+      setForm((prev) => ({ ...prev, 
+        email: userData.email,
+      studentName:userData.fullName || '' }));
     } 
   }, [navigate]);
 
@@ -42,26 +47,59 @@ const StudentRegistration = () => {
     setMessage('');
     
     try {
-      const response = await fetch('http://www.careerspott.com/api/auth/complete-student-registration', { 
+
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+      
+      // PREPARE DATA WITH FULL NAME
+      const registrationData = {
+        ...form,
+        fullName: form.studentName || userFullName, // SEND FULL NAME TO BACKEND
+        email: form.email || userEmail // SEND email TO BACKEND
+      };
+
+      console.log("Sending registration data:", registrationData); // Debug log
+
+      const response = await fetch('https://www.careerspott.com/api/auth/complete-student-registration', { 
        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(registrationData),
       });
       
-      const data = await response.text();
+      let data;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      const textResponse = await response.text();
+      throw new Error(textResponse || 'Registration failed');
+    }
+      console.log("Registration response:", data); // Debug log
       
       if (response.ok) {
-        setMessage('Registration completed successfully! Redirecting to home...');
+        setMessage('Registration completed successfully! Redirecting...');
+
+        //  UPDATE LOCAL STORAGE WITH COMPLETE PROFILE
+        const updatedUserData = {
+          ...userData,
+          fullName: form.studentName || userFullName,
+          completed: true
+        };
+        localStorage.setItem('userData', JSON.stringify(updatedUserData));
+
         setTimeout(() => {
           navigate('/student-success');
         }, 1000);
+
+        
       } else {
-        setError(data);
+        setError(data || 'Registration failed');
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
+      console.error('Registration error:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,7 +131,8 @@ const StudentRegistration = () => {
           <input
             type="text"
             id="studentName"
-            name="studentName"
+            value={form.studentName}
+            onChange={handleChange}
             placeholder="Enter your full name"
             required
           />
@@ -105,6 +144,7 @@ const StudentRegistration = () => {
               onChange={handleChange}
               placeholder="Email"
               className={errors.email ? 'error' : ''}
+              
             />
             {errors.email && <div className="error-message">{errors.email}</div>}
 

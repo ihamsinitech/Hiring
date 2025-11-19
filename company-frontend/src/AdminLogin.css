@@ -225,28 +225,28 @@
 /* Password Toggle Icon - ALWAYS VISIBLE for Admin */
 .admin-login-page .password-toggle-icon {
   position: absolute;
-  right: 15px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   color: rgba(34, 33, 33, 0.8);
-  font-size: 1.2rem;
+  font-size: 0.5rem;
   padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   z-index: 10;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   outline: none;
 }
 
 .admin-login-page .password-toggle-icon:hover {
   color: rgba(34, 33, 33, 1);
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(0.5);
 }
 
 .admin-login-page .password-toggle-icon:focus {
